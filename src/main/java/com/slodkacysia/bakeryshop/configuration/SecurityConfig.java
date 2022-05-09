@@ -22,13 +22,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
 
     }
+
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/**").access("permitAll")
                 .antMatchers("/admin/**").access("hasRole('ADMIN')")
                 .and().logout().logoutSuccessUrl("/login?logout")
                 .and().formLogin().loginPage("/login").successHandler(savedRequestAwareAuthenticationSuccessHandler())
-                .loginProcessingUrl( "/j_spring_security_check" )
+                .loginProcessingUrl("/j_spring_security_check")
                 .failureUrl("/login?error")
                 .usernameParameter("email")
                 .passwordParameter("password");
@@ -53,3 +54,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
+
+//git test
