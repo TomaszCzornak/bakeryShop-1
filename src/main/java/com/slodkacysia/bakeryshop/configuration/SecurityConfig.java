@@ -55,4 +55,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 }
 
-//Tomasz
+//Tomasz --
