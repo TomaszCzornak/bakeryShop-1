@@ -55,4 +55,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 }
 
-//git test new name Tomasz Czornak
+//Tomasz
