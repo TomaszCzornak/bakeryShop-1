@@ -35,4 +35,16 @@ public class Category {
     public void setId(Long id) {
         this.id = id;
     }
+    public String getFullNameCategory() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

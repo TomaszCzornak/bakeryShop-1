@@ -9,6 +9,7 @@ import com.slodkacysia.bakeryshop.repository.ProductRepository;
 import com.slodkacysia.bakeryshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@Secured("ROLE_ADMIN")
+//@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/admin")
 public class AdminUser {
 
@@ -35,26 +36,26 @@ public class AdminUser {
         this.categoryRepository = categoryRepository;
     }
 
-    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
-    public String login() {
-        return "adminLogin";
-    }
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestParam("email") String email, @RequestParam("password") String password) {
-        if(authenticateAdmin.isAuthenticated("tomasz.czornak59@gmail.com",password)) {
-            return "redirect:/welcome";
-        }
-        return "redirect:/login?error";
-    }
+//    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
+//    public String login() {
+//        return "adminLogin";
+//    }
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    public String login(@RequestParam("email") String email, @RequestParam("password") String password) {
+//        if(authenticateAdmin.isAuthenticated(email,password)) {
+//            return "redirect:/welcome";
+//        }
+//        return "redirect:/login?error";
+//    }
 
-    @RequestMapping("/add-product")
+    @RequestMapping("/panel")
     public String addProductForm(Model model) {
 
         model.addAttribute("product", new Product());
 
         return "addProduct";
     }
-    @RequestMapping(value = "/add-product", method = RequestMethod.POST)
+    @RequestMapping(value = "/panel", method = RequestMethod.POST)
     public String saveProductForm(@Valid Product product, BindingResult result) {
 
         if (result.hasErrors()) {
@@ -62,7 +63,7 @@ public class AdminUser {
         } else {
 
             productRepository.save(product);
-            return "redirect:/productList";
+            return "redirect:/admin/productlist";
         }
     }
 
@@ -74,6 +75,6 @@ public class AdminUser {
     }
     @ModelAttribute("categories")
     public List<Category> getAllCategories(){
-        return categoryRepository.findAllBy();
+        return categoryRepository.findAll();
     }
 }

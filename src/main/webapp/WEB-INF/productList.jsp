@@ -10,6 +10,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <html>
 <head>
     <title>Lista produktów</title>
@@ -29,6 +30,7 @@
             <td><a href="/add/${item.id}">dodaj sztukę</a></td>
         </tr>
     </c:forEach>
+
 </table>
 </body>
 </html>

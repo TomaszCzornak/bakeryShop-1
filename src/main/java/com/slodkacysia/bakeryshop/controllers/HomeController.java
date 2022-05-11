@@ -7,6 +7,7 @@ import com.slodkacysia.bakeryshop.repository.CartRepository;
 import com.slodkacysia.bakeryshop.repository.PurchaseRepository;
 import com.slodkacysia.bakeryshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 
 @Controller
+//@Secured("ROLE_USER")
 public class HomeController {
 
 
@@ -42,34 +44,25 @@ public class HomeController {
             cartRepository.save(cart);
             purchase.setCart(cart);
             purchaseRepository.save(purchase);
-
-            return "redirect:/welcome";
+            System.out.println("hasło: " +password);
+            return "redirect:/";
         }
         return "redirect:/login?error";
     }
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(
-            @RequestParam(value="error", required = false)
-            String error,
-            @RequestParam(value="logout", required = false)
-            String logout,
-            Model model){
-
-        if(error != null){
-            model.addAttribute("error", "Invalid username and password");
+    @RequestMapping("/login")
+    public String login(@RequestParam(value = "error", required = false) String error,
+                        @RequestParam(value = "logout", required = false) String logout, Model model) {
+        if (error != null) {
+            model.addAttribute("error", "Invalid username and Password");
         }
 
-        if (logout !=null){
-            model.addAttribute("msg", "You have been logged out successfully");
+        if (logout != null) {
+            model.addAttribute("logout", "You have logged out successfully");
         }
-
         return "login";
     }
 
-    @RequestMapping(value = {
-            "/",
-            "/welcome"
-    }, method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String welcome(Model model) {
         return "welcome";
     }
