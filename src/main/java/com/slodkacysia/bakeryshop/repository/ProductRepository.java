@@ -2,6 +2,8 @@ package com.slodkacysia.bakeryshop.repository;
 
 import com.slodkacysia.bakeryshop.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -12,6 +14,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     Product findProductById(Long id);
 
     Product save(Product product);
+
+
 
 //    void update(Product product);
 //

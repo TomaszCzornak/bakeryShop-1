@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-//@PreAuthorize("hasRole('ROLE_ADMIN')")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/admin")
 public class AdminUser {
 
@@ -36,17 +36,17 @@ public class AdminUser {
         this.categoryRepository = categoryRepository;
     }
 
-//    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
-//    public String login() {
-//        return "adminLogin";
-//    }
-//    @RequestMapping(value = "/login", method = RequestMethod.POST)
-//    public String login(@RequestParam("email") String email, @RequestParam("password") String password) {
-//        if(authenticateAdmin.isAuthenticated(email,password)) {
-//            return "redirect:/welcome";
-//        }
-//        return "redirect:/login?error";
-//    }
+    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
+    public String login() {
+        return "adminLogin";
+    }
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(@RequestParam("email") String email, @RequestParam("password") String password) {
+        if(authenticateAdmin.isAuthenticated(email,password)) {
+            return "redirect:/welcome";
+        }
+        return "redirect:/login?error";
+    }
 
     @RequestMapping("/panel")
     public String addProductForm(Model model) {
@@ -76,5 +76,23 @@ public class AdminUser {
     @ModelAttribute("categories")
     public List<Category> getAllCategories(){
         return categoryRepository.findAll();
+    }
+    @RequestMapping("/removeproduct/{id}")
+    public String deleteCategory(@PathVariable Long id){
+        Product product = productRepository.findProductById(id);
+        productRepository.delete(product);
+        return "redirect:/admin/productlist";
+    }
+    @RequestMapping("/admin/editproduct/{id}")
+    public String editProduct(@PathVariable Long id, Model model){
+        Product product = productRepository.findProductById(id);
+        model.addAttribute("product", product);
+        return "edit-product";
+    }
+    @RequestMapping(value = "/admin/editproduct/{id}", method = RequestMethod.POST)
+    public String saveEditProduct(@PathVariable Long id, Product product) {
+        productRepository.save(product);
+
+        return "redirect:/admin/productlist";
     }
 }

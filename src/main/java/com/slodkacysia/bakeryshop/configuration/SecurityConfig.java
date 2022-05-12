@@ -28,7 +28,7 @@ import javax.sql.DataSource;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("tomasz.czornak59@gmail.com").password("pass").authorities("ROLE_ADMIN");
+        auth.inMemoryAuthentication().withUser("tomasz.czornak59@gmail.com").password("pass").authorities("ROLE_ADMIN");
 
     }
 //    @ConfigurationProperties(prefix = "spring.datasource")
@@ -42,17 +42,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/admin/costam/**").access("hasRole('ADMIN')").and().formLogin().loginPage("/admin/login").defaultSuccessUrl("/admin/panel").and().authorizeRequests()
-//                .antMatchers("/user/**").access("hasRole('USER')").and().formLogin().loginPage("/login").defaultSuccessUrl("/user/home").and().authorizeRequests()
-//                .antMatchers("/").permitAll()
+                .antMatchers("/admin/**").access("hasRole('ADMIN')").and().formLogin().loginPage("/admin/login").defaultSuccessUrl("/admin/panel").and().authorizeRequests()
+                .antMatchers("/user/**").access("hasRole('USER')").and().formLogin().loginPage("/login").defaultSuccessUrl("/user/home").and().authorizeRequests()
+                .antMatchers("/").permitAll();
 
-                .and().logout().logoutSuccessUrl("/login?logout")
-                .and().formLogin().loginPage("/login").successHandler(savedRequestAwareAuthenticationSuccessHandler())
-                .loginProcessingUrl( "/j_spring_security_check" )
-                .failureUrl("/login?error")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/");
+//                .and().logout().logoutSuccessUrl("/login?logout")
+//                .and().formLogin().loginPage("/login").successHandler(savedRequestAwareAuthenticationSuccessHandler())
+//                .loginProcessingUrl( "/j_spring_security_check" )
+//                .failureUrl("/login?error")
+//                .usernameParameter("username")
+//                .passwordParameter("password")
+//                .defaultSuccessUrl("/");
 //                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
 //                .rememberMe().key("remember-me").rememberMeParameter("remember-me").rememberMeCookieName("remember-me");.tokenRepository(persistentTokenRepository()).tokenValiditySeconds(1209600);
     }
