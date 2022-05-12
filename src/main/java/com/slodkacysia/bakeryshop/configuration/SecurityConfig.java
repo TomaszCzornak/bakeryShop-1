@@ -42,9 +42,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/admin/**").access("hasRole('ADMIN')").and().formLogin().loginPage("/admin/login").defaultSuccessUrl("/admin/panel").and().authorizeRequests()
-                .antMatchers("/user/**").access("hasRole('USER')").and().formLogin().loginPage("/login").defaultSuccessUrl("/user/home").and().authorizeRequests()
-                .antMatchers("/").permitAll();
+                .antMatchers("/**").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .and().formLogin().loginPage("/admin/login").defaultSuccessUrl("/welcome");
+
 
 //                .and().logout().logoutSuccessUrl("/login?logout")
 //                .and().formLogin().loginPage("/login").successHandler(savedRequestAwareAuthenticationSuccessHandler())

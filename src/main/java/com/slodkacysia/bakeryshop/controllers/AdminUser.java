@@ -95,4 +95,8 @@ public class AdminUser {
 
         return "redirect:/admin/productlist";
     }
+    @RequestMapping(value = "/admin/welcome", method = RequestMethod.GET)
+    public String welcome(Model model) {
+        return "welcome";
+    }
 }
