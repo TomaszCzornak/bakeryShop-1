@@ -1,11 +1,13 @@
 package com.slodkacysia.bakeryshop.entity;
 
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +19,15 @@ public class User {
 
     @OneToMany
     private List<Purchase> purchases;
+
+    public User(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+
+    }
+
+    public User() {
+
+    }
+
 
     public List<Purchase> getPurchases() {
         return purchases;

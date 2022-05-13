@@ -1,40 +1,53 @@
 package com.slodkacysia.bakeryshop.controllers;
 
-import com.slodkacysia.bakeryshop.configuration.Authenticate;
 import com.slodkacysia.bakeryshop.configuration.AuthenticateAdmin;
 import com.slodkacysia.bakeryshop.entity.Category;
 import com.slodkacysia.bakeryshop.entity.Product;
+import com.slodkacysia.bakeryshop.entity.User;
 import com.slodkacysia.bakeryshop.repository.CategoryRepository;
 import com.slodkacysia.bakeryshop.repository.ProductRepository;
 import com.slodkacysia.bakeryshop.repository.UserRepository;
+import com.slodkacysia.bakeryshop.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
+import java.util.*;
 
 @Controller
-@PreAuthorize("hasRole('ROLE_ADMIN')")
+//@Secured("ROLE_ADMIN")
 @RequestMapping("/admin")
 public class AdminUser {
 
+    private static final List ADMIN_ROLE = Arrays.asList("ADMIN_ROLE");
     private final AuthenticateAdmin authenticateAdmin;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+    private final UserServiceImpl userService;
 
     private final CategoryRepository categoryRepository;
     @Autowired
-    AdminUser(AuthenticateAdmin authenticateAdmin, UserRepository userRepository, ProductRepository productRepository, CategoryRepository categoryRepository){
+    AdminUser(AuthenticateAdmin authenticateAdmin, UserRepository userRepository, ProductRepository productRepository, UserServiceImpl userService, CategoryRepository categoryRepository){
         this.authenticateAdmin = authenticateAdmin;
         this.userRepository = userRepository;
         this.productRepository = productRepository;
+        this.userService = userService;
         this.categoryRepository = categoryRepository;
     }
+
+    @GetMapping("/create-user")
+    @ResponseBody
+    public String createUser() {
+        User user = new User("admin", "pass", Collections.unmodifiableList(ADMIN_ROLE));
+        userService.saveUser(user);
+        return "admin";
+    }
+
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public String login() {
@@ -43,7 +56,7 @@ public class AdminUser {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestParam("email") String email, @RequestParam("password") String password) {
         if(authenticateAdmin.isAuthenticated(email,password)) {
-            return "redirect:/welcome";
+            return "redirect:/admin/welcome";
         }
         return "redirect:/login?error";
     }
@@ -95,7 +108,7 @@ public class AdminUser {
 
         return "redirect:/admin/productlist";
     }
-    @RequestMapping(value = "/admin/welcome", method = RequestMethod.GET)
+    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public String welcome(Model model) {
         return "welcome";
     }

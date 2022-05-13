@@ -16,6 +16,10 @@
 </head>
 <body>
 <sec:authorize access="isAuthenticated()">
+    <p>Zalogowany jako: <sec:authentication property="principal.email"/></p>
+    <p>Posiada role: <sec:authentication property="authorities"/></p>
+</sec:authorize>
+<sec:authorize access="isAuthenticated()">
     <form action="<c:url value="/logout"/>" method="post">
         <input type="submit" value="Wyloguj">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
