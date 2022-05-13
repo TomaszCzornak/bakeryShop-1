@@ -9,7 +9,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthenticateAdmin {
 
-    private  final UserRepository userRepository;
+    private final UserRepository userRepository;
+
     @Autowired
     public AuthenticateAdmin(UserRepository userRepository) {
         this.userRepository = userRepository;

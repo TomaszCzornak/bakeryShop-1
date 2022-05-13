@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -26,11 +25,10 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("tomasz.czornak59@gmail.com").password("pass").authorities("ROLE_ADMIN");
+        auth.inMemoryAuthentication().withUser("tomasz.czornak59@gmail.com").password("pass").authorities("ROLE_ADMIN");
 
     }
 //    @ConfigurationProperties(prefix = "spring.datasource")
@@ -44,11 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/**").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN").and()
-                .formLogin().loginPage("/admin/login").defaultSuccessUrl("/welcome").loginProcessingUrl("/admin/login")
-                .and().logout().logoutSuccessUrl("/").permitAll()
-                .and().exceptionHandling().accessDeniedPage("/403");
+//                .antMatchers("/admin/**").authenticated()
+                .antMatchers("/admin/login/").hasRole("ADMIN")
+                .and().formLogin().loginPage("/admin/login").defaultSuccessUrl("/admin/welcome").loginProcessingUrl("admin/login");
 
 
 //                .and().logout().logoutSuccessUrl("/login?logout")
