@@ -28,7 +28,7 @@ import javax.sql.DataSource;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("tomasz.czornak59@gmail.com").password("pass").authorities("ROLE_ADMIN");
+//        auth.inMemoryAuthentication().withUser("tomasz.czornak59@gmail.com").password("pass").authorities("ROLE_ADMIN");
 
     }
 //    @ConfigurationProperties(prefix = "spring.datasource")
@@ -44,11 +44,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
 //                .antMatchers("/admin/**").authenticated()
                 .antMatchers("/admin/login/").hasRole("ADMIN")
-                .and().formLogin().loginPage("/admin/login").defaultSuccessUrl("/admin/welcome").loginProcessingUrl("admin/login");
+                .and().formLogin().loginPage("/admin/login").defaultSuccessUrl("/admin/welcome").loginProcessingUrl("admin/login")
 
 
 //                .and().logout().logoutSuccessUrl("/login?logout")
-//                .and().formLogin().loginPage("/login").successHandler(savedRequestAwareAuthenticationSuccessHandler())
+                .and().formLogin().loginPage("/login").usernameParameter("email").successHandler(savedRequestAwareAuthenticationSuccessHandler());
 //                .loginProcessingUrl( "/j_spring_security_check" )
 //                .failureUrl("/login?error")
 //                .usernameParameter("username")
@@ -57,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
 //                .rememberMe().key("remember-me").rememberMeParameter("remember-me").rememberMeCookieName("remember-me");.tokenRepository(persistentTokenRepository()).tokenValiditySeconds(1209600);
     }
+//    userParameter = email z formularza!!
 
 //    private PersistentTokenRepository persistentTokenRepository() {
 //

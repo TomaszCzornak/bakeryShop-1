@@ -58,6 +58,8 @@ public class HomeController {
             purchaseRepository.save(purchase);
             System.out.println("hasło: " +password);
             return "redirect:/";
+
+//            to wyrzycenia!!
         }
         return "redirect:/login?error";
     }
@@ -74,7 +76,7 @@ public class HomeController {
         return "login";
     }
 
-    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String welcome(Model model) {
         return "welcome";
     }

@@ -86,13 +86,13 @@ public class AdminUser {
         productRepository.delete(product);
         return "redirect:/admin/productlist";
     }
-    @RequestMapping("/admin/editproduct/{id}")
+    @RequestMapping("/editproduct/{id}")
     public String editProduct(@PathVariable Long id, Model model){
         Product product = productRepository.findProductById(id);
         model.addAttribute("product", product);
         return "edit-product";
     }
-    @RequestMapping(value = "/admin/editproduct/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/editproduct/{id}", method = RequestMethod.POST)
     public String saveEditProduct(@PathVariable Long id, Product product) {
         productRepository.save(product);
 

@@ -20,9 +20,7 @@ public class User {
     @OneToMany
     private List<Purchase> purchases;
 
-    public User(String username, String password, Collection<? extends GrantedAuthority> authorities) {
 
-    }
 
     public User() {
 

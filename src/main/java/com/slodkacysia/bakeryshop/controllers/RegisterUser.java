@@ -35,7 +35,7 @@ public class RegisterUser {
     public String registerUser(Model model) {
 
 
-        User user = new User("admin", "pass", Collections.unmodifiableList(ADMIN_ROLE));
+        User user = new User();
         model.addAttribute("user", user);
 
         return "registerUser";
@@ -58,8 +58,11 @@ public class RegisterUser {
 
             }
             Role role = new Role();
+            roleRepository.getById()
             role.setName("ROLE_USER");
-            role.setEmail(user.getEmail());
+//            role.setEmail(user.getEmail()); do wyrzecnia - setter rola na userze
+
+            user.setRoles(Collections.singleton(role));
             roleRepository.save(role);
             userRepository.save(user);
             return "redirect:/health";

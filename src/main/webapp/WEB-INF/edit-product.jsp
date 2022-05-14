@@ -28,5 +28,6 @@
     Kategoria: <form:select path="category" items="${categories}" itemLabel="fullNameCategory" itemValue="id"/>
     <input type="submit">
 </form:form>
+<%--usunąć product--%>
 </body>
 </html>

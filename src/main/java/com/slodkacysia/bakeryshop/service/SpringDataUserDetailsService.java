@@ -1,5 +1,6 @@
 package com.slodkacysia.bakeryshop.service;
 
+
 import com.slodkacysia.bakeryshop.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,17 +27,7 @@ public class SpringDataUserDetailsService implements UserDetailsService {
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         user.getRoles().forEach(r ->
                 grantedAuthorities.add(new SimpleGrantedAuthority(r.getName())));
-        return new org.springframework.security.core.userdetails.User(
-                user.getEmail(), user.getPassword(), grantedAuthorities);
+        return new CurrentUser(name, user.getEmail(), user.getPassword());
     }
-    public class CurrentUser extends User {
-        private final com.slodkacysia.bakeryshop.entity.User user;
-        public CurrentUser(String username, String password,
-                           Collection<? extends GrantedAuthority> authorities,
-                           com.slodkacysia.bakeryshop.entity.User user) {
-            super(username, password, authorities);
-            this.user = user;
-        }
-        public com.slodkacysia.bakeryshop.entity.User getUser() {return user;}
-    }
+
 }
