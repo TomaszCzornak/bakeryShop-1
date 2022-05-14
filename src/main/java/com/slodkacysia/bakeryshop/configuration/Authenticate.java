@@ -17,12 +17,12 @@ public class Authenticate {
     }
 
 
-    public boolean isAuthenticated(String email, String password){
-        boolean isAuthenticated = false;
-        User user = userRepository.getUserByEmail(email);
-        String hashedPass = user.getPassword();
-        isAuthenticated = BCrypt.checkpw(password,hashedPass);
-
-        return isAuthenticated;
-    }
+//    public boolean isAuthenticated(String email, String password){
+//        boolean isAuthenticated = false;
+////        User user = userRepository.getUserByEmail(email);
+////        String hashedPass = user.getPassword();
+//        isAuthenticated = BCrypt.checkpw(password,hashedPass);
+//
+//        return isAuthenticated;
+//    }
 }

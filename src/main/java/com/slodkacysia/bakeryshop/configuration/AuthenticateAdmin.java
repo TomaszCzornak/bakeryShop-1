@@ -17,14 +17,14 @@ public class AuthenticateAdmin {
     }
 
 
-    public boolean isAuthenticated(String email, String password) {
-        boolean isAuthenticated = false;
-
-            User user = userRepository.getUserByEmail(email);
-            System.out.println(user.getPassword());
-            String hashedPass = user.getPassword();
-            isAuthenticated = BCrypt.checkpw(password, hashedPass);
-
-        return isAuthenticated;
-    }
+//    public boolean isAuthenticated(String email, String password) {
+//        boolean isAuthenticated = false;
+//
+//            User user = userRepository.getUserByEmail(email);
+//            System.out.println(user.getPassword());
+//            String hashedPass = user.getPassword();
+//            isAuthenticated = BCrypt.checkpw(password, hashedPass);
+//
+//        return isAuthenticated;
+//    }
     }

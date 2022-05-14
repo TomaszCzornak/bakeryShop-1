@@ -20,11 +20,11 @@
 <%--@elvariable id="product" type="pl.coderslab.entity.Product"--%>
 <form:form modelAttribute="product" method="post">
     <form:hidden path="id"/>
-    Nazwa Produktu: <form:input path="product.name"/>
-    Opis Produktu: <form:input path="product.description"/>
-    Adres www: <form:input path="product.image_url"/>
-    Cena: <form:input path="product.price"/>
-    Dostępna Ilość: <form:input path="product.available_quantity"/>
+    Nazwa Produktu: <form:input path="name"/>
+    Opis Produktu: <form:input path="description"/>
+    Adres www: <form:input path="image_url"/>
+    Cena: <form:input path="price"/>
+    Dostępna Ilość: <form:input path="available_quantity"/>
     Kategoria: <form:select path="category" items="${categories}" itemLabel="fullNameCategory" itemValue="id"/>
     <input type="submit">
 </form:form>

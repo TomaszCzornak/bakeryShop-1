@@ -30,9 +30,9 @@ public class User {
         this.userName = userName;
     }
 
-    public User() {
-
-    }
+//    public User() {
+//
+//    }
 
 
     public List<Purchase> getPurchases() {

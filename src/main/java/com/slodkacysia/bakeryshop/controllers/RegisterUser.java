@@ -57,13 +57,11 @@ public class RegisterUser {
 
 
             }
-            Role role = new Role();
-            roleRepository.getById()
-            role.setName("ROLE_USER");
+//            Role role = new Role();
+            Role admin_role = roleRepository.findByName("ROLE_ADMIN");
 //            role.setEmail(user.getEmail()); do wyrzecnia - setter rola na userze
 
-            user.setRoles(Collections.singleton(role));
-            roleRepository.save(role);
+            user.setRoles(Collections.singleton(admin_role));
             userRepository.save(user);
             return "redirect:/health";
         }

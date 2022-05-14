@@ -46,20 +46,20 @@ public class AdminUser {
         return "Hello " + entityUser.getUserName();
     }
 
-    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
-    public String login() {
-        return "adminLogin";
-    }
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestParam("email") String email, @RequestParam("password") String password) {
-        if(authenticateAdmin.isAuthenticated(email,password)) {
-            System.out.println("jest w true");
-            return "redirect:/admin/welcome";
-        }
-        System.out.println("jest w false");
-
-        return "redirect:/login?error";
-    }
+//    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
+//    public String login() {
+//        return "adminLogin";
+//    }
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    public String login(@RequestParam("email") String email, @RequestParam("password") String password) {
+//        if(authenticateAdmin.isAuthenticated(email,password)) {
+//            System.out.println("jest w true");
+//            return "redirect:/admin/welcome";
+//        }
+//        System.out.println("jest w false");
+//
+//        return "redirect:/login?error";
+//    }
 
     @RequestMapping("/panel")
     public String addProductForm(Model model) {
