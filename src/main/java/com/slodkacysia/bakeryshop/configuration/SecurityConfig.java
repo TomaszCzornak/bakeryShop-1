@@ -13,9 +13,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
@@ -26,25 +28,21 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("tomasz.czornak59@gmail.com").password("pass").authorities("ROLE_ADMIN");
 
+
+    @Autowired
+    private CustomAuthenticationProvider authProvider;
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authProvider);
     }
-//    @ConfigurationProperties(prefix = "spring.datasource")
-//    @Bean
-//    @Primary
-//    public DataSource dataSource() {
-//        return DataSourceBuilder.create().build();
-//    }
-//    @Autowired
-//    private DataSource dataSource;
+
 
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-//                .antMatchers("/admin/**").authenticated()
-                .antMatchers("/admin/login").permitAll()
-                .and().formLogin().defaultSuccessUrl("/admin/welcome").loginProcessingUrl("admin/panel")
+                .antMatchers("/admin/login").hasRole("ADMIN")
+                .and().formLogin().defaultSuccessUrl("/admin/panel").loginProcessingUrl("/login")
 
 
 //                .and().logout().logoutSuccessUrl("/login?logout")
