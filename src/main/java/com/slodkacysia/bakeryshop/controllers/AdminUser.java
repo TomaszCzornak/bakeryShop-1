@@ -4,12 +4,15 @@ import com.slodkacysia.bakeryshop.configuration.Authenticate;
 import com.slodkacysia.bakeryshop.configuration.AuthenticateAdmin;
 import com.slodkacysia.bakeryshop.entity.Category;
 import com.slodkacysia.bakeryshop.entity.Product;
+import com.slodkacysia.bakeryshop.entity.User;
 import com.slodkacysia.bakeryshop.repository.CategoryRepository;
 import com.slodkacysia.bakeryshop.repository.ProductRepository;
 import com.slodkacysia.bakeryshop.repository.UserRepository;
+import com.slodkacysia.bakeryshop.service.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +37,13 @@ public class AdminUser {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
+    }
+
+    @GetMapping("/admin")
+    @ResponseBody
+    public String admin(@AuthenticationPrincipal CurrentUser customUser) {
+        User entityUser = customUser.getUser();
+        return "Hello " + entityUser.getUserName();
     }
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
