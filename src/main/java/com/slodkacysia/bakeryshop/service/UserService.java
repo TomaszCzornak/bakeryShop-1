@@ -3,6 +3,6 @@ package com.slodkacysia.bakeryshop.service;
 import com.slodkacysia.bakeryshop.entity.User;
 
 public interface UserService {
-    User findUserByUserName(String name);
+    User findUserByEmail(String email);
     void saveUser(User user);
 }

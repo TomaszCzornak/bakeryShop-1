@@ -42,7 +42,9 @@ public class RegisterUser {
     }
     @PostMapping("/register")
     public String addUser(@Valid@ ModelAttribute User user, BindingResult bindingResult, Model model){
-
+        System.out.println("drukowanie " +user.getEmail());
+        System.out.println("drukowanie " +user.getFirst_name());
+        System.out.println("drukowanie " +user.getLast_name());
         if(bindingResult.hasErrors()){
             return "registerUser";
         }else{

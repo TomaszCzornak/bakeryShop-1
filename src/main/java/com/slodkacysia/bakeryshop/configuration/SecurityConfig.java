@@ -30,23 +30,24 @@ import javax.sql.DataSource;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-    @Autowired
-    private CustomAuthenticationProvider authProvider;
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authProvider);
-    }
+//    @Autowired
+//    private CustomAuthenticationProvider authProvider;
+//
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.authenticationProvider(authProvider);
+//    }
 
 
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/admin/login").hasRole("ADMIN")
+                .antMatchers("/admin**").authenticated()
+                .antMatchers("/").permitAll()
                 .and().formLogin().defaultSuccessUrl("/admin/panel").loginProcessingUrl("/login")
 
 
 //                .and().logout().logoutSuccessUrl("/login?logout")
-                .and().formLogin().usernameParameter("username").successHandler(savedRequestAwareAuthenticationSuccessHandler());
+                .and().formLogin().usernameParameter("email").successHandler(savedRequestAwareAuthenticationSuccessHandler());
 //                .loginProcessingUrl( "/j_spring_security_check" )
 //                .failureUrl("/login?error")
 //                .usernameParameter("username")
