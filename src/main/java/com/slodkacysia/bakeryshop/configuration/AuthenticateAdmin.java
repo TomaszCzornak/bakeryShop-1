@@ -18,13 +18,12 @@ public class AuthenticateAdmin {
 
     public boolean isAuthenticated(String email, String password) {
         boolean isAuthenticated = false;
-        if (email.equals("tomasz.czornak59@gmail.com")) {
+
             User user = userRepository.getUserByEmail(email);
             System.out.println(user.getPassword());
             String hashedPass = user.getPassword();
             isAuthenticated = BCrypt.checkpw(password, hashedPass);
 
-        }
         return isAuthenticated;
     }
-}
+    }

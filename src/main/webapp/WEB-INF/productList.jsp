@@ -26,8 +26,8 @@
             <td>${item.name}</td>
             <td>${item.description}</td>
             <td>${item.price}</td>
-            <td><a href="/removal/${item.id}">usuń</a></td>
-            <td><a href="/add/${item.id}">dodaj sztukę</a></td>
+            <td><a href="/removecategory/${item.id}">usuń</a></td>
+            <td><a href="/admin/editproduct/${item.id}">edytuj produkt</a></td>
         </tr>
     </c:forEach>
 

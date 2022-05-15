@@ -5,6 +5,7 @@ import com.slodkacysia.bakeryshop.entity.User;
 import com.slodkacysia.bakeryshop.repository.RoleRepository;
 import com.slodkacysia.bakeryshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,11 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.util.List;
+import java.util.*;
+
 
 @Controller
 public class RegisterUser {
 
+    public static final List ADMIN_ROLE = Arrays.asList("ADMIN_ROLE");
     private final UserRepository userRepository;
 
     private final RoleRepository roleRepository;
@@ -31,7 +34,8 @@ public class RegisterUser {
     @RequestMapping("/register")
     public String registerUser(Model model) {
 
-        User user = new User();
+
+        User user = new User("admin", "pass", Collections.unmodifiableList(ADMIN_ROLE));
         model.addAttribute("user", user);
 
         return "registerUser";
