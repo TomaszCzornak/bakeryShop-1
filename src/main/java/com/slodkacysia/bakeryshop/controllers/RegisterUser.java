@@ -5,7 +5,6 @@ import com.slodkacysia.bakeryshop.entity.User;
 import com.slodkacysia.bakeryshop.repository.RoleRepository;
 import com.slodkacysia.bakeryshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,7 +19,6 @@ import java.util.*;
 @Controller
 public class RegisterUser {
 
-    public static final List ADMIN_ROLE = Arrays.asList("ADMIN_ROLE");
     private final UserRepository userRepository;
 
     private final RoleRepository roleRepository;
