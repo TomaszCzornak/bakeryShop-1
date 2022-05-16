@@ -13,7 +13,9 @@
 <head>
     <title>Witanko!</title>
 </head>
+
 <body>
+<%@include file="/WEB-INF/header.jsp" %><br>
 Witaj na stronie
 </body>
 </html>

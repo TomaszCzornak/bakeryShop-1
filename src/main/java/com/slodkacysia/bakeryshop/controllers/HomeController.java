@@ -18,7 +18,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.stylesheets.LinkStyle;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.util.*;
 
 
@@ -45,25 +47,12 @@ public class HomeController {
         this.authenticate = authenticate;
     }
 
-    //    @RequestMapping(value = "/login", method = RequestMethod.POST)
-//    public String login(@RequestParam("email") String email, @RequestParam("password") String password) {
-//        if(authenticate.isAuthenticated(email,password)) {
-//
-//            User user = new User("admin", "pass", Collections.unmodifiableList(ADMIN_ROLE));
-//            Purchase purchase = new Purchase();
-//            Cart cart = new Cart();
-//            cart.setPurchase(purchase);
-//            cart.setTotal_amount(BigDecimal.valueOf(0));
-//            cartRepository.save(cart);
-//            purchase.setCart(cart);
-//            purchaseRepository.save(purchase);
-//            System.out.println("hasło: " +password);
-//            return "redirect:/";
-//
-////            to wyrzycenia!!
-//        }
-//        return "redirect:/login?error";
-//    }
+    @RequestMapping(value = "/username", method = RequestMethod.GET)
+    @ResponseBody
+    public String currentUserNameSimple(HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        return principal.getName();
+    }
 
 
 

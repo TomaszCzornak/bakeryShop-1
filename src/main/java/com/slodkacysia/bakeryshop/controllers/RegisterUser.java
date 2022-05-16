@@ -1,5 +1,6 @@
 package com.slodkacysia.bakeryshop.controllers;
 
+import com.slodkacysia.bakeryshop.entity.Role;
 import com.slodkacysia.bakeryshop.entity.User;
 import com.slodkacysia.bakeryshop.repository.RoleRepository;
 import com.slodkacysia.bakeryshop.repository.UserRepository;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -62,13 +64,11 @@ public class RegisterUser {
 
             }
 //            Role role = new Role();
-//            Role admin_role = roleRepository.findByName("ROLE_ADMIN");
+            Role admin_role = roleRepository.findByName("ROLE_ADMIN");
 //            role.setEmail(user.getEmail()); do wyrzecnia - setter rola na userze
 
-//            user.setRoles(Collections.singleton(admin_role));
-            System.out.println("Registration : " + user.getPassword());
-            System.out.println("Registration : " + user.getEmail());
-//            userRepository.save(user);
+            user.setRoles(Collections.singleton(admin_role));
+
             userServiceImpl.saveUser(user);
             return "redirect:/health";
         }

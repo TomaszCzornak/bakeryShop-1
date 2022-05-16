@@ -34,6 +34,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication)
             throws AuthenticationException {
         String email = authentication.getName();
+        String name = authentication.getPrincipal().toString();
         User user = null;
         if(email != null) {
             user = userServiceimpl.findUserByEmail(email);
