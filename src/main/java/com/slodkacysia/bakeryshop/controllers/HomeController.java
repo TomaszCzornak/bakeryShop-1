@@ -27,7 +27,6 @@ import java.util.*;
 public class HomeController {
 
 
-    private static final List ADMIN_ROLE = Arrays.asList("ADMIN_ROLE");
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
 
@@ -69,18 +68,18 @@ public class HomeController {
 
 
 
-    @RequestMapping("/login")
-    public String login(@RequestParam(value = "error", required = false) String error,
-                        @RequestParam(value = "logout", required = false) String logout, Model model) {
-        if (error != null) {
-            model.addAttribute("error", "Invalid username and Password");
-        }
-
-        if (logout != null) {
-            model.addAttribute("logout", "You have logged out successfully");
-        }
-        return "login";
-    }
+//    @RequestMapping("/login")
+//    public String login(@RequestParam(value = "error", required = false) String error,
+//                        @RequestParam(value = "logout", required = false) String logout, Model model) {
+//        if (error != null) {
+//            model.addAttribute("error", "Invalid username and Password");
+//        }
+//
+//        if (logout != null) {
+//            model.addAttribute("logout", "You have logged out successfully");
+//        }
+//        return "login";
+//    }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String welcome(Model model) {

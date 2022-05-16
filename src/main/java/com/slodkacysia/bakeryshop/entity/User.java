@@ -43,7 +43,7 @@ public class User {
         this.purchases = purchases;
     }
 
-    @Email(message = "proszę podać poprawny adres email")
+    @Email(message = "proszę podać p6   oprawny adres email")
     private String email;
 
     private String phone;
@@ -152,15 +152,7 @@ public class User {
         return password;
     }
 
-    public String hashPassword(String password) {
-        return BCrypt.hashpw(password, BCrypt.gensalt());
-    }
-
-
     public void setPassword(String password) {
-        this.password = hashPassword(password);
+        this.password = password;
     }
-
-
-
 }

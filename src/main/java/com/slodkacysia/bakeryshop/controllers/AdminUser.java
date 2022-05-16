@@ -22,7 +22,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@PreAuthorize("hasRole('ROLE_ADMIN')")
+//@Secured("ADMIN")
 @RequestMapping("/admin")
 public class AdminUser {
 

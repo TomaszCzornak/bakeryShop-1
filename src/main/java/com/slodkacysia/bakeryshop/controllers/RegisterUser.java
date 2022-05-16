@@ -1,9 +1,9 @@
 package com.slodkacysia.bakeryshop.controllers;
 
-import com.slodkacysia.bakeryshop.entity.Role;
 import com.slodkacysia.bakeryshop.entity.User;
 import com.slodkacysia.bakeryshop.repository.RoleRepository;
 import com.slodkacysia.bakeryshop.repository.UserRepository;
+import com.slodkacysia.bakeryshop.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.util.*;
+import java.util.List;
 
 
 @Controller
@@ -23,10 +23,13 @@ public class RegisterUser {
 
     private final RoleRepository roleRepository;
 
+    private final UserServiceImpl userServiceImpl;
+
     @Autowired
-    private RegisterUser(UserRepository userRepository, RoleRepository roleRepository){
+    private RegisterUser(UserRepository userRepository, RoleRepository roleRepository, UserServiceImpl userServiceImpl){
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.userServiceImpl = userServiceImpl;
     }
 
     @RequestMapping("/register")
@@ -43,6 +46,7 @@ public class RegisterUser {
         System.out.println("drukowanie " +user.getEmail());
         System.out.println("drukowanie " +user.getFirst_name());
         System.out.println("drukowanie " +user.getLast_name());
+        System.out.println("drukowanie " +user.getPassword());
         if(bindingResult.hasErrors()){
             return "registerUser";
         }else{
@@ -58,11 +62,14 @@ public class RegisterUser {
 
             }
 //            Role role = new Role();
-            Role admin_role = roleRepository.findByName("ROLE_ADMIN");
+//            Role admin_role = roleRepository.findByName("ROLE_ADMIN");
 //            role.setEmail(user.getEmail()); do wyrzecnia - setter rola na userze
 
-            user.setRoles(Collections.singleton(admin_role));
-            userRepository.save(user);
+//            user.setRoles(Collections.singleton(admin_role));
+            System.out.println("Registration : " + user.getPassword());
+            System.out.println("Registration : " + user.getEmail());
+//            userRepository.save(user);
+            userServiceImpl.saveUser(user);
             return "redirect:/health";
         }
     }
