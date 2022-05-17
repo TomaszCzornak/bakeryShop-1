@@ -12,6 +12,7 @@ import com.slodkacysia.bakeryshop.repository.UserRepository;
 import com.slodkacysia.bakeryshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +26,7 @@ import java.util.*;
 
 
 @Controller
-//@Secured("ROLE_USER")
+@PreAuthorize("hasRole('ROLE_USER')")
 public class HomeController {
 
 
@@ -70,7 +71,7 @@ public class HomeController {
 //        return "login";
 //    }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public String welcome(Model model) {
         return "welcome";
     }

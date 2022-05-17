@@ -28,7 +28,7 @@ public class SpringDataUserDetailsService implements UserDetailsService {
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         user.getRoles().forEach(r ->
                 grantedAuthorities.add(new SimpleGrantedAuthority(r.getName())));
-        return new CurrentUser(user.getUserName(),user.getPassword(),
+        return new CurrentUser(user.getEmail(),user.getPassword(),
                 grantedAuthorities, user);
     }
 

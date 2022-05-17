@@ -19,8 +19,8 @@
 <body>
 <div id="navbar" ...>
   <ul class="nav navbar-nav pull-right">
-    <li><a id="navLogoutLink" href="@{/logout}">
-      Logout</a></li>
+    <li><a href="<c:url value="/logout" />">Logout</a>
+      Logout</li>
   </ul>
     <security:authorize access="isAuthenticated()">
         authenticated as <security:authentication property="principal.email" />
