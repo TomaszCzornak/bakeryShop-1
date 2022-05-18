@@ -64,10 +64,10 @@ public class RegisterUser {
 
             }
 //            Role role = new Role();
-                Role admin_role = roleRepository.findByName("ROLE_USER");
-//            role.setEmail(user.getEmail()); do wyrzecnia - setter rola na userze
-
-            user.setRoles(Collections.singleton(admin_role));
+//                Role admin_role = roleRepository.findByName("ROLE_ADMIN");
+////            role.setEmail(user.getEmail()); do wyrzecnia - setter rola na userze
+//
+//            user.setRoles(Collections.singleton(admin_role));
 
             userServiceImpl.saveUser(user);
             return "redirect:/health";

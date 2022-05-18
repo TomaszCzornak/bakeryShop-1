@@ -23,7 +23,7 @@ import java.util.List;
 
 @Controller
 @PreAuthorize("hasRole('ROLE_ADMIN')")
-@RequestMapping("/admin")
+@RequestMapping("/registered/admin")
 public class AdminUser {
 
     private final AuthenticateAdmin authenticateAdmin;
