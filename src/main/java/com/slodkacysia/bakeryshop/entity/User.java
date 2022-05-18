@@ -17,10 +17,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
-    private List<Purchase> purchases;
 
     private String userName;
+
+    private Long customerId;
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
+    }
 
     public String getUserName() {
         return userName;
@@ -30,20 +38,10 @@ public class User {
         this.userName = userName;
     }
 
-//    public User() {
-//
-//    }
 
 
-    public List<Purchase> getPurchases() {
-        return purchases;
-    }
 
-    public void setPurchases(List<Purchase> purchases) {
-        this.purchases = purchases;
-    }
-
-    @Email(message = "proszę podać p6   oprawny adres email")
+    @Email(message = "proszę podać poprawny adres email")
     private String email;
 
     private String phone;
