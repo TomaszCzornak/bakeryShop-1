@@ -18,15 +18,15 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-    @GetMapping("/create-user")
-    @ResponseBody
-    public String createUser() {
-        User user = new User();
-        user.setUserName("admin");
-        user.setPassword("admin");
-        userService.saveUser(user);
-        return "admin";
-    }
+//    @GetMapping("/create-user")
+//    @ResponseBody
+//    public String createUser() {
+//        User user = new User();
+//        user.setUserName("admin");
+//        user.setPassword("admin");
+//        userService.saveUser(user);
+//        return "admin";
+//    }
     @GetMapping("/admin")
     @ResponseBody
     public String userInfo(@AuthenticationPrincipal UserDetails customUser) {

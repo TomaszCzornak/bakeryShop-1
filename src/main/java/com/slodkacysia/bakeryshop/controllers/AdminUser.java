@@ -38,13 +38,13 @@ public class AdminUser {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
     }
-
-    @GetMapping("/admin")
-    @ResponseBody
-    public String admin(@AuthenticationPrincipal CurrentUser customUser) {
-        User entityUser = customUser.getUser();
-        return "Hello " + entityUser.getUserName();
-    }
+//
+//    @GetMapping("/admin")
+//    @ResponseBody
+//    public String admin(@AuthenticationPrincipal CurrentUser customUser) {
+//        User entityUser = customUser.getUser();
+//        return "Hello " + entityUser.getUserName();
+//    }
 
 
 

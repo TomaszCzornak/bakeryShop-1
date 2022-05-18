@@ -14,8 +14,11 @@
     <title>Witanko!</title>
 </head>
 
-<body>
+<a>
 <%@include file="/WEB-INF/header.jsp" %><br>
 Witaj na stronie
+<br><br>
+
+<a href="/productlist"> lista dostępnych produktów</a></a>
 </body>
 </html>

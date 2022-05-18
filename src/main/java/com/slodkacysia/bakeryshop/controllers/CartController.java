@@ -1,9 +1,13 @@
 package com.slodkacysia.bakeryshop.controllers;
 
 import com.slodkacysia.bakeryshop.configuration.CustomAuthenticationProvider;
+import com.slodkacysia.bakeryshop.entity.Customer;
+import com.slodkacysia.bakeryshop.entity.User;
 import com.slodkacysia.bakeryshop.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,14 +31,12 @@ public class CartController {
     }
 
     @RequestMapping
-    public String getCart(HttpServletRequest request) {
-        Principal activeUser = request.getUserPrincipal();
-//        Customer customer = customerRepository.findCustomerByCustomerName(activeUser.getName());
-        System.out.println("wydruk " +activeUser.getName());
-//        long cartId = customer.getCart().getId();
+    public String getCart(@AuthenticationPrincipal User activeUser) {
+        System.out.println("wydruk" + activeUser.getEmail().toString());
+        Customer customer = customerRepository.findCustomerByEmail(activeUser.getEmail());
+        long cartId = customer.getCart().getId();
 
-//        return "redirect:/customer/cart/" + cartId;
-        return "redirect:/customer/cart/" + activeUser.getName();
+        return "redirect:/customer/cart/" + cartId;
     }
 
     @RequestMapping("/{cartId}")

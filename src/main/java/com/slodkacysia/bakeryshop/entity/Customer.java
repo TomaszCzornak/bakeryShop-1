@@ -28,8 +28,7 @@ public class Customer {
 
     @OneToOne
     private Cart cart;
-    @NotNull
-    private String username;
+
     @NotNull
     private String customerName;
     @NotNull
@@ -50,13 +49,6 @@ public class Customer {
     private String post_code;
 
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getCustomerName() {
         return customerName;

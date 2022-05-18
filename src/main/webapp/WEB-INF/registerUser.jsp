@@ -18,6 +18,8 @@
 <%--@elvariable id="user" type="pl.coderslab.entity.User"--%>
 
 <form:form modelAttribute="user" method="post">
+    USER NAME <form:input path="userName"/><br>
+    <form:errors path="userName" cssClass="error"/><br>
     FIRST NAME <form:input path="first_name"/><br>
     <form:errors path="first_name" cssClass="error"/><br>
     LAST NAME <form:input path="last_name"/><br>
