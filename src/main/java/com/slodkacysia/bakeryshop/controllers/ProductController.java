@@ -24,7 +24,6 @@ public class ProductController {
     public String getProductByCategory(@PathVariable ("product_category_name") String productCategory, Model model){
         List<Product> productList = productRepository.findAllByCategory(productCategory);
         model.addAttribute("products", productList);
-        System.out.println("Wydruk " + productList.toString());
 
         for (int i = 0; i < productList.size(); i++) {
             System.out.println(productList.get(i).getName().toString());
