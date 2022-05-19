@@ -19,7 +19,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     Product save(Product product);
     @Query("SELECT p FROM Product p join fetch p.category c where c.name = :category")
-    List<Product> findProductByCategory(@Param("category") String category);
+    List<Product> findAllByCategory(@Param("category") String category);
 
 
 
