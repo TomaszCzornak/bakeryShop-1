@@ -72,7 +72,6 @@ public class RegisterUser {
             customer.setUserId(user.getId());
             customer.setEnabled(1);
             customer.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            System.out.println("hasło customer " + customer.getPassword());
             customer.setUsername(user.getUserName());
             customer.setEmail(user.getEmail());
             customer.setCity(user.getCity());
@@ -93,11 +92,9 @@ public class RegisterUser {
 
             user.setCart(cart);
             userRepository.save(user);
-            System.out.println("Hasło user " + user.getPassword());
 
 
             userServiceImpl.saveUser(user);
-            System.out.println("hasło userServiceImpl ");
             return "redirect:/login";
         }
     }

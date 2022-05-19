@@ -74,8 +74,6 @@ public class CartItemController {
     public void removeItem(@PathVariable("productId") int productId) {
         CartItem cartItem = cartItemRepository.findCartItemByProduct_id(productId);
 
-        System.out.println("C:" + cartItem.getTotal_price());
-        System.out.println(cartItem);
         cartItemRepository.deleteCartItemById(cartItem.getId());
     }
 
