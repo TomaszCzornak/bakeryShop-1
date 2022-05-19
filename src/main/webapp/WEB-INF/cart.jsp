@@ -15,7 +15,7 @@
             <div class="jumbotron">
                 <div class="container">
                     <h1>Cart</h1>
-                    <p>All the selected products in your shopping cart</p>
+                    <p>Tutaj jest lista twoich produktów w obecnym koszyku</p>
                 </div>
             </div>
         </section>
@@ -26,7 +26,7 @@
 
                 <div>
                     <a class="btn btn-danger pull-left" ng-click = "clearCart()"><span class="glyphicon glyphicon-remove-sign"></span> Clear Cart</a>
-                    <a href="<spring:url value="/order/${cartId}" />" class="btn btn-success pull-right"><span class="glyphicon glyphicon-shopping-cart"></span> Check out</a>
+                    <a href="<spring:url value="/purchase/${cartId}" />" class="btn btn-success pull-right"><span class="glyphicon glyphicon-shopping-cart"></span> Check out</a>
                 </div>
 
                 <br/><br/><br/>
@@ -57,7 +57,7 @@
 
             </div>
         </section>
-        </body>
-        </html>
+        </div>
+        </div>
         <!-- My -->
 

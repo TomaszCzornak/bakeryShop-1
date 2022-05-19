@@ -4,39 +4,38 @@ import com.slodkacysia.bakeryshop.configuration.CustomAuthenticationProvider;
 import com.slodkacysia.bakeryshop.entity.Customer;
 import com.slodkacysia.bakeryshop.entity.User;
 import com.slodkacysia.bakeryshop.repository.CustomerRepository;
+import com.slodkacysia.bakeryshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
-
 @Controller
-@RequestMapping("/customer/cart")
+@RequestMapping("/user/customer/cart")
 
 public class CartController {
 
     private final CustomAuthenticationProvider customAuthenticationProvider;
     private final CustomerRepository customerRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public CartController(CustomAuthenticationProvider customAuthenticationProvider, CustomerRepository customerRepository) {
+    public CartController(CustomAuthenticationProvider customAuthenticationProvider, CustomerRepository customerRepository, UserRepository userRepository) {
         this.customAuthenticationProvider = customAuthenticationProvider;
         this.customerRepository = customerRepository;
+        this.userRepository = userRepository;
     }
 
     @RequestMapping
-    public String getCart(@AuthenticationPrincipal User activeUser) {
-        System.out.println("wydruk" + activeUser.getEmail().toString());
-        Customer customer = customerRepository.findCustomerByEmail(activeUser.getEmail());
-        long cartId = customer.getCart().getId();
+    public String getCart(@AuthenticationPrincipal User activeCustomer) {
+        System.out.println("wydruk" + activeCustomer.getEmail().toString());
+//        Customer customer = customerRepository.findCustomerByEmail(activeUser.getEmail());
+        User user = userRepository.findUserByEmail(activeCustomer.getEmail());
+        long cartId = user.getCart().getId();
 
-        return "redirect:/customer/cart/" + cartId;
+        return "redirect:/user/customer/cart/" + cartId;
     }
 
     @RequestMapping("/{cartId}")

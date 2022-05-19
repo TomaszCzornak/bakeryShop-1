@@ -1,7 +1,6 @@
 package com.slodkacysia.bakeryshop.controllers;
 
-import com.slodkacysia.bakeryshop.configuration.Authenticate;
-import com.slodkacysia.bakeryshop.configuration.AuthenticateAdmin;
+
 import com.slodkacysia.bakeryshop.entity.Category;
 import com.slodkacysia.bakeryshop.entity.Product;
 import com.slodkacysia.bakeryshop.entity.User;
@@ -26,14 +25,12 @@ import java.util.List;
 @RequestMapping("/registered/admin")
 public class AdminUser {
 
-    private final AuthenticateAdmin authenticateAdmin;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
 
     private final CategoryRepository categoryRepository;
     @Autowired
-    AdminUser(AuthenticateAdmin authenticateAdmin, UserRepository userRepository, ProductRepository productRepository, CategoryRepository categoryRepository){
-        this.authenticateAdmin = authenticateAdmin;
+    AdminUser(UserRepository userRepository, ProductRepository productRepository, CategoryRepository categoryRepository){
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;

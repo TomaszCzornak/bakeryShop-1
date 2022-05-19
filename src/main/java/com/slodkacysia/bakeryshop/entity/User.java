@@ -22,6 +22,10 @@ public class User {
 
     private Long customerId;
 
+    @OneToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
     public Long getCustomerId() {
         return customerId;
     }
@@ -65,6 +69,14 @@ public class User {
     private String city;
 
     private String password;
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
 
     public int getEnabled() {
         return enabled;
