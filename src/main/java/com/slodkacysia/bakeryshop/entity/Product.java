@@ -18,19 +18,19 @@ public class Product {
 
     private BigDecimal price;
 
-    public List<Category> getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(List<Category> category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
     private Integer available_quantity;
 
 
-    @ManyToMany
-    private List<Category> category;
+    @ManyToOne
+    private Category category;
 
     public Long getId() {
         return id;
