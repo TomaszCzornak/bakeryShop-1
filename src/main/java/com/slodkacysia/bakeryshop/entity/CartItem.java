@@ -13,7 +13,7 @@ public class CartItem {
     private Cart cart;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", insertable = false, updatable = false)
     private Product product;
 
     private BigDecimal total_price;
@@ -38,7 +38,7 @@ public class CartItem {
 
     private BigDecimal price;
 
-    private Integer quantity;
+    private BigDecimal quantity;
 
     public Cart getCart() {
         return cart;
@@ -68,7 +68,7 @@ public class CartItem {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
     }
 
