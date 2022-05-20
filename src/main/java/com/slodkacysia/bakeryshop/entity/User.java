@@ -17,22 +17,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
+    @Size(min = 1, message = "podaj nazwę użytkownika")
     private String userName;
 
-    private Long customerId;
 
     @OneToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    public Long getCustomerId() {
-        return customerId;
-    }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
-    }
 
     public String getUserName() {
         return userName;

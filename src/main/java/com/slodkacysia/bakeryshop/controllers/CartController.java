@@ -30,7 +30,6 @@ public class CartController {
 
     @RequestMapping
     public String getCart(@AuthenticationPrincipal User activeCustomer) {
-//        Customer customer = customerRepository.findCustomerByEmail(activeUser.getEmail());
         User user = userRepository.findUserByEmail(activeCustomer.getEmail());
         long cartId = user.getCart().getId();
 

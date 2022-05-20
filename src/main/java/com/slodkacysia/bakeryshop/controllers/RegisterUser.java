@@ -65,9 +65,15 @@ public class RegisterUser {
                     model.addAttribute("emailMsg","Taki email już istnieje");
                     return "registerUser";
                 }
+                if (userInList.getUserName().equals(user.getUserName())) {
+                    model.addAttribute("usernameMsg","Taki użytkownik już jest zarejestrowany");
+                    return "registerUser";
+                }
 
 
             }
+
+
             Customer customer = new Customer();
             customer.setUserId(user.getId());
             customer.setEnabled(1);
