@@ -10,10 +10,10 @@ public class CartItem {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name="cartId")
     private Cart cart;
 
     @ManyToOne
-    @JoinColumn(name = "id", insertable = false, updatable = false)
     private Product product;
 
     private BigDecimal total_price;
@@ -34,7 +34,6 @@ public class CartItem {
         this.product = product;
     }
 
-    private Integer product_id;
 
     private BigDecimal price;
 
@@ -48,13 +47,6 @@ public class CartItem {
         this.cart = cart;
     }
 
-    public Integer getProduct_id() {
-        return product_id;
-    }
-
-    public void setProduct_id(Integer product_id) {
-        this.product_id = product_id;
-    }
 
     public BigDecimal getPrice() {
         return price;

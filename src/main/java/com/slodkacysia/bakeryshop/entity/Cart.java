@@ -26,7 +26,7 @@ public class Cart {
         this.user = user;
     }
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<CartItem> cartItems;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -70,5 +70,27 @@ public class Cart {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void addProduct(Product product) {
+        CartItem item = this.findItemByID(product.getId());
+
+        if (item == null) {
+            item = new CartItem();
+            item.setQuantity(BigDecimal.valueOf(1));
+            item.setProduct(product);
+            this.cartItems.add(item);
+        }
+
+    }
+
+    private CartItem findItemByID(Long id) {
+        CartItem item = null;
+        for (int i = 0; i < cartItems.size(); i++) {
+            if (cartItems.get(i).getProduct().getId() == id) {
+                item = cartItems.get(i);
+            }
+        }
+        return item;
     }
 }

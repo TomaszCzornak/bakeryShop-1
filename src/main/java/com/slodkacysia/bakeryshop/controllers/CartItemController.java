@@ -1,17 +1,17 @@
 package com.slodkacysia.bakeryshop.controllers;
 
-import com.slodkacysia.bakeryshop.entity.Cart;
-import com.slodkacysia.bakeryshop.entity.CartItem;
-import com.slodkacysia.bakeryshop.entity.Product;
+import com.slodkacysia.bakeryshop.entity.*;
 import com.slodkacysia.bakeryshop.repository.CartItemRepository;
 import com.slodkacysia.bakeryshop.repository.CartRepository;
 import com.slodkacysia.bakeryshop.repository.ProductRepository;
 import com.slodkacysia.bakeryshop.repository.UserRepository;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -33,18 +33,27 @@ public class CartItemController {
     }
 
     @RequestMapping("/{cartId}")
-    public @ResponseBody Cart getCartById(@PathVariable("cartId") int cartId) {
+    public String getCartById(Model model, @PathVariable("cartId") Long cartId) {
 
-        return cartRepository.getCartById(cartId);
+        model.addAttribute("cartList", cartRepository.getCartById(cartId));
+        return "cartAdded";
     }
 
-    @RequestMapping(value = "/add/{productId}", method = RequestMethod.PUT)
-    public void addItem(@PathVariable("productId") int productId, @AuthenticationPrincipal User activeCustomer) {
+    @RequestMapping("/products_to_buy")
+    public String addToCart(Model model) {
+        List<Product> productList = productRepository.findAllBy();
+        model.addAttribute("offer", productList);
 
-        com.slodkacysia.bakeryshop.entity.User user = userRepository.findUserByEmail(activeCustomer.getUsername());
+        return "productList";
+    }
+
+    @GetMapping("/add/{productId}")
+    public String addItem(Model model, @PathVariable("productId") Long productId, @AuthenticationPrincipal User activeCustomer) {
+
+        com.slodkacysia.bakeryshop.entity.User user = userRepository.findUserByEmail(activeCustomer.getEmail());
         Cart cart = user.getCart();
-        Product product = productRepository.findProductById((long) productId);
-
+        Product product = productRepository.findProductById(productId);
+        cart.addProduct(product);
         List<CartItem> cartItems = cart.getCartItems();
         for (int i = 0; i < cartItems.size(); i++) {
 
@@ -55,26 +64,36 @@ public class CartItemController {
                 cartItem.setQuantity(cartItem.getQuantity().add(BigDecimal.valueOf(1)));
                 BigDecimal total_price = product.getPrice().multiply(cartItem.getQuantity());
                 cartItem.setTotal_price(total_price);
+                cart.setId(user.getCart().getId());
+                cartRepository.save(cart);
                 cartItemRepository.save(cartItem);
 
-                return;
+                model.addAttribute("addedItems", cartItem);
+                return "cartAdded";
             } else {
                 CartItem cartItem = new CartItem();
                 cartItem.setProduct(product);
                 cartItem.setQuantity(BigDecimal.valueOf(1));
                 BigDecimal total_price = product.getPrice().multiply(cartItem.getQuantity());
                 cartItem.setTotal_price(total_price);
+                cart.setId(user.getCart().getId());
                 cartItemRepository.save(cartItem);
+                System.out.println("Lista cartItemów " + cartItem.getProduct().getId());
+                model.addAttribute("addedItems", cartItem);
+
             }
         }
+        return "cartAdded";
     }
 
-    @RequestMapping(value = "/remove/{productId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/remove/{productId}", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void removeItem(@PathVariable("productId") int productId) {
+    public String removeItem(@PathVariable("productId") Long productId) {
         CartItem cartItem = cartItemRepository.findCartItemByProduct_id(productId);
 
         cartItemRepository.deleteCartItemById(cartItem.getId());
+
+        return "cartAdded";
     }
 
 
@@ -87,5 +106,13 @@ public class CartItemController {
         Cart cart = cartRepository.getCartById(cartId);
         cartItemRepository.deleteAllByCart(cart);
 
+    }
+    @GetMapping("/add/quantity/{productId}")
+    public String addQuantity(@PathVariable Long productId){
+        CartItem cartItem = cartItemRepository.findCartItemByProduct_id(productId);
+        cartItem.setQuantity(cartItem.getQuantity().add(BigDecimal.valueOf(1)));
+        cartItemRepository.save(cartItem);
+        Long cartID = cartItem.getCart().getId();
+        return  "redirect: /rest/cart/"+ cartID;
     }
 }
