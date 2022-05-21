@@ -6,9 +6,9 @@ select * from category;
 
 # insert into product (available_quantity, description, image_url, name, price, category_id) values(10,'Tort z masłem orzechowym', 'www.tort.pl','Tort Urodzinowy',100, 1 );
 
-insert into category(name,description)values ('urodzinowy','masło orzechowe + czekolada');
-insert into category(name,description)values ('weselny','zamówienie miesięczne');
-insert into category(name,description)values ('przyjęcie','szybka dostawa');
+insert into category(name)values ('urodzinowy');
+insert into category(name)values ('weselny');
+insert into category(name)values ('przyjęcie');
 
 insert into product(available_quantity, description, image_url, name, price, category_id
 ) VALUES (10,'smaczny tort','www.tort.pl','masło orzechowe', 100,  1);
@@ -21,6 +21,10 @@ insert into product(available_quantity, description, image_url, name, price, cat
 insert into product(available_quantity, description, image_url, name, price, category_id
 ) VALUES (5,'tort orzechowy','www.tortorzech.pl','orzech', 150,  3);
 
+INSERT INTO `role` (`id`, `name`) VALUES (NULL, 'ROLE_USER');
+INSERT INTO `role` (`id`, `name`) VALUES (NULL, 'ROLE_ADMIN');
 
-select product.name from product join category pc on product.id = pc.id
-where pc.name = 'urodzinowy';
+INSERT INTO `payment_method`(`name`)values ('gotówka odbiór własny');
+INSERT INTO `payment_method`(`name`)values ('przelew internetowy');
+INSERT INTO `payment_method`(`name`)values ('płatność za pobraniem');
+

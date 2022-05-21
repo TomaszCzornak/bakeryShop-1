@@ -57,11 +57,16 @@
             <td>${addedItems.quantity}</td>
             <td><a href="/remove/${cart.id}">usuń</a></td>
             <td><a href="/rest/cart/add/${cart.id}">dodaj_sztukę</a></td>
-            <br>
-
         </tr>
-    <a href="/rest/cart/products_to_buy"> powrót do zakupów</a>    <tr>
-    </tr>
 </table>
+<br>
+<br>
+<br>
+    <a href="/rest/cart/products_to_buy"> powrót do zakupów</a><br><br><br>
+    <a href="/user/customer/cart/${cart.id}"> koszyk</a>
+
+
+
+
 </body>
 </html>

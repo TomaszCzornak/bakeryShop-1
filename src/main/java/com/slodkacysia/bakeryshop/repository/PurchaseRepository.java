@@ -7,5 +7,7 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Integer> {
 
     Purchase save(Purchase purchase);
 
-    Purchase findPurchaseById(Integer id);
+    Purchase findPurchaseById(Long id);
+
+    Purchase findPurchaseByCartId(Long id);
 }

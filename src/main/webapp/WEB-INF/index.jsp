@@ -20,5 +20,13 @@
 <h1>
 Witaj w Słodka Cysia
 </h1>
+<br>
+<br>
+<a href="/register"> rejestracja</a><br><br>
+<a href="/login"> logowanie</a><br><br>
+
+
+<a href="/products_to_buy"> lista dostępnych produktów</a></a>
+
 </body>
 </html>

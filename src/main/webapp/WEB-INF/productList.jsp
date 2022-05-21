@@ -16,7 +16,9 @@
     <title>Lista produktów</title>
 </head>
 <body>
-
+<a>
+    <a href="/register"> rejestracja</a><br><br>
+    <a href="/login"> logowanie</a><br><br>
 
 <%--@elvariable id="product" type="java.util.List<pl.coderslab.entity.Product>"--%>
 <table>

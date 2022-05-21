@@ -19,6 +19,8 @@
         }
     </style>
 </head>
+<a>
+    <%@include file="/WEB-INF/header.jsp" %></a><br>
 <%--@elvariable id="product" type="pl.coderslab.entity.Product"--%>
 <form:form modelAttribute="product" >
     Nazwa <form:input path="name"/>

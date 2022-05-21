@@ -17,6 +17,16 @@ public class Purchase {
     @Column(name = "cart_date")
     private Date date;
 
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    @OneToOne
+    private PaymentMethod paymentMethod;
 
     public User getUser() {
         return user;
@@ -57,4 +67,6 @@ public class Purchase {
     public void setId(Long id) {
         this.id = id;
     }
+
+
 }

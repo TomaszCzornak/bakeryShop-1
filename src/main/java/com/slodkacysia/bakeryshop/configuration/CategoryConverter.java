@@ -15,10 +15,13 @@ public class CategoryConverter implements Converter<String, List<Category>> {
     @Autowired
     private CategoryRepository categoryRepository;
 
+
+
     @Override
     public List<Category> convert(String s) {
         List<Category> result = new ArrayList<>();
         result.add(categoryRepository.findById(Long.parseLong(s)));
         return result;
     }
+
 }

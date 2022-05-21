@@ -6,6 +6,7 @@ import com.slodkacysia.bakeryshop.repository.CartRepository;
 import com.slodkacysia.bakeryshop.repository.ProductRepository;
 import com.slodkacysia.bakeryshop.repository.UserRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.math.BigDecimal;
 import java.util.List;
 
+@PreAuthorize("hasRole('ROLE_USER')")
 @Controller
 @RequestMapping("/rest/cart/")
 public class CartItemController {
@@ -44,7 +46,7 @@ public class CartItemController {
         List<Product> productList = productRepository.findAllBy();
         model.addAttribute("offer", productList);
 
-        return "productList";
+        return "productListCustomer";
     }
 
     @GetMapping("/add/{productId}")
@@ -65,6 +67,7 @@ public class CartItemController {
                 BigDecimal total_price = product.getPrice().multiply(cartItem.getQuantity());
                 cartItem.setTotal_price(total_price);
                 cart.setId(user.getCart().getId());
+                cartItem.setCart(cart);
                 cartRepository.save(cart);
                 cartItemRepository.save(cartItem);
 
@@ -77,6 +80,7 @@ public class CartItemController {
                 BigDecimal total_price = product.getPrice().multiply(cartItem.getQuantity());
                 cartItem.setTotal_price(total_price);
                 cart.setId(user.getCart().getId());
+                cartItem.setCart(cart);
                 cartItemRepository.save(cartItem);
                 System.out.println("Lista cartItemów " + cartItem.getProduct().getId());
                 model.addAttribute("addedItems", cartItem);
@@ -115,4 +119,6 @@ public class CartItemController {
         Long cartID = cartItem.getCart().getId();
         return  "redirect: /rest/cart/"+ cartID;
     }
+
+
 }

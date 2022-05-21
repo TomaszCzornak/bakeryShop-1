@@ -1,5 +1,6 @@
 package com.slodkacysia.bakeryshop.controllers;
 
+import com.slodkacysia.bakeryshop.entity.Product;
 import com.slodkacysia.bakeryshop.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.List;
 
 
 @Controller
@@ -59,5 +61,12 @@ public class HomeController {
     public String index() {
         return "index";
 
+    }
+    @RequestMapping("/products_to_buy")
+    public String addToCart(Model model) {
+        List<Product> productList = productRepository.findAllBy();
+        model.addAttribute("offer", productList);
+
+        return "productList";
     }
 }

@@ -66,7 +66,7 @@
     <tr>
         <c:set var="cartTotal" value="${0}" />
         <c:forEach var="cart" items="${fullCart}">
-            <c:set var="cartTotal" value="${cartTotal + cart.product.price}" />
+            <c:set var="cartTotal" value="${cartTotal + (cart.product.price* cart.quantity)}" />
         </c:forEach>
     </tr>
     </c:forEach>
@@ -76,7 +76,8 @@
     <br>
     <br>
     <br>
+</table><br>
     <a href="/rest/cart/products_to_buy"> powrót do zakupów</a>
-</table>
+
 </body>
 </html>

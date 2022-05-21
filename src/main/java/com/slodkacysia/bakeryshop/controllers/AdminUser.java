@@ -22,7 +22,7 @@ import java.util.List;
 
 @Controller
 @PreAuthorize("hasRole('ROLE_ADMIN')")
-@RequestMapping("/registered/admin")
+@RequestMapping("/admin")
 public class AdminUser {
 
     private final UserRepository userRepository;
@@ -35,13 +35,7 @@ public class AdminUser {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
     }
-//
-//    @GetMapping("/admin")
-//    @ResponseBody
-//    public String admin(@AuthenticationPrincipal CurrentUser customUser) {
-//        User entityUser = customUser.getUser();
-//        return "Hello " + entityUser.getUserName();
-//    }
+
 
 
 
@@ -58,7 +52,7 @@ public class AdminUser {
         if (result.hasErrors()) {
             return "addProduct";
         } else {
-
+            System.out.println("wynik " + product.getCategory().toString());
             productRepository.save(product);
             return "redirect:/admin/productlist";
         }

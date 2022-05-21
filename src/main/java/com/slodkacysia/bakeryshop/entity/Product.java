@@ -27,6 +27,8 @@ public class Product {
     public void setCartItems(List<CartItem> cartItems) {
         this.cartItems = cartItems;
     }
+    @ManyToOne
+    private Category category;
 
     @OneToMany(mappedBy = "product")
     private List<CartItem> cartItems;
@@ -42,8 +44,7 @@ public class Product {
     private Integer available_quantity;
 
 
-    @ManyToOne
-    private Category category;
+
 
     public Long getId() {
         return id;
