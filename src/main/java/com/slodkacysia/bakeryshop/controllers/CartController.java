@@ -1,7 +1,9 @@
 package com.slodkacysia.bakeryshop.controllers;
 
 import com.slodkacysia.bakeryshop.configuration.CustomAuthenticationProvider;
+import com.slodkacysia.bakeryshop.entity.Cart;
 import com.slodkacysia.bakeryshop.entity.CartItem;
+import com.slodkacysia.bakeryshop.entity.Purchase;
 import com.slodkacysia.bakeryshop.entity.User;
 import com.slodkacysia.bakeryshop.repository.CartItemRepository;
 import com.slodkacysia.bakeryshop.repository.CartRepository;
@@ -45,9 +47,13 @@ public class CartController {
     }
 
     @RequestMapping("/{cartId}")
-    public String getCartRedirect(@PathVariable(value = "cartId") Long cartId, Model model) {
-
+    public String getCartRedirect(@PathVariable(value = "cartId") Long cartId, Model model,@AuthenticationPrincipal User activeCustomer) {
+        User user = userRepository.findUserByEmail(activeCustomer.getEmail());
+        System.out.println(user.getEmail());
         List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
+        cartItemList.stream().forEach(System.out::println);
+        Purchase purchase = new Purchase();
+        purchase.setCart(user.getCart());
         model.addAttribute("fullCart", cartItemList);
         return "cartView";
     }

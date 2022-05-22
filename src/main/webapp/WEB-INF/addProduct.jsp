@@ -20,30 +20,33 @@
     </style>
 </head>
 <a>
-    <%@include file="/WEB-INF/header.jsp" %></a><br>
+    <%@include file="/WEB-INF/header.jsp" %>
+</a><br>
+
+JESTEŚ ADMINISTATOREM<br><br><br>
 <%--@elvariable id="product" type="pl.coderslab.entity.Product"--%>
-<form:form modelAttribute="product" >
+<form:form modelAttribute="product">
     Nazwa <form:input path="name"/>
-    <form:errors path="name" cssClass="error" /><br>
+    <form:errors path="name" cssClass="error"/><br>
 
-    Opis <form:input path="description" />
-    <form:errors path="description" cssClass="error" /><br>
+    Opis <form:input path="description"/>
+    <form:errors path="description" cssClass="error"/><br>
 
-    Image URL <form:input path="image_url" />
-    <form:errors path="image_url" cssClass="error" /><br>
+    Image URL <form:input path="image_url"/>
+    <form:errors path="image_url" cssClass="error"/><br>
 
     <br/>
 
     Price <form:input path="price"/>
-    <form:errors path="price" cssClass="error" /><br>
+    <form:errors path="price" cssClass="error"/><br>
 
     <br>
     Available Quantity <form:input path="available_quantity"/>
-    <form:errors path="available_quantity" cssClass="error" /><br>
+    <form:errors path="available_quantity" cssClass="error"/><br>
 
     <br>
     <form:select path="category.id" items="${categories}" itemLabel="fullNameCategory" itemValue="id"/>
-    <form:errors path="category.id" cssClass="error" /><br>
+    <form:errors path="category.id" cssClass="error"/><br>
 
     <br>
     <input type="submit">

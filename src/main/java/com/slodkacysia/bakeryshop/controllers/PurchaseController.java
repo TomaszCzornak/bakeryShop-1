@@ -29,22 +29,23 @@ public class PurchaseController {
         this.paymentMethodRepository = paymentMethodRepository;
     }
 
-    @RequestMapping("/purchase/{cartId}")
-    public String createPurchase(@PathVariable("cartId") Long cartId) {
-
-        Purchase purchase = new Purchase();
-        Cart cart = cartRepository.getCartById(cartId);
-        purchase.setCart(cart);
-        User user = cart.getUser();
-        purchase.setUser(user);
-        purchaseRepository.save(purchase);
-
-        return "redirect:/checkout/" + cartId;
-
-    }
+//    @RequestMapping("/purchase/{cartId}")
+//    public String createPurchase(@PathVariable("cartId") Long cartId) {
+//
+//        Purchase purchase = new Purchase();
+//        Cart cart = cartRepository.getCartById(cartId);
+//        purchase.setCart(cart);
+//        User user = cart.getUser();
+//        purchase.setUser(user);
+//        purchaseRepository.save(purchase);
+//
+//        return "redirect:/checkout/" + cartId;
+//
+//    }
 
     @RequestMapping("/checkout/{cartId}")
     public String finalize(@PathVariable("cartId") Long cartId, Model model) {
+
         List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
         model.addAttribute("checkout", cartItemList);
 
@@ -55,17 +56,35 @@ public class PurchaseController {
     public List<PaymentMethod> getPaymentMethod() {
         return paymentMethodRepository.findAllBy();
     }
+    @RequestMapping("/checkout/payment/{cartId}")
+    public String PaymentView(Model model,@PathVariable Long cartId) {
+        Cart cart = cartRepository.getCartById(cartId);
+        model.addAttribute("purchase", new Purchase() );
+
+        return "paymentMethod";
+    }
+
+    @RequestMapping(value = "/checkout/payment/{cartId}", method = RequestMethod.POST)
+    private String PaymentMethod(@PathVariable Long cartId, Purchase purchase, BindingResult bindingResult){
+        List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
+        if(bindingResult.hasErrors()){
+            return "paymentMethod";
+        }else {
+            purchaseRepository.save(purchase);
+        }
+        return "redirect:/finalization/"+cartId;
+    }
 
     @ResponseBody
     @RequestMapping("/finalization/{cartId}")
     public String createOrder(@PathVariable("cartId") Long cartId, Model model) {
-        Purchase purchase = new Purchase();
+        Purchase purchase = purchaseRepository.findPurchaseByCartId(cartId);
         Cart cart = cartRepository.getCartById(cartId);
         List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
         purchase.setCart(cart);
         User user = cart.getUser();
         purchase.setUser(user);
-        cart.setPurchase(purchase);
+//        cart.setPurchase(purchase);
         purchaseRepository.save(purchase);
 
         for (int i = 0; i < cartItemList.size(); i++) {

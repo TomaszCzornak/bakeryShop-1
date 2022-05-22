@@ -81,7 +81,7 @@
 <br>
 <br>
 <br>
-<a href="/checkout/${cartId}"> DO KASY</a>
+<a href="/checkout/payment/${cartId}"> do płatności</a>
 
 </body>
 </html>

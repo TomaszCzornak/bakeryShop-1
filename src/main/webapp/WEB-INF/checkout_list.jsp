@@ -21,19 +21,13 @@
 <body>
 <%@include file="/WEB-INF/header.jsp" %><br>
 
-Kasa: wybierz metodę płatności<br><br>
-
-<%--@elvariable id="purchase" type="com.slodkacysia.bakeryshop.entity.Purchase"--%>
-<%--<form:form modelAttribute="purchase" method="post">--%>
-<%--<br>--%>
-<%--<form:select path="paymentMethod" items="${payment}" itemLabel="name" itemValue="id"/>--%>
-<%--<form:errors path="paymentMethod" cssClass="error"/>--%>
-<%--<br>--%>
-<%--</form:form>--%>
 
 
 
 
+
+
+<br>
 <html>
 
 <head>

@@ -37,7 +37,7 @@
 <br>
 <br>
 
-    <a href="/user/customer/cart/${cart.id}"> koszyk</a>
+
 
 </table>
 </body>
