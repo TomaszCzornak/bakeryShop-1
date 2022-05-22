@@ -3,6 +3,7 @@ package com.slodkacysia.bakeryshop.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Purchase {
@@ -25,7 +26,7 @@ public class Purchase {
         this.paymentMethod = paymentMethod;
     }
 
-    @OneToOne
+    @ManyToOne
     private PaymentMethod paymentMethod;
 
     public User getUser() {

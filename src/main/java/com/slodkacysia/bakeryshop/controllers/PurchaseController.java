@@ -58,16 +58,19 @@ public class PurchaseController {
         return paymentMethodRepository.findAllBy();
     }
 
-    @PostMapping("/finalization/{cartId}")
-    public String createOrder(@PathVariable("cartId")Long cartId, Model model, @ModelAttribute("purchase")@Valid Purchase purchase, BindingResult bindingResult){
+    @GetMapping("/finalization/{cartId}")
+    public String createOrder(@PathVariable("cartId")Long cartId, Model model,@ModelAttribute("payment")@Valid PaymentMethod paymentMethod, BindingResult bindingResult){
+        Purchase purchase = new Purchase();
         Cart cart = cartRepository.getCartById(cartId);
         List<CartItem> cartItemList = cart.getCartItems();
         purchase.setCart(cart);
         User user = cart.getUser();
         purchase.setUser(user);
-        purchase.setPaymentMethod(purchase.getCart().getPurchase().getPaymentMethod());
+        purchase.setPaymentMethod(paymentMethod);
         purchaseRepository.save(purchase);
         model.addAttribute("finalization", cartItemList);
+        System.out.println("usuwam koszyk nr " + cartId);
+        cartRepository.delete(cart);
         return "finalPage";
     }
 }

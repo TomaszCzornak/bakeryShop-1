@@ -24,12 +24,12 @@
 Kasa: wybierz metodę płatności<br><br>
 
 <%--@elvariable id="purchase" type="com.slodkacysia.bakeryshop.entity.Purchase"--%>
-<form:form modelAttribute="purchase">
-<br>
-<form:select path="paymentMethod" items="${payment}" itemLabel="name" itemValue="id"/>
-<form:errors path="paymentMethod" cssClass="error"/>
-<br>
-</form:form>
+<%--<form:form modelAttribute="purchase" method="post">--%>
+<%--<br>--%>
+<%--<form:select path="paymentMethod" items="${payment}" itemLabel="name" itemValue="id"/>--%>
+<%--<form:errors path="paymentMethod" cssClass="error"/>--%>
+<%--<br>--%>
+<%--</form:form>--%>
 
 
 
@@ -72,29 +72,31 @@ Kasa: wybierz metodę płatności<br><br>
         <th>Akcja</th>
     </tr>
     <br>
-    <c:forEach var="cartItems" items="${checkout}">
+    <c:forEach var="cart" items="${checkout}">
         <tr>
-<%--            <td>${cart.id}</td>--%>
-            <td>${cartItems.product.id}</td>
-            <td>${cartItems.product.name}</td>
-            <td>${cartItems.product.price}</td>
-            <td>${cartItems.quantity}</td>
-            <td><a href="/checkout/${cart.product.id}">usuń</a></td>
+                <%--            <td>${calaLista.quantity}</td>--%>
+            <td>${cart.product.id}</td>
+            <td>${cart.product.name}</td>
+            <td>${cart.product.price}</td>
+            <td>${cart.product.description}</td>
+            <td>${cart.quantity}</td>
+            <td><a href="/remove/${cart.product.id}">usuń</a></td>
+            <td><a href="/rest/cart/add/quantity/${cart.product.id}">dodaj_sztukę</a></td>
             <br>
 
         </tr>
     </c:forEach>
 
-    <c:forEach var="cartItems" items="${checkout}">
+    <c:forEach var="cart" items="${checkout}">
         <tr>
             <c:set var="cartTotal" value="${0}" />
-            <c:forEach var="cartItems" items="${checkout}">
-                <c:set var="cartTotal" value="${cartTotal + (cartItems.product.price* cart.quantity)}" />
+            <c:forEach var="cart" items="${checkout}">
+                <c:set var="cartTotal" value="${cartTotal + (cart.product.price* cart.quantity)}" />
             </c:forEach>
         </tr>
     </c:forEach>
     <td></td>
-    <td>Suma do zapłaty:</td>
+    <td></td>
     <td>${cartTotal}</td>
     <br>
     <br>

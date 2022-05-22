@@ -78,6 +78,10 @@
     <br>
 </table><br>
     <a href="/rest/cart/products_to_buy"> powrót do zakupów</a>
+<br>
+<br>
+<br>
+<a href="/checkout/${cartId}"> DO KASY</a>
 
 </body>
 </html>

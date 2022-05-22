@@ -23,10 +23,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
 
 
-//    void update(Product product);
-//
-//    void delete(long productId);
-
     List<Product> getAllProductByCategory(String category);
 
 

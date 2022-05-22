@@ -42,8 +42,8 @@
     <form:errors path="available_quantity" cssClass="error" /><br>
 
     <br>
-    <form:select path="category" items="${categories}" itemLabel="fullNameCategory" itemValue="id"/>
-    <form:errors path="category" cssClass="error" /><br>
+    <form:select path="category.id" items="${categories}" itemLabel="fullNameCategory" itemValue="id"/>
+    <form:errors path="category.id" cssClass="error" /><br>
 
     <br>
     <input type="submit">

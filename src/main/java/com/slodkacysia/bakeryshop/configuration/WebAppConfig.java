@@ -23,12 +23,6 @@ public class WebAppConfig implements WebMvcConfigurer {
 
 
     }
-    @Override
-    public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(CategoryConverter());
-    }
-    @Bean
-    public Converter CategoryConverter(){
-        return new CategoryConverter();
-    }
+
+
 }
