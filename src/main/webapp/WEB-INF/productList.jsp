@@ -31,6 +31,13 @@
             <td><a href="/rest/cart/add/${item.id}">    dodaj do koszyka</a></td>
         </tr>
     </c:forEach>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+    <a href="/user/customer/cart/${cart.id}"> koszyk</a>
 
 </table>
 </body>

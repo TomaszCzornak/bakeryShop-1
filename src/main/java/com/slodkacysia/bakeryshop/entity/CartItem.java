@@ -9,14 +9,25 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @ManyToOne
-    @JoinColumn(name="cartId")
+    @JoinColumn(name="cartId", nullable = true)
     private Cart cart;
 
     @ManyToOne
     private Product product;
 
     private BigDecimal total_price;
+
+    private Integer status;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     public BigDecimal getTotal_price() {
         return total_price;

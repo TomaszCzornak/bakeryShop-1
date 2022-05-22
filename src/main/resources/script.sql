@@ -4,9 +4,11 @@ show tables ;
 select * from product;
 select * from category;
 
-# insert into product (available_quantity, description, image_url, name, price, category_id) values(10,'Tort z masłem orzechowym', 'www.tort.pl','Tort Urodzinowy',100, 1 );
+create database bakery CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-insert into category(name)values ('urodzinowy');
+insert into category(name)
+values ('urodzinowy');
+
 insert into category(name)values ('weselny');
 insert into category(name)values ('przyjęcie');
 
@@ -28,3 +30,5 @@ INSERT INTO `payment_method`(`name`)values ('gotówka odbiór własny');
 INSERT INTO `payment_method`(`name`)values ('przelew internetowy');
 INSERT INTO `payment_method`(`name`)values ('płatność za pobraniem');
 
+select id from cart join cart_item ci on cart.id = ci.cart_id
+where ci.status = 0;

@@ -15,7 +15,7 @@ public class Cart {
 
     private BigDecimal total_amount;
 
-    private Long session_id;
+
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
@@ -28,8 +28,8 @@ public class Cart {
     public void setUser(User user) {
         this.user = user;
     }
-
-    @OneToMany(cascade = CascadeType.ALL)
+    @Column(nullable = true)
+    @OneToMany(mappedBy="cart",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
     private List<CartItem> cartItems;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -43,13 +43,6 @@ public class Cart {
         this.total_amount = total_amount;
     }
 
-    public Long getSession_id() {
-        return session_id;
-    }
-
-    public void setSession_id(Long session_id) {
-        this.session_id = session_id;
-    }
 
     public List<CartItem> getCartItems() {
         return cartItems;

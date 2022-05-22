@@ -56,37 +56,22 @@ public class CartItemController {
         Cart cart = user.getCart();
         Product product = productRepository.findProductById(productId);
         cart.addProduct(product);
-        List<CartItem> cartItems = cart.getCartItems();
-        for (int i = 0; i < cartItems.size(); i++) {
 
-            if (product.getId() == cartItems.get(i).getProduct().getId()) {
-                CartItem cartItem = cartItems.get(i);
-                BigDecimal productPrice = new BigDecimal(String.valueOf(product.getPrice()));
-                BigDecimal quantity = new BigDecimal(String.valueOf(cartItem.getQuantity()));
-                cartItem.setQuantity(cartItem.getQuantity().add(BigDecimal.valueOf(1)));
-                BigDecimal total_price = product.getPrice().multiply(cartItem.getQuantity());
-                cartItem.setTotal_price(total_price);
-                cart.setId(user.getCart().getId());
-                cartItem.setCart(cart);
-                cartRepository.save(cart);
-                cartItemRepository.save(cartItem);
+        CartItem cartItem = new CartItem();
 
-                model.addAttribute("addedItems", cartItem);
-                return "cartAdded";
-            } else {
-                CartItem cartItem = new CartItem();
-                cartItem.setProduct(product);
-                cartItem.setQuantity(BigDecimal.valueOf(1));
-                BigDecimal total_price = product.getPrice().multiply(cartItem.getQuantity());
-                cartItem.setTotal_price(total_price);
-                cart.setId(user.getCart().getId());
-                cartItem.setCart(cart);
-                cartItemRepository.save(cartItem);
-                System.out.println("Lista cartItemów " + cartItem.getProduct().getId());
-                model.addAttribute("addedItems", cartItem);
+        cartItem.setProduct(product);
+        cartItem.setQuantity(BigDecimal.valueOf(1));
+        BigDecimal total_price = product.getPrice().multiply(cartItem.getQuantity());
+        cartItem.setTotal_price(total_price);
+        cart.setTotal_amount(cartItem.getTotal_price());
+        cart.setId(user.getCart().getId());
+        cartItem.setCart(cart);
+        cartItem.setPrice(product.getPrice());
+        cartItem.setStatus(0);
+        cartItemRepository.save(cartItem);
+        model.addAttribute("addedItems", cartItem);
 
-            }
-        }
+
         return "cartAdded";
     }
 
@@ -101,7 +86,7 @@ public class CartItemController {
     }
 
 
-    //REMOVE CART/CLEAR CART
+//REMOVE CART/CLEAR CART
 
     @RequestMapping(value = "/{cartId}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
@@ -111,13 +96,14 @@ public class CartItemController {
         cartItemRepository.deleteAllByCart(cart);
 
     }
+
     @GetMapping("/add/quantity/{productId}")
-    public String addQuantity(@PathVariable Long productId){
+    public String addQuantity(@PathVariable Long productId) {
         CartItem cartItem = cartItemRepository.findCartItemByProduct_id(productId);
         cartItem.setQuantity(cartItem.getQuantity().add(BigDecimal.valueOf(1)));
         cartItemRepository.save(cartItem);
         Long cartID = cartItem.getCart().getId();
-        return  "redirect: /rest/cart/"+ cartID;
+        return "redirect: /rest/cart/" + cartID;
     }
 
 

@@ -32,5 +32,9 @@
     </c:forEach>
 
 </table>
+<br>
+<br>
+<br>
+<a href="/user/customer/cart/${cart.id}"> koszyk</a>
 </body>
 </html>

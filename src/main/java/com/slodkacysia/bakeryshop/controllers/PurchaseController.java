@@ -30,7 +30,7 @@ public class PurchaseController {
     }
 
     @RequestMapping("/purchase/{cartId}")
-    public String createPurchase(@PathVariable("cartId")Long cartId){
+    public String createPurchase(@PathVariable("cartId") Long cartId) {
 
         Purchase purchase = new Purchase();
         Cart cart = cartRepository.getCartById(cartId);
@@ -39,38 +39,45 @@ public class PurchaseController {
         purchase.setUser(user);
         purchaseRepository.save(purchase);
 
-        return "redirect:/checkout/"+cartId;
+        return "redirect:/checkout/" + cartId;
 
     }
 
     @RequestMapping("/checkout/{cartId}")
-    public String finalize(@PathVariable("cartId")Long cartId, Model model){
-        Cart cart = cartRepository.getCartById(cartId);
-        List<CartItem> cartItemList = cart.getCartItems();
+    public String finalize(@PathVariable("cartId") Long cartId, Model model) {
+        List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
         model.addAttribute("checkout", cartItemList);
-        System.out.println("numer koszyka " + cart.getId().toString());
 
         return "checkout_list";
     }
 
     @ModelAttribute("payment")
-    public List<PaymentMethod> getPaymentMethod(){
+    public List<PaymentMethod> getPaymentMethod() {
         return paymentMethodRepository.findAllBy();
     }
 
-    @GetMapping("/finalization/{cartId}")
-    public String createOrder(@PathVariable("cartId")Long cartId, Model model,@ModelAttribute("payment")@Valid PaymentMethod paymentMethod, BindingResult bindingResult){
+    @ResponseBody
+    @RequestMapping("/finalization/{cartId}")
+    public String createOrder(@PathVariable("cartId") Long cartId, Model model) {
         Purchase purchase = new Purchase();
         Cart cart = cartRepository.getCartById(cartId);
-        List<CartItem> cartItemList = cart.getCartItems();
+        List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
         purchase.setCart(cart);
         User user = cart.getUser();
         purchase.setUser(user);
-        purchase.setPaymentMethod(paymentMethod);
+        cart.setPurchase(purchase);
         purchaseRepository.save(purchase);
-        model.addAttribute("finalization", cartItemList);
-        System.out.println("usuwam koszyk nr " + cartId);
-        cartRepository.delete(cart);
-        return "finalPage";
+
+        for (int i = 0; i < cartItemList.size(); i++) {
+            if (!(cartItemList.size() == 0)) {
+                cartItemList.get(i).setStatus(1);
+                cartItemRepository.save(cartItemList.get(i));
+
+                return "Twoje zamówienie zostały przyjęte do realizacji";
+            }
+
+        }
+        return "Twój koszyk był pusty";
+
     }
 }

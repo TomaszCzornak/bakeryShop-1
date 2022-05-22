@@ -2,6 +2,9 @@ package com.slodkacysia.bakeryshop.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -14,9 +17,12 @@ public class Purchase {
     @OneToOne
     private Cart cart;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "cart_date")
-    private Date date;
+    private String created;
+
+    public Purchase() {
+        this.created = getTime();
+    }
 
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
@@ -48,18 +54,13 @@ public class Purchase {
         this.cart = cart;
     }
 
-    public Date getDate() {
-        return date;
+    public String getCreated() {
+        return created;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreated(String created) {
+        this.created = created;
     }
-
-
-
-
-
 
     public Long getId() {
         return id;
@@ -68,6 +69,11 @@ public class Purchase {
     public void setId(Long id) {
         this.id = id;
     }
-
+    public String getTime (){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String result = dtf.format(now);
+        return result;
+    }
 
 }
