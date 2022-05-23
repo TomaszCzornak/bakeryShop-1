@@ -59,7 +59,7 @@ public class PurchaseController {
     @RequestMapping("/checkout/payment/{cartId}")
     public String PaymentView(Model model,@PathVariable Long cartId) {
         Cart cart = cartRepository.getCartById(cartId);
-        model.addAttribute("purchase", new Purchase() );
+        model.addAttribute("purchase", purchaseRepository.findPurchaseByCartId(cartId));
 
         return "paymentMethod";
     }
@@ -85,7 +85,6 @@ public class PurchaseController {
 //        purchase.setCart(cart);
         User user = cart.getUser();
 //        purchase.setUser(user);
-        purchaseRepository.saveByCartId(user.getCart().getId());
         cart.setPurchase(purchase);
 
         for (int i = 0; i < cartItemList.size(); i++) {

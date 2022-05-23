@@ -19,12 +19,5 @@ public class CartDao {
             products.put(product, 1);
         }
     }
-    @Transactional
-    public void insertWithQuery(Purchase purchase) {
-        entityManager.createNativeQuery("INSERT INTO person (id, first_name, last_name) VALUES (?,?,?)")
-                .setParameter(1, person.getId())
-                .setParameter(2, person.getFirstName())
-                .setParameter(3, person.getLastName())
-                .executeUpdate();
-    }
+
 }
