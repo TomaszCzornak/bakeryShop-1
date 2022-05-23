@@ -49,9 +49,9 @@ public class User {
     private String first_name;
     @Size(min = 1, message = "podaj nazwisko")
     private String last_name;
-    @Size(min = 1, message = "podaj nazwę ulicy")
+//    @Size(min = 1, message = "podaj nazwę ulicy")
     private String street;
-    @Pattern(regexp = "[0-9]{2}-[0-9]{3}", message = "kod powinien być w formacie 00-000")
+//    @Pattern(regexp = "[0-9]{2}-[0-9]{3}", message = "kod powinien być w formacie 00-000")
     private String post_code;
 
     private int enabled;
