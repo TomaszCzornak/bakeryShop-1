@@ -57,15 +57,15 @@ public class PurchaseController {
         return paymentMethodRepository.findAllBy();
     }
     @RequestMapping("/checkout/payment/{cartId}")
-    public String PaymentView(Model model,@PathVariable Long cartId) {
+    public String PaymentView(Model model,@PathVariable Long cartId, Purchase purchase) {
         Cart cart = cartRepository.getCartById(cartId);
-        model.addAttribute("purchase", purchaseRepository.findPurchaseByCartId(cartId));
+        model.addAttribute("purchase", purchase);
 
         return "paymentMethod";
     }
 
     @RequestMapping(value = "/checkout/payment/{cartId}", method = RequestMethod.POST)
-    private String PaymentMethod(@PathVariable Long cartId, Purchase purchase, BindingResult bindingResult){
+    private String PaymentMethod(@PathVariable Long cartId,@Valid Purchase purchase, BindingResult bindingResult){
         List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
         if(bindingResult.hasErrors()){
             return "paymentMethod";
@@ -77,16 +77,15 @@ public class PurchaseController {
 
     @ResponseBody
     @RequestMapping("/finalization/{cartId}")
-    public String createOrder(@PathVariable("cartId") Long cartId, Model model, Purchase purchase, BindingResult bindingResult) {
-//        Purchase purchase = purchaseRepository.findPurchaseByCartId(cartId);
+    public String createOrder(@PathVariable("cartId") Long cartId, Model model, @Valid Purchase purchase, BindingResult bindingResult ) {
         Cart cart = cartRepository.getCartById(cartId);
         List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
 //        purchase.setId(purchase.getId());
-//        purchase.setCart(cart);
-        User user = cart.getUser();
-//        purchase.setUser(user);
-        cart.setPurchase(purchase);
-
+        purchase.setCart(cart);
+if (bindingResult.hasErrors()){
+    return "paymentMethod";
+}else {
+        System.out.println("to jest purchase " + purchase.getId().toString());
         for (int i = 0; i < cartItemList.size(); i++) {
             if (!(cartItemList.size() == 0)) {
                 cartItemList.get(i).setStatus(1);
@@ -96,7 +95,8 @@ public class PurchaseController {
             }
 
         }
+
         return "Twój koszyk był pusty";
 
     }
-}
+}}
