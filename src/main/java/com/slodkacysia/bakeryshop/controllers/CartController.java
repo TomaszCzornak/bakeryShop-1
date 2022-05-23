@@ -1,14 +1,10 @@
 package com.slodkacysia.bakeryshop.controllers;
 
 import com.slodkacysia.bakeryshop.configuration.CustomAuthenticationProvider;
-import com.slodkacysia.bakeryshop.entity.Cart;
 import com.slodkacysia.bakeryshop.entity.CartItem;
 import com.slodkacysia.bakeryshop.entity.Purchase;
 import com.slodkacysia.bakeryshop.entity.User;
-import com.slodkacysia.bakeryshop.repository.CartItemRepository;
-import com.slodkacysia.bakeryshop.repository.CartRepository;
-import com.slodkacysia.bakeryshop.repository.CustomerRepository;
-import com.slodkacysia.bakeryshop.repository.UserRepository;
+import com.slodkacysia.bakeryshop.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -28,14 +24,16 @@ public class CartController {
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
+    private final PurchaseRepository purchaseRepository;
 
     @Autowired
-    public CartController(CustomAuthenticationProvider customAuthenticationProvider, CustomerRepository customerRepository, UserRepository userRepository, CartRepository cartRepository, CartItemRepository cartItemRepository) {
+    public CartController(CustomAuthenticationProvider customAuthenticationProvider, CustomerRepository customerRepository, UserRepository userRepository, CartRepository cartRepository, CartItemRepository cartItemRepository, PurchaseRepository purchaseRepository) {
         this.customAuthenticationProvider = customAuthenticationProvider;
         this.customerRepository = customerRepository;
         this.userRepository = userRepository;
         this.cartRepository = cartRepository;
         this.cartItemRepository = cartItemRepository;
+        this.purchaseRepository = purchaseRepository;
     }
 
     @RequestMapping
@@ -52,7 +50,7 @@ public class CartController {
         System.out.println(user.getEmail());
         List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
         cartItemList.stream().forEach(System.out::println);
-        Purchase purchase = new Purchase();
+        Purchase purchase = purchaseRepository.findPurchaseByUserId(user.getId());
         purchase.setCart(user.getCart());
         model.addAttribute("fullCart", cartItemList);
         return "cartView";

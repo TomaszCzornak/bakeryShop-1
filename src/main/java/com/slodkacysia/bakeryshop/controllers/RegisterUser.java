@@ -2,6 +2,7 @@ package com.slodkacysia.bakeryshop.controllers;
 
 import com.slodkacysia.bakeryshop.entity.Cart;
 import com.slodkacysia.bakeryshop.entity.Customer;
+import com.slodkacysia.bakeryshop.entity.Purchase;
 import com.slodkacysia.bakeryshop.entity.User;
 import com.slodkacysia.bakeryshop.repository.CartRepository;
 import com.slodkacysia.bakeryshop.repository.CustomerRepository;
@@ -91,9 +92,10 @@ public class RegisterUser {
             customerRepository.save(customer);
 
             Cart cart = new Cart();
+            Purchase purchase = new Purchase();
             cart.setUser(user);
             cart.setTotal_amount(BigDecimal.ZERO);
-
+            cart.setPurchase(purchase);
             cartRepository.save(cart);
 
             user.setCart(cart);

@@ -77,14 +77,14 @@ public class PurchaseController {
 
     @ResponseBody
     @RequestMapping("/finalization/{cartId}")
-    public String createOrder(@PathVariable("cartId") Long cartId, Model model) {
-        Purchase purchase = purchaseRepository.findPurchaseByCartId(cartId);
+    public String createOrder(@PathVariable("cartId") Long cartId, Model model, Purchase purchase, BindingResult bindingResult) {
+//        Purchase purchase = purchaseRepository.findPurchaseByCartId(cartId);
         Cart cart = cartRepository.getCartById(cartId);
         List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
         purchase.setCart(cart);
         User user = cart.getUser();
         purchase.setUser(user);
-//        cart.setPurchase(purchase);
+        cart.setPurchase(purchase);
         purchaseRepository.save(purchase);
 
         for (int i = 0; i < cartItemList.size(); i++) {

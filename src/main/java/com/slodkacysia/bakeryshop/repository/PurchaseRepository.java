@@ -10,4 +10,6 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Integer> {
     Purchase findPurchaseById(Long id);
 
     Purchase findPurchaseByCartId(Long id);
+
+    Purchase findPurchaseByUserId(Long id);
 }

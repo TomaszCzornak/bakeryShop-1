@@ -22,7 +22,13 @@
 <%@include file="/WEB-INF/header.jsp" %><br>
 
 
-
+<%--@elvariable id="purchase" type="com.slodkacysia.bakeryshop.entity.Purchase"--%>
+<form:form modelAttribute="purchase">
+    <form:select path="paymentMethod.id" items="${payment}" itemLabel="name" itemValue="id"/>
+    <form:errors path="paymentMethod.id" cssClass="error"/>
+    <br>
+    <input type="submit">
+</form:form>
 
 
 
@@ -52,6 +58,9 @@
     </style>
 </head>
 <body>
+
+
+<br>
 <h1>
     Oto twój koszyk
 </h1>
