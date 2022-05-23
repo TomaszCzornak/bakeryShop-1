@@ -92,10 +92,8 @@ public class RegisterUser {
             customerRepository.save(customer);
 
             Cart cart = new Cart();
-            Purchase purchase = new Purchase();
             cart.setUser(user);
             cart.setTotal_amount(BigDecimal.ZERO);
-            cart.setPurchase(purchase);
             cartRepository.save(cart);
 
             user.setCart(cart);

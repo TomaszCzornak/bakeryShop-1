@@ -70,7 +70,7 @@ public class PurchaseController {
         if(bindingResult.hasErrors()){
             return "paymentMethod";
         }else {
-            purchaseRepository.save(purchase);
+//            purchaseRepository.save(purchase);
         }
         return "redirect:/finalization/"+cartId;
     }
@@ -81,11 +81,11 @@ public class PurchaseController {
 //        Purchase purchase = purchaseRepository.findPurchaseByCartId(cartId);
         Cart cart = cartRepository.getCartById(cartId);
         List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
+        purchase.setId(purchase.getId());
         purchase.setCart(cart);
         User user = cart.getUser();
         purchase.setUser(user);
         cart.setPurchase(purchase);
-        purchaseRepository.save(purchase);
 
         for (int i = 0; i < cartItemList.size(); i++) {
             if (!(cartItemList.size() == 0)) {

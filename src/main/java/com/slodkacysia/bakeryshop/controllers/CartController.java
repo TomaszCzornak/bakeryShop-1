@@ -1,6 +1,7 @@
 package com.slodkacysia.bakeryshop.controllers;
 
 import com.slodkacysia.bakeryshop.configuration.CustomAuthenticationProvider;
+import com.slodkacysia.bakeryshop.entity.Cart;
 import com.slodkacysia.bakeryshop.entity.CartItem;
 import com.slodkacysia.bakeryshop.entity.Purchase;
 import com.slodkacysia.bakeryshop.entity.User;
@@ -50,8 +51,7 @@ public class CartController {
         System.out.println(user.getEmail());
         List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
         cartItemList.stream().forEach(System.out::println);
-        Purchase purchase = purchaseRepository.findPurchaseByUserId(user.getId());
-        purchase.setCart(user.getCart());
+
         model.addAttribute("fullCart", cartItemList);
         return "cartView";
     }

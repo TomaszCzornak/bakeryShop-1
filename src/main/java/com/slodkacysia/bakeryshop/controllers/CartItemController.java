@@ -1,10 +1,8 @@
 package com.slodkacysia.bakeryshop.controllers;
 
 import com.slodkacysia.bakeryshop.entity.*;
-import com.slodkacysia.bakeryshop.repository.CartItemRepository;
-import com.slodkacysia.bakeryshop.repository.CartRepository;
-import com.slodkacysia.bakeryshop.repository.ProductRepository;
-import com.slodkacysia.bakeryshop.repository.UserRepository;
+import com.slodkacysia.bakeryshop.repository.*;
+import com.slodkacysia.bakeryshop.service.CartDao;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,12 +24,17 @@ public class CartItemController {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
     private final CartItemRepository cartItemRepository;
+    private final CartDao cartDao;
+    private final PurchaseRepository purchaseRepository;
 
-    public CartItemController(CartRepository cartRepository, UserRepository userRepository, ProductRepository productRepository, CartItemRepository cartItemRepository) {
+    public CartItemController(CartRepository cartRepository, UserRepository userRepository, ProductRepository productRepository, CartItemRepository cartItemRepository, CartDao cartDao, PurchaseRepository purchaseRepository) {
         this.cartRepository = cartRepository;
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.cartItemRepository = cartItemRepository;
+        this.cartDao = cartDao;
+
+        this.purchaseRepository = purchaseRepository;
     }
 
     @RequestMapping("/{cartId}")
@@ -55,8 +58,11 @@ public class CartItemController {
         com.slodkacysia.bakeryshop.entity.User user = userRepository.findUserByEmail(activeCustomer.getEmail());
         Cart cart = user.getCart();
         Product product = productRepository.findProductById(productId);
-        cart.addProduct(product);
-
+        cartDao.addProduct(product);
+        Purchase purchase = new Purchase();
+        purchase.setCart(user.getCart());
+        purchase.setUser(activeCustomer);
+        purchaseRepository.save(purchase);
         CartItem cartItem = new CartItem();
 
         cartItem.setProduct(product);
@@ -64,7 +70,7 @@ public class CartItemController {
         BigDecimal total_price = product.getPrice().multiply(cartItem.getQuantity());
         cartItem.setTotal_price(total_price);
         cart.setTotal_amount(cartItem.getTotal_price());
-        cart.setId(user.getCart().getId());
+//        cart.setId(user.getCart().getId());
         cartItem.setCart(cart);
         cartItem.setPrice(product.getPrice());
         cartItem.setStatus(0);

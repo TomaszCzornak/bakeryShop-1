@@ -19,6 +19,12 @@ public class Purchase {
 
     @Column(name = "cart_date")
     private String created;
+    @ManyToOne
+    private PaymentMethod paymentMethod;
+    @OneToOne
+    private User user;
+
+
 
     public Purchase() {
         this.created = getTime();
@@ -32,9 +38,6 @@ public class Purchase {
         this.paymentMethod = paymentMethod;
     }
 
-    @ManyToOne
-    private PaymentMethod paymentMethod;
-
     public User getUser() {
         return user;
     }
@@ -42,9 +45,6 @@ public class Purchase {
     public void setUser(User user) {
         this.user = user;
     }
-
-    @OneToOne
-    private User user;
 
     public Cart getCart() {
         return cart;
@@ -70,7 +70,7 @@ public class Purchase {
         this.id = id;
     }
     public String getTime (){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String result = dtf.format(now);
         return result;
