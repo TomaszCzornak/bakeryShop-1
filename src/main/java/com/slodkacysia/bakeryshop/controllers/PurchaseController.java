@@ -78,21 +78,19 @@ public class PurchaseController {
     @ResponseBody
     @RequestMapping("/finalization/{cartId}")
     public String createOrder(@PathVariable("cartId") Long cartId, Model model, @Valid Purchase purchase, BindingResult bindingResult) {
-        Cart cart = cartRepository.getCartById(cartId);
         List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
-//        purchase.setId(purchase.getId());
-//        purchase.setCart(cart);
+
         if (bindingResult.hasErrors()) {
             return "paymentMethod";
         } else {
-            for (int i = 0; i < cartItemList.size(); i++) {
-                if (!(cartItemList.size() == 0)) {
+            if (!(cartItemList.size() == 0)) {
+                for (int i = 0; i < cartItemList.size(); i++) {
                     cartItemList.get(i).setStatus(1);
-                    cartItemRepository.save(cartItemList.get(i));
 
-                    return "Twoje zamówienie zostały przyjęte do realizacji";
+                    cartItemRepository.save(cartItemList.get(i));
                 }
 
+                return "Twoje zamówienie zostały przyjęte do realizacji";
             }
 
             return "Twój koszyk był pusty";

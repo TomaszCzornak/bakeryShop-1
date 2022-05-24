@@ -1,10 +1,7 @@
 package com.slodkacysia.bakeryshop.service;
 
 import com.slodkacysia.bakeryshop.entity.Product;
-import com.slodkacysia.bakeryshop.entity.Purchase;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
