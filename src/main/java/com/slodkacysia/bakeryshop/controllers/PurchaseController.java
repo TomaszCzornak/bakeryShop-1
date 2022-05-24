@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -54,22 +55,21 @@ public class PurchaseController {
 
     @RequestMapping(value = "/checkout/payment/{cartId}", method = RequestMethod.POST)
     private String PaymentMethod(@PathVariable Long cartId, @Valid Purchase purchase, BindingResult bindingResult, @AuthenticationPrincipal User activeUser) {
+
         if (bindingResult.hasErrors()) {
             return "paymentMethod";
         } else {
-//            purchaseRepository.updatePurchase(cartId,purchase.getPaymentMethod());
             purchaseSpecific.updatePayment(cartId,purchase.getPaymentMethod(), activeUser.getId());
         }
         return "redirect:/finalization/" + cartId;
     }
 
     @RequestMapping("/finalization/{cartId}")
-    public String createOrder(@PathVariable("cartId") Long cartId, Model model, @Valid Purchase purchase, BindingResult bindingResult, User activeCustomer) {
+    public String createOrder(@PathVariable("cartId") Long cartId, Model model) {
         List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
-
-        if (bindingResult.hasErrors()) {
-            return "paymentMethod";
-        } else {
+        Cart cart = cartRepository.getCartById(cartId);
+        Purchase purchase = purchaseRepository.findPurchaseByCartId(cartId);
+        cart.setPurchase(purchase);
             if (!(cartItemList.size() == 0)) {
                 for (int i = 0; i < cartItemList.size(); i++) {
                     cartItemList.get(i).setStatus(1);
@@ -86,4 +86,3 @@ public class PurchaseController {
 
         }
     }
-}
