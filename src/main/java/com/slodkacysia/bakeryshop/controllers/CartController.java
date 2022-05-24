@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -47,11 +48,19 @@ public class CartController {
 
     @RequestMapping("/{cartId}")
     public String getCartRedirect(@PathVariable(value = "cartId") Long cartId, Model model,@AuthenticationPrincipal User activeCustomer) {
-        User user = userRepository.findUserByEmail(activeCustomer.getEmail());
-        System.out.println(user.getEmail());
         List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
         cartItemList.stream().forEach(System.out::println);
+        BigDecimal allCartItems = BigDecimal.valueOf(0);
+        BigDecimal totalCart = BigDecimal.valueOf(0);
+        for (int i = 0; i < cartItemList.size(); i++) {
+            allCartItems =  allCartItems.add(BigDecimal.valueOf(cartItemList.get(i).getPrice().doubleValue()));
+            totalCart = allCartItems.multiply(cartItemList.get(i).getQuantity());
 
+        }
+        Cart cart = cartRepository.getCartById(cartId);
+        cart.setTotal_amount(totalCart);
+        cartRepository.save(cart);
+        System.out.println("sumakwadratu " + totalCart);
         model.addAttribute("fullCart", cartItemList);
         return "cartView";
     }
