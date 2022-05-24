@@ -1,7 +1,6 @@
 package com.slodkacysia.bakeryshop.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Customer {
@@ -9,6 +8,36 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    private Long userId;
+
+    private Integer enabled;
+
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Integer getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Integer enabled) {
+        this.enabled = enabled;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public Long getId() {
         return id;
@@ -29,34 +58,24 @@ public class Customer {
     @OneToOne
     private Cart cart;
 
-    @NotNull
-    private String customerName;
-    @NotNull
     private String email;
-    @NotNull
     private String first_name;
-    @NotNull
     private String last_name;
-    @NotNull
     private String password;
-    @NotNull
-    private String enabled;
-    @NotNull
     private String city;
-    @NotNull
     private String street;
-    @NotNull
+    private String phone;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     private String post_code;
 
-
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
 
     public String getEmail() {
         return email;
@@ -90,13 +109,7 @@ public class Customer {
         this.password = password;
     }
 
-    public String getEnabled() {
-        return enabled;
-    }
 
-    public void setEnabled(String enabled) {
-        this.enabled = enabled;
-    }
 
     public String getCity() {
         return city;

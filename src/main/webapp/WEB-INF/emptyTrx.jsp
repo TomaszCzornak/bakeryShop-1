@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: tomek
-  Date: 08.05.2022
-  Time: 07:46
+  Date: 22.05.2022
+  Time: 18:18
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,14 +11,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %><html>
 <head>
-    <title>Witanko!</title>
+    <title>Title</title>
 </head>
+<body>
+<h1>
+</h1>
+<modelAttribute="purchase" method="get">
 
-<a>
-<%@include file="/WEB-INF/header.jsp" %><br>
-Witaj na stronie
-<br><br>
-
-<a href="/rest/cart/products_to_buy"> lista dostępnych produktów</a></a>
+${emptyCart}
 </body>
 </html>

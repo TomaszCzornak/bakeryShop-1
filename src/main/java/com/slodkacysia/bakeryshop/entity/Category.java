@@ -10,7 +10,6 @@ public class Category {
 
     private String name;
 
-    private String description;
 
     public String getName() {
         return name;
@@ -20,13 +19,6 @@ public class Category {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public Long getId() {
         return id;
@@ -44,7 +36,6 @@ public class Category {
         return "Category{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
                 '}';
     }
 }

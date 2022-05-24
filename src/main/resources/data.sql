@@ -1,10 +1,5 @@
-show databases;
-use bakery;
-show tables ;
-select * from product;
-select * from category;
 
-create database bakery CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+# create database bakery CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 insert into category(name)values ('urodzinowy');
 insert into category(name)values ('weselny');
@@ -28,5 +23,4 @@ INSERT INTO `payment_method`(`name`)values ('gotówka odbiór własny');
 INSERT INTO `payment_method`(`name`)values ('przelew internetowy');
 INSERT INTO `payment_method`(`name`)values ('płatność za pobraniem');
 
-select id from cart join cart_item ci on cart.id = ci.cart_id
-where ci.status = 0;
+

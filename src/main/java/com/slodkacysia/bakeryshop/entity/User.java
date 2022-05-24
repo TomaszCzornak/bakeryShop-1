@@ -17,10 +17,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
-    private List<Purchase> purchases;
-
+    @Size(min = 1, message = "podaj nazwę użytkownika")
     private String userName;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
+
 
     public String getUserName() {
         return userName;
@@ -30,20 +35,10 @@ public class User {
         this.userName = userName;
     }
 
-//    public User() {
-//
-//    }
 
 
-    public List<Purchase> getPurchases() {
-        return purchases;
-    }
 
-    public void setPurchases(List<Purchase> purchases) {
-        this.purchases = purchases;
-    }
-
-    @Email(message = "proszę podać p6   oprawny adres email")
+    @Email(message = "proszę podać poprawny adres email")
     private String email;
 
     private String phone;
@@ -54,9 +49,9 @@ public class User {
     private String first_name;
     @Size(min = 1, message = "podaj nazwisko")
     private String last_name;
-    @Size(min = 1, message = "podaj nazwę ulicy")
+//    @Size(min = 1, message = "podaj nazwę ulicy")
     private String street;
-    @Pattern(regexp = "[0-9]{2}-[0-9]{3}", message = "kod powinien być w formacie 00-000")
+//    @Pattern(regexp = "[0-9]{2}-[0-9]{3}", message = "kod powinien być w formacie 00-000")
     private String post_code;
 
     private int enabled;
@@ -67,6 +62,14 @@ public class User {
     private String city;
 
     private String password;
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
 
     public int getEnabled() {
         return enabled;
