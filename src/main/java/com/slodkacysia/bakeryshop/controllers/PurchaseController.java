@@ -69,7 +69,8 @@ public class PurchaseController {
         if (bindingResult.hasErrors()) {
             return "paymentMethod";
         } else {
-            purchaseRepository.updatePurchase(cartId,purchase.getPaymentMethod().getId());
+//            System.out.println("checking data type " + purchase.getPaymentMethod().getClass().getSimpleName().toString());
+            purchaseRepository.updatePurchase(cartId,purchase.getPaymentMethod());
         }
         return "redirect:/finalization/" + cartId;
     }

@@ -1,6 +1,7 @@
 package com.slodkacysia.bakeryshop.repository;
 
 import com.slodkacysia.bakeryshop.entity.Cart;
+import com.slodkacysia.bakeryshop.entity.PaymentMethod;
 import com.slodkacysia.bakeryshop.entity.Purchase;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -18,7 +19,7 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Integer> {
     @Modifying
     @Transactional
     @Query("update Purchase p set p.paymentMethod =:paymentId  where p.cart.id = :cartId")
-    void updatePurchase(@Param("cartId") Long cartId, Long paymentId);
+    void updatePurchase(@Param("cartId") Long cartId, @Param("paymentId") PaymentMethod paymentId);
 
     Purchase findPurchaseById(Long id);
 
