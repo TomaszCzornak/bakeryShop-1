@@ -7,10 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<%@include file="/WEB-INF/header.jsp" %><br>
 <head>
     <title>final page</title>
 </head>
 <body>
-<h1>zamówienie przesłane do realizacji</h1>
+<br>
+<br>
+${endOfTrx}
 </body>
 </html>

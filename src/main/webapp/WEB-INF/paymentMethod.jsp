@@ -12,13 +12,17 @@
 <head>
     <title>Metoda Płatności</title>
 </head>
+<a>
+    <%@include file="/WEB-INF/header.jsp" %>
+</a><br>
 <body>
+    WYBIERZ METODĘ PŁATNOŚCI
 <%--@elvariable id="purchase" type="com.slodkacysia.bakeryshop.entity.Purchase"--%>
 <form:form modelAttribute="purchase">
     <br>
     <form:select path="paymentMethod.id" items="${payment}" itemLabel="name" itemValue="id"/>
     <form:errors path="paymentMethod.id" cssClass="error"/>
-    <br>
+    <br><br>
     <input type="submit">
 </form:form>
 </body>

@@ -63,7 +63,6 @@ public class PurchaseController {
         return "redirect:/finalization/" + cartId;
     }
 
-    @ResponseBody
     @RequestMapping("/finalization/{cartId}")
     public String createOrder(@PathVariable("cartId") Long cartId, Model model, @Valid Purchase purchase, BindingResult bindingResult, User activeCustomer) {
         List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
@@ -77,11 +76,13 @@ public class PurchaseController {
 
                     cartItemRepository.save(cartItemList.get(i));
                 }
+                model.addAttribute("endOfTrx", "Twoje zamówienie zostały przyjęte do realizacji");
 
-                return "Twoje zamówienie zostały przyjęte do realizacji";
+                return "finalPage";
             }
+            model.addAttribute("endOfTrx", "Twój koszyk był pusty");
 
-            return "Twój koszyk był pusty";
+            return "finalPage";
 
         }
     }
