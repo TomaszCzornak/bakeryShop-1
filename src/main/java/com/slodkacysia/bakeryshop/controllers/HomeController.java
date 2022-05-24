@@ -1,9 +1,11 @@
 package com.slodkacysia.bakeryshop.controllers;
 
 import com.slodkacysia.bakeryshop.entity.Product;
+import com.slodkacysia.bakeryshop.entity.User;
 import com.slodkacysia.bakeryshop.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,9 +40,8 @@ public class HomeController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/username", method = RequestMethod.GET)
     @ResponseBody
-    public String currentUserNameSimple(HttpServletRequest request) {
-        Principal principal = request.getUserPrincipal();
-        return principal.getName();
+    public String currentUserNameSimple(@AuthenticationPrincipal User activeUser) {
+        return "Jesteś zalogowany jako: " + activeUser.getUserName();
     }
 
 
