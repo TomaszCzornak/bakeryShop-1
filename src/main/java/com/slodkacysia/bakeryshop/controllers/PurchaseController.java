@@ -1,10 +1,8 @@
 package com.slodkacysia.bakeryshop.controllers;
 
 import com.slodkacysia.bakeryshop.entity.*;
-import com.slodkacysia.bakeryshop.repository.CartItemRepository;
-import com.slodkacysia.bakeryshop.repository.CartRepository;
-import com.slodkacysia.bakeryshop.repository.PaymentMethodRepository;
-import com.slodkacysia.bakeryshop.repository.PurchaseRepository;
+import com.slodkacysia.bakeryshop.repository.*;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,27 +18,17 @@ public class PurchaseController {
     private final PurchaseRepository purchaseRepository;
     private final CartItemRepository cartItemRepository;
     private final PaymentMethodRepository paymentMethodRepository;
+    private final PurchaseSpecific purchaseSpecific;
 
-    public PurchaseController(CartRepository cartRepository, PurchaseRepository purchaseRepository, CartItemRepository cartItemRepository, PaymentMethodRepository paymentMethodRepository) {
+    public PurchaseController(CartRepository cartRepository, PurchaseRepository purchaseRepository, CartItemRepository cartItemRepository, PaymentMethodRepository paymentMethodRepository, PurchaseSpecific purchaseSpecific) {
         this.cartRepository = cartRepository;
         this.purchaseRepository = purchaseRepository;
         this.cartItemRepository = cartItemRepository;
         this.paymentMethodRepository = paymentMethodRepository;
+        this.purchaseSpecific = purchaseSpecific;
     }
 
-//    @RequestMapping("/purchase/{cartId}")
-//    public String createPurchase(@PathVariable("cartId") Long cartId) {
-//
-//        Purchase purchase = new Purchase();
-//        Cart cart = cartRepository.getCartById(cartId);
-//        purchase.setCart(cart);
-//        User user = cart.getUser();
-//        purchase.setUser(user);
-//        purchaseRepository.save(purchase);
-//
-//        return "redirect:/checkout/" + cartId;
-//
-//    }
+
 
     @RequestMapping("/checkout/{cartId}")
     public String finalize(@PathVariable("cartId") Long cartId, Model model) {
@@ -65,19 +53,19 @@ public class PurchaseController {
     }
 
     @RequestMapping(value = "/checkout/payment/{cartId}", method = RequestMethod.POST)
-    private String PaymentMethod(@PathVariable Long cartId, @Valid Purchase purchase, BindingResult bindingResult) {
+    private String PaymentMethod(@PathVariable Long cartId, @Valid Purchase purchase, BindingResult bindingResult, @AuthenticationPrincipal User activeUser) {
         if (bindingResult.hasErrors()) {
             return "paymentMethod";
         } else {
-//            System.out.println("checking data type " + purchase.getPaymentMethod().getClass().getSimpleName().toString());
-            purchaseRepository.updatePurchase(cartId,purchase.getPaymentMethod());
+//            purchaseRepository.updatePurchase(cartId,purchase.getPaymentMethod());
+            purchaseSpecific.updatePayment(cartId,purchase.getPaymentMethod(), activeUser.getId());
         }
         return "redirect:/finalization/" + cartId;
     }
 
     @ResponseBody
     @RequestMapping("/finalization/{cartId}")
-    public String createOrder(@PathVariable("cartId") Long cartId, Model model, @Valid Purchase purchase, BindingResult bindingResult) {
+    public String createOrder(@PathVariable("cartId") Long cartId, Model model, @Valid Purchase purchase, BindingResult bindingResult, User activeCustomer) {
         List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
 
         if (bindingResult.hasErrors()) {

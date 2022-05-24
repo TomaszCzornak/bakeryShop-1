@@ -59,10 +59,7 @@ public class CartItemController {
         Cart cart = user.getCart();
         Product product = productRepository.findProductById(productId);
         cartDao.addProduct(product);
-        Purchase purchase = new Purchase();
-        purchase.setCart(user.getCart());
-        purchase.setUser(activeCustomer);
-        purchaseRepository.save(purchase);
+
         CartItem cartItem = new CartItem();
 
         cartItem.setProduct(product);
@@ -70,7 +67,6 @@ public class CartItemController {
         BigDecimal total_price = product.getPrice().multiply(cartItem.getQuantity());
         cartItem.setTotal_price(total_price);
         cart.setTotal_amount(cartItem.getTotal_price());
-//        cart.setId(user.getCart().getId());
         cartItem.setCart(cart);
         cartItem.setPrice(product.getPrice());
         cartItem.setStatus(0);

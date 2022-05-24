@@ -21,6 +21,14 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Integer> {
     @Query("update Purchase p set p.paymentMethod =:paymentId  where p.cart.id = :cartId")
     void updatePurchase(@Param("cartId") Long cartId, @Param("paymentId") PaymentMethod paymentId);
 
+//    @Modifying
+//    @Transactional
+//    @Query(value = "insert Purchase p set p.paymentMethod =:paymentId, p.cart.id =:cartId, p.user.id=:userId")
+//    void updatePurchaseData(@Param("cartId") Long cartId, @Param("paymentId") PaymentMethod paymentId, @Param("userId") Long id);
+
+
+
+
     Purchase findPurchaseById(Long id);
 
     Purchase findPurchaseByCartId(Long id);

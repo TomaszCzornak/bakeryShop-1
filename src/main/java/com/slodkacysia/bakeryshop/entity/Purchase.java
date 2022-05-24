@@ -21,7 +21,7 @@ public class Purchase {
     private String created;
     @ManyToOne
     private PaymentMethod paymentMethod;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
 
