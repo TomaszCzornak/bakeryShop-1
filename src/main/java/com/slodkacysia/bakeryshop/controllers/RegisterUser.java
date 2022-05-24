@@ -91,12 +91,12 @@ public class RegisterUser {
 
             customerRepository.save(customer);
 
-            Cart cart = new Cart();
-            cart.setUser(user);
-            cart.setTotal_amount(BigDecimal.ZERO);
-            cartRepository.save(cart);
-
-            user.setCart(cart);
+//            Cart cart = new Cart();
+//            cart.setUser(user);
+//            cart.setTotal_amount(BigDecimal.ZERO);
+//            cartRepository.save(cart);
+//
+//            user.setCart(cart);
             userRepository.save(user);
 
 

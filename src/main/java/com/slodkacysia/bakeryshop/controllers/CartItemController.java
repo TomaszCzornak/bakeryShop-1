@@ -66,7 +66,7 @@ public class CartItemController {
         cartItem.setQuantity(BigDecimal.valueOf(1));
         BigDecimal total_price = product.getPrice().multiply(cartItem.getQuantity());
         cartItem.setTotal_price(total_price);
-        cart.setTotal_amount(cartItem.getTotal_price());
+//        cart.setTotal_amount(cartItem.getTotal_price());
         cartItem.setCart(cart);
         cartItem.setPrice(product.getPrice());
         cartItem.setStatus(0);

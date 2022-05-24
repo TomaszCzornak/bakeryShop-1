@@ -1,5 +1,6 @@
 package com.slodkacysia.bakeryshop.controllers;
 
+import com.slodkacysia.bakeryshop.entity.Cart;
 import com.slodkacysia.bakeryshop.entity.Product;
 import com.slodkacysia.bakeryshop.entity.User;
 import com.slodkacysia.bakeryshop.repository.*;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
 
@@ -54,7 +56,14 @@ public class HomeController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
-    public String welcome(Model model) {
+    public String welcome(Model model,@AuthenticationPrincipal User activeUser) {
+        User user = userRepository.findUserByEmail(activeUser.getEmail());
+        Cart cart = new Cart();
+        cart.setUser(user);
+        cart.setTotal_amount(BigDecimal.ZERO);
+        user.setCart(cart);
+        cartRepository.save(cart);
+
         return "welcome";
     }
 
