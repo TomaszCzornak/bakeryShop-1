@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -69,7 +70,6 @@ public class PurchaseController {
         Cart cart = cartRepository.getCartById(cartId);
         Purchase purchase = purchaseRepository.findPurchaseByCartId(cartId);
         cart.setPurchase(purchase);
-
             if (!(cartItemList.size() == 0)) {
                 for (int i = 0; i < cartItemList.size(); i++) {
                     cartItemList.get(i).setStatus(1);
