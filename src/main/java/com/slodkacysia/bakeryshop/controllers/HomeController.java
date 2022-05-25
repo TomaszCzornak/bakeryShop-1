@@ -47,7 +47,7 @@ public class HomeController {
     }
 
 
-    @RequestMapping("/productlist")
+    @RequestMapping("/product_list")
     public String list(Model model) {
         model.addAttribute("products", productRepository.findAllBy());
 

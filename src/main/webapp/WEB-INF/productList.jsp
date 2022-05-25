@@ -13,7 +13,7 @@
 
 <html>
 <head>
-    <title>Lista produktów</title>
+    <title>Lista produktów - Admin</title>
 </head>
 <body>
 <a>
@@ -22,14 +22,14 @@
 
 <%--@elvariable id="product" type="java.util.List<pl.coderslab.entity.Product>"--%>
 <table>
-    <c:forEach var="item" items="${offer}">
+    <c:forEach var="item" items="${products}">
         <tr>
             <td>${item.id}</td>
             <td>${item.name}</td>
             <td>${item.description}</td>
             <td>${item.price}</td>
-            <td><a href="/rest/cart/add/${item.id}">    dodaj do koszyka</a></td>
-        </tr>
+            <td><a href="/admin/remove_product/${item.id}">usuń</a></td>
+            <td><a href="/admin/edit_product/${item.id}">edytuj</a></td>        </tr>
     </c:forEach>
 <br>
 <br>

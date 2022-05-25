@@ -54,11 +54,11 @@ public class AdminUser {
         } else {
             System.out.println("wynik " + product.getCategory().toString());
             productRepository.save(product);
-            return "redirect:/admin/productlist";
+            return "redirect:/admin/product_list";
         }
     }
 
-    @RequestMapping("/productlist")
+    @RequestMapping("/product_list")
     public String list(Model model){
         model.addAttribute("products", productRepository.findAllBy());
 
@@ -68,23 +68,23 @@ public class AdminUser {
     public List<Category> getAllCategories(){
         return categoryRepository.findAll();
     }
-    @RequestMapping("/removeproduct/{id}")
+    @RequestMapping("/remove_product/{id}")
     public String deleteCategory(@PathVariable Long id){
         Product product = productRepository.findProductById(id);
-        productRepository.delete(product);
-        return "redirect:/admin/productlist";
+        productRepository.deleteProductById(product.getId());
+        return "redirect:/admin/product_list";
     }
-    @RequestMapping("/editproduct/{id}")
+    @RequestMapping("/edit_product/{id}")
     public String editProduct(@PathVariable Long id, Model model){
         Product product = productRepository.findProductById(id);
         model.addAttribute("product", product);
         return "edit-product";
     }
-    @RequestMapping(value = "/editproduct/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit_product/{id}", method = RequestMethod.POST)
     public String saveEditProduct(@PathVariable Long id, Product product) {
         productRepository.save(product);
 
-        return "redirect:/admin/productlist";
+        return "redirect:/admin/product_list";
     }
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public String welcome(Model model) {

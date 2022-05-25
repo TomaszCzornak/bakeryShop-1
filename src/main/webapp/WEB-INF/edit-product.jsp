@@ -27,9 +27,8 @@
     Adres www: <form:input path="image_url"/>
     Cena: <form:input path="price"/>
     Dostępna Ilość: <form:input path="available_quantity"/>
-    Kategoria: <form:select path="category" items="${categories}" itemLabel="fullNameCategory" itemValue="id"/>
+    Kategoria: <form:select path="category.id" items="${categories}" itemLabel="fullNameCategory" itemValue="id"/>
     <input type="submit">
 </form:form>
-<%--usunąć product--%>
 </body>
 </html>
