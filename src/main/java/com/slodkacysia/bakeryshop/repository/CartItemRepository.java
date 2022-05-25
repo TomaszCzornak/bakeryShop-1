@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 import javax.transaction.Transactional;
 import java.util.List;
 
-public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
+public interface CartItemRepository extends JpaRepository<CartItem, Long> {
 
      CartItem save(CartItem cartItem);
      public CartItem findCartItemById(long cartItemId);

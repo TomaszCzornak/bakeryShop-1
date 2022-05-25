@@ -13,7 +13,7 @@
 <body>
 <%@include file="/WEB-INF/header.jsp" %>
 <br>
-LISTA AKTUALNYCH ZAMÓWIEŃ
+SZCZEGÓŁY ZAMÓWIENIA ${details.cartItem.id}
 <br>
 <br>
 <br>
@@ -40,24 +40,22 @@ LISTA AKTUALNYCH ZAMÓWIEŃ
 </style>
 <table>
     <tr>
-        <th>User Id</th>
-        <th>Suma Koszyka</th>
-        <th>Rodzaj płatności</th>
-        <th>Data Zamówienia</th>
-        <th>Numer Klienta</th>
-        <th>status</th>
+        <th>Numer zamówienia</th>
+        <th>Cena</th>
+        <th>Ilość</th>
+        <th>Suma</th>
+        <th>Produkt</th>
 
     </tr><br>
-<%--@elvariable id="product" type="java.util.List<pl.coderslab.entity.Product>"--%>
-    <c:forEach var="item" items="${purchases}">
+    <%--@elvariable id="product" type="java.util.List<pl.coderslab.entity.Product>"--%>
+    <c:forEach var="item" items="${details}">
         <tr>
-            <td>${item.user.id}</td>
-            <td>${item.cart.total_amount}</td>
-            <td>${item.paymentMethod.name}</td>
-            <td>${item.created}</td>
-            <td>${item.cart.user.first_name}</td>
-            <td>${item.status}</td>
-            <td><a href="/admin/purchases/details/${item.cart.id}">szczegóły</a></td>
+<%--            <td>${item.id}</td>--%>
+<%--            <td>${item.price}</td>--%>
+<%--            <td>${item.quantity}</td>--%>
+<%--            <td>${item.total_price}</td>--%>
+<%--            <td>${item.cart.id}</td>--%>
+<%--            <td>${item.product.name}</td>--%>
         </tr>
     </c:forEach>
 </table>

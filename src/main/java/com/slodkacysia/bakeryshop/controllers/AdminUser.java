@@ -1,6 +1,7 @@
 package com.slodkacysia.bakeryshop.controllers;
 
 
+import com.slodkacysia.bakeryshop.entity.CartItem;
 import com.slodkacysia.bakeryshop.entity.Category;
 import com.slodkacysia.bakeryshop.entity.Product;
 import com.slodkacysia.bakeryshop.repository.*;
@@ -23,14 +24,16 @@ public class AdminUser {
     private final ProductRepository productRepository;
     private final PurchaseRepository purchaseRepository;
     private final PurchaseSpecific purchaseSpecific;
+    private final CartItemRepository cartItemRepository;
 
     private final CategoryRepository categoryRepository;
     @Autowired
-    AdminUser(UserRepository userRepository, ProductRepository productRepository, PurchaseRepository purchaseRepository, PurchaseSpecific purchaseSpecific, CategoryRepository categoryRepository){
+    AdminUser(UserRepository userRepository, ProductRepository productRepository, PurchaseRepository purchaseRepository, PurchaseSpecific purchaseSpecific, CartItemRepository cartItemRepository, CategoryRepository categoryRepository){
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.purchaseRepository = purchaseRepository;
         this.purchaseSpecific = purchaseSpecific;
+        this.cartItemRepository = cartItemRepository;
         this.categoryRepository = categoryRepository;
 
     }
@@ -95,6 +98,14 @@ public class AdminUser {
         model.addAttribute("purchases", purchaseSpecific.findAllByStatus());
 
         return "purchases_list";
+    }
+
+    @RequestMapping("/purchases/details/{cartId}")
+    public String purchaseDetails(@PathVariable Long cartId, Model model){
+        model.addAttribute("details", cartItemRepository.findCartItemsByCartId(cartId));
+        List<CartItem> cartItemList = cartItemRepository.findCartItemsByCartId(cartId);
+        cartItemList.stream().forEach(System.out::println);
+        return "purchase_details";
     }
 
 }
