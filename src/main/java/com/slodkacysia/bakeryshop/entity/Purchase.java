@@ -2,7 +2,11 @@ package com.slodkacysia.bakeryshop.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Purchase {
@@ -13,6 +17,35 @@ public class Purchase {
     @OneToOne
     private Cart cart;
 
+    @Column(name = "cart_date")
+    private String created;
+    @ManyToOne
+    private PaymentMethod paymentMethod;
+    @OneToOne(cascade = CascadeType.ALL)
+    private User user;
+
+
+
+    public Purchase() {
+        this.created = getTime();
+    }
+
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Cart getCart() {
         return cart;
     }
@@ -21,38 +54,13 @@ public class Purchase {
         this.cart = cart;
     }
 
-    public Date getDate() {
-        return date;
+    public String getCreated() {
+        return created;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreated(String created) {
+        this.created = created;
     }
-
-    public BigDecimal getTotal_price() {
-        return total_price;
-    }
-
-    public void setTotal_price(BigDecimal total_price) {
-        this.total_price = total_price;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    @Temporal(TemporalType.DATE)
-    @Column(name = "cart_date")
-    private Date date;
-
-    private BigDecimal total_price;
-
-    private String status;
-
 
     public Long getId() {
         return id;
@@ -61,4 +69,11 @@ public class Purchase {
     public void setId(Long id) {
         this.id = id;
     }
+    public String getTime (){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String result = dtf.format(now);
+        return result;
+    }
+
 }

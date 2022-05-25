@@ -44,9 +44,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         }
         String noHashPass = (user.getPassword());
         String password = user.getPassword();
-        System.out.println("zahaszowane " + password);
-        System.out.println("bez haszowania " + noHashPass);
-        System.out.println("credentials " + authentication.getCredentials());
+
 
 
         boolean isPasswordMatch = bCryptPasswordEncoder.matches(authentication.getCredentials().toString(),password);

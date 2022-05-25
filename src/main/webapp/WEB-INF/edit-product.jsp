@@ -17,6 +17,8 @@
     <title>Edit Product</title>
 </head>
 <body>
+<a>
+    <%@include file="/WEB-INF/header.jsp" %></a><br>
 <%--@elvariable id="product" type="pl.coderslab.entity.Product"--%>
 <form:form modelAttribute="product" method="post">
     <form:hidden path="id"/>

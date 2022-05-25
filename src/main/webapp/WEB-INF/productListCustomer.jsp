@@ -13,12 +13,11 @@
 
 <html>
 <head>
-    <title>Lista produktów</title>
+    <title>Twoja lista produktów</title>
 </head>
 <body>
 <a>
-    <a href="/register"> rejestracja</a><br><br>
-    <a href="/login"> logowanie</a><br><br>
+    <%@include file="/WEB-INF/header.jsp" %></a><br>
 
 <%--@elvariable id="product" type="java.util.List<pl.coderslab.entity.Product>"--%>
 <table>
@@ -31,14 +30,11 @@
             <td><a href="/rest/cart/add/${item.id}">    dodaj do koszyka</a></td>
         </tr>
     </c:forEach>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
 
 </table>
+<br>
+<br>
+<br>
+<a href="/user/customer/cart/${cart.id}"> koszyk</a>
 </body>
 </html>

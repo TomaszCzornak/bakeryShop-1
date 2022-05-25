@@ -1,5 +1,7 @@
 package com.slodkacysia.bakeryshop.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -18,19 +20,31 @@ public class Product {
 
     private BigDecimal price;
 
-    public List<Category> getCategory() {
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
+    @ManyToOne
+    private Category category;
+
+    @OneToMany(mappedBy = "product")
+    private List<CartItem> cartItems;
+
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(List<Category> category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
     private Integer available_quantity;
 
 
-    @ManyToMany
-    private List<Category> category;
+
 
     public Long getId() {
         return id;

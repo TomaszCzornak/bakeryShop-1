@@ -13,32 +13,28 @@
 
 <html>
 <head>
-    <title>Lista produktów</title>
+  <title>Twoja lista produktów</title>
 </head>
 <body>
 <a>
-    <a href="/register"> rejestracja</a><br><br>
-    <a href="/login"> logowanie</a><br><br>
+  <%@include file="/WEB-INF/header.jsp" %></a><br>
 
 <%--@elvariable id="product" type="java.util.List<pl.coderslab.entity.Product>"--%>
 <table>
-    <c:forEach var="item" items="${offer}">
-        <tr>
-            <td>${item.id}</td>
-            <td>${item.name}</td>
-            <td>${item.description}</td>
-            <td>${item.price}</td>
-            <td><a href="/rest/cart/add/${item.id}">    dodaj do koszyka</a></td>
-        </tr>
-    </c:forEach>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
+  <c:forEach var="item" items="${offer}">
+    <tr>
+      <td>${item.id}</td>
+      <td>${item.name}</td>
+      <td>${item.description}</td>
+      <td>${item.price}</td>
+      <td><a href="/rest/cart/add/${item.id}">    dodaj do koszyka</a></td>
+    </tr>
+  </c:forEach>
 
 </table>
+<br>
+<br>
+<br>
+<a href="/user/customer/cart/${cart.id}"> koszyk</a>
 </body>
 </html>
