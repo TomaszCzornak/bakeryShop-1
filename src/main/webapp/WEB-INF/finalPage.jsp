@@ -17,7 +17,7 @@
 ${endOfTrx}
 <br>
 <br>
-<a href="/rest/cart/products_to_buy"> powrót do sklepu</a>
+<a href="/rest/cart/products_view"> powrót do sklepu</a>
 
 
 

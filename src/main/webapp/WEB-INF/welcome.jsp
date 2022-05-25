@@ -19,6 +19,6 @@
 Witaj na stronie
 <br><br>
 
-<a href="/rest/cart/products_to_buy"> lista dostępnych produktów</a></a>
+    <a href="/rest/cart/products_view"> lista produktów</a>
 </body>
 </html>

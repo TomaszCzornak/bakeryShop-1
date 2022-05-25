@@ -52,6 +52,19 @@ public class CartItemController {
         return "productListCustomer";
     }
 
+    @RequestMapping("/products_view")
+    public String shopView(Model model, @AuthenticationPrincipal User activeUser) {
+        List<Product> productList = productRepository.findAllBy();
+        model.addAttribute("offer", productList);
+        User user = userRepository.findUserByEmail(activeUser.getEmail());
+        Cart cart = new Cart();
+        cart.setUser(user);
+        cart.setTotal_amount(BigDecimal.ZERO);
+        user.setCart(cart);
+        cartRepository.save(cart);
+        return "productsView";
+    }
+
     @GetMapping("/add/{productId}")
     public String addItem(Model model, @PathVariable("productId") Long productId, @AuthenticationPrincipal User activeCustomer) {
 
