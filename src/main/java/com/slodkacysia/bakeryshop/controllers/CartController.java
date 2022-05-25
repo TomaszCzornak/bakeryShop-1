@@ -22,16 +22,14 @@ import java.util.List;
 public class CartController {
 
     private final CustomAuthenticationProvider customAuthenticationProvider;
-    private final CustomerRepository customerRepository;
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
     private final PurchaseRepository purchaseRepository;
 
     @Autowired
-    public CartController(CustomAuthenticationProvider customAuthenticationProvider, CustomerRepository customerRepository, UserRepository userRepository, CartRepository cartRepository, CartItemRepository cartItemRepository, PurchaseRepository purchaseRepository) {
+    public CartController(CustomAuthenticationProvider customAuthenticationProvider, UserRepository userRepository, CartRepository cartRepository, CartItemRepository cartItemRepository, PurchaseRepository purchaseRepository) {
         this.customAuthenticationProvider = customAuthenticationProvider;
-        this.customerRepository = customerRepository;
         this.userRepository = userRepository;
         this.cartRepository = cartRepository;
         this.cartItemRepository = cartItemRepository;
