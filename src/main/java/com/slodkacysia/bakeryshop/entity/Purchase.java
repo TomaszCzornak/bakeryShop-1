@@ -24,6 +24,15 @@ public class Purchase {
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    private Integer status;
 
 
     public Purchase() {

@@ -3,15 +3,9 @@ package com.slodkacysia.bakeryshop.controllers;
 
 import com.slodkacysia.bakeryshop.entity.Category;
 import com.slodkacysia.bakeryshop.entity.Product;
-import com.slodkacysia.bakeryshop.entity.User;
-import com.slodkacysia.bakeryshop.repository.CategoryRepository;
-import com.slodkacysia.bakeryshop.repository.ProductRepository;
-import com.slodkacysia.bakeryshop.repository.UserRepository;
-import com.slodkacysia.bakeryshop.service.CurrentUser;
+import com.slodkacysia.bakeryshop.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,13 +21,18 @@ public class AdminUser {
 
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+    private final PurchaseRepository purchaseRepository;
+    private final PurchaseSpecific purchaseSpecific;
 
     private final CategoryRepository categoryRepository;
     @Autowired
-    AdminUser(UserRepository userRepository, ProductRepository productRepository, CategoryRepository categoryRepository){
+    AdminUser(UserRepository userRepository, ProductRepository productRepository, PurchaseRepository purchaseRepository, PurchaseSpecific purchaseSpecific, CategoryRepository categoryRepository){
         this.userRepository = userRepository;
         this.productRepository = productRepository;
+        this.purchaseRepository = purchaseRepository;
+        this.purchaseSpecific = purchaseSpecific;
         this.categoryRepository = categoryRepository;
+
     }
 
 
@@ -90,4 +89,12 @@ public class AdminUser {
     public String welcome(Model model) {
         return "welcome";
     }
+
+    @RequestMapping("/purchases")
+    public String purchases(Model model){
+        model.addAttribute("purchases", purchaseSpecific.findAllByStatus());
+
+        return "purchases_list";
+    }
+
 }

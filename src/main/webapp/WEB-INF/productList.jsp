@@ -19,26 +19,33 @@
 <a>
     <a href="/register"> rejestracja</a><br><br>
     <a href="/login"> logowanie</a><br><br>
+    PANEL ADMINISTRACYJNY
+    <%@include file="/WEB-INF/header.jsp" %>
+    <br>
+    <br>
+    <br>
+    <%--@elvariable id="product" type="java.util.List<pl.coderslab.entity.Product>"--%>
+    <table>
+        <c:forEach var="item" items="${products}">
+            <tr>
+                <td>${item.id}</td>
+                <td>${item.name}</td>
+                <td>${item.description}</td>
+                <td>${item.price}</td>
+                <td>${item.available_quantity}</td>
+                <td><a href="/admin/remove_product/${item.id}">usuń</a></td>
+                <td><a href="/admin/edit_product/${item.id}">edytuj</a></td>
+            </tr>
+        </c:forEach>
+    </table>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-<%--@elvariable id="product" type="java.util.List<pl.coderslab.entity.Product>"--%>
-<table>
-    <c:forEach var="item" items="${products}">
-        <tr>
-            <td>${item.id}</td>
-            <td>${item.name}</td>
-            <td>${item.description}</td>
-            <td>${item.price}</td>
-            <td><a href="/admin/remove_product/${item.id}">usuń</a></td>
-            <td><a href="/admin/edit_product/${item.id}">edytuj</a></td>        </tr>
-    </c:forEach>
-<br>
-<br>
-<br>
-<br>
-<br>
+    <td><a href="/admin/panel">dodawanie produktów</a></td>
 
 
-
-</table>
 </body>
 </html>

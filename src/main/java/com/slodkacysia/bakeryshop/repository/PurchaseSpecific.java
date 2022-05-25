@@ -9,6 +9,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
+
 @Repository
 public interface PurchaseSpecific extends CrudRepository<Purchase, Long> {
 
@@ -17,4 +19,7 @@ public interface PurchaseSpecific extends CrudRepository<Purchase, Long> {
     @Transactional
     void updatePayment(@Param("cartId") Long cartId, @Param("paymentId") PaymentMethod paymentMethod, @Param("userId") Long id);
 
+
+    @Query(value = "select p from Purchase p join Cart c on p.cart = c")
+    List<Purchase> findAllByStatus();
     }
