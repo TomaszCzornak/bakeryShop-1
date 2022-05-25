@@ -20,6 +20,6 @@ public interface PurchaseSpecific extends CrudRepository<Purchase, Long> {
     void updatePayment(@Param("cartId") Long cartId, @Param("paymentId") PaymentMethod paymentMethod, @Param("userId") Long id);
 
 
-    @Query(value = "select p from Purchase p join Cart c on p.cart = c")
+    @Query(value = "select p from Purchase p join Cart c on p.cart = c where p.status=1")
     List<Purchase> findAllByStatus();
     }
