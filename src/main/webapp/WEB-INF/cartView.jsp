@@ -72,7 +72,7 @@
     </tr>
     </c:forEach>
 <td></td>
-<td></td>
+<td>Suma Zakupów</td>
 <td>${cartTotal}</td>
     <br>
     <br>

@@ -48,7 +48,7 @@ LISTA AKTUALNYCH ZAMÓWIEŃ
         <th>status</th>
 
     </tr><br>
-<%--@elvariable id="product" type="java.util.List<pl.coderslab.entity.Product>"--%>
+<%--@elvariable id="purchase" type="java.util.List<pl.coderslab.entity.Purchase>"--%>
     <c:forEach var="item" items="${purchases}">
         <tr>
             <td>${item.user.id}</td>
