@@ -44,7 +44,8 @@
     <br>
     <br>
 
-    <td><a href="/admin/panel">dodawanie produktów</a></td>
+    <td><a href="/admin/panel">dodawanie produktów</a></td><br><br>
+    <td><a href="/admin/purchases">lista zamówień</a></td>
 
 
 </body>

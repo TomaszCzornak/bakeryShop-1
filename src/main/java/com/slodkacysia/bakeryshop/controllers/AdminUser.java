@@ -4,6 +4,7 @@ package com.slodkacysia.bakeryshop.controllers;
 import com.slodkacysia.bakeryshop.entity.CartItem;
 import com.slodkacysia.bakeryshop.entity.Category;
 import com.slodkacysia.bakeryshop.entity.Product;
+import com.slodkacysia.bakeryshop.entity.Purchase;
 import com.slodkacysia.bakeryshop.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -95,16 +96,16 @@ public class AdminUser {
 
     @RequestMapping("/purchases")
     public String purchases(Model model){
-        model.addAttribute("purchases", purchaseSpecific.findAllByStatus());
+        List<Purchase> purchaseList = purchaseSpecific.findAllByCartItemStatus();
+        model.addAttribute("purchases", purchaseList);
 
         return "purchases_list";
     }
 
     @RequestMapping("/purchases/details/{cartId}")
     public String purchaseDetails(@PathVariable Long cartId, Model model){
-        model.addAttribute("details", cartItemRepository.findCartItemsByCartId(cartId));
-        List<CartItem> cartItemList = cartItemRepository.findCartItemsByCartId(cartId);
-        cartItemList.stream().forEach(System.out::println);
+        List<CartItem>cartItemList = cartItemRepository.findCartItemsByCartId(cartId);
+        model.addAttribute("details", cartItemList);
         return "purchase_details";
     }
 

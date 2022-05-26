@@ -13,7 +13,7 @@
 <body>
 <%@include file="/WEB-INF/header.jsp" %>
 <br>
-SZCZEGÓŁY ZAMÓWIENIA ${details.cartItem.id}
+SZCZEGÓŁY ZAMÓWIENIA ${cartId}
 <br>
 <br>
 <br>
@@ -50,14 +50,29 @@ SZCZEGÓŁY ZAMÓWIENIA ${details.cartItem.id}
     <%--@elvariable id="cartItems" type="java.util.List<pl.coderslab.entity.CartItems>"--%>
     <c:forEach var="item" items="${details}">
         <tr>
+<%--            <td>${item.id}</td>--%>
             <td>${item.id}</td>
             <td>${item.price}</td>
-            <td>${item.quantity}</td>
             <td>${item.total_price}</td>
-            <td>${item.cart.id}</td>
             <td>${item.product.name}</td>
+            <td>${item.quantity}</td>
+            <td>${item.status}</td>
         </tr>
     </c:forEach>
+    <c:forEach var="cart" items="${details}">
+        <tr>
+            <c:set var="cartTotal" value="${0}" />
+            <c:forEach var="cart" items="${details}">
+                <c:set var="cartTotal" value="${cartTotal + (cart.price* cart.quantity)}" />
+            </c:forEach>
+        </tr>
+    </c:forEach>
+    <td></td>
+    <td>Suma Zakupów</td>
+    <td>${cartTotal}</td>
+    <br>
+    <br>
+    <br>
 </table>
 </body>
 </html>

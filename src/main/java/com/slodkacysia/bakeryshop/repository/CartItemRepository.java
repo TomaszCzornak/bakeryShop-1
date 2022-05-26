@@ -17,7 +17,6 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
      public CartItem findCartItemById(long cartItemId);
      public CartItem findCartItemByProduct_id(long product_id);
 
-     List<CartItem> findCartItemsByCartId(Long cartId);
 
      void deleteCartItemById(Long id);
      @Transactional
@@ -32,4 +31,12 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
      @Query("SELECT c FROM CartItem c join fetch c.cart s where c.status=0 and s.id=:cartId")
      List<CartItem> findCartItemsByCart(@Param("cartId") Long id);
 
+//     @Query(value = "select * from cart_item where cart_id =:cartId", nativeQuery = true)
+//     List<CartItem>findCartItemsByCartId(@Param("cartId") Long cartId);
+
+     @Query(value = "select price from cart_item ci join cart c on ci.cart_id = c.id where ci.cart_id =:cartId", nativeQuery = true)
+     CartItem findByCartId(Long cartId);
+
+
+     List<CartItem> findCartItemsByCartId(Long id);
 }
