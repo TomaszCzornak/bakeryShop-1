@@ -54,7 +54,7 @@ public class AdminUser {
         } else {
             System.out.println("wynik " + product.getCategory().toString());
             productRepository.save(product);
-            return "redirect:/admin/product_list";
+            return "redirect:/admin /product_list";
         }
     }
 

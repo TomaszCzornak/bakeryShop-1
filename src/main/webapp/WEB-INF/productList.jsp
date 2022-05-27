@@ -16,11 +16,11 @@
     <title>Lista produktów - Admin</title>
 </head>
 <body>
-<a>
+<%@include file="/WEB-INF/header.jsp" %>
+<br>
     <a href="/register"> rejestracja</a><br><br>
     <a href="/login"> logowanie</a><br><br>
     PANEL ADMINISTRACYJNY
-    <%@include file="/WEB-INF/header.jsp" %>
     <br>
     <br>
     <br>
