@@ -2,7 +2,6 @@ package com.slodkacysia.bakeryshop.controllers;
 
 import com.slodkacysia.bakeryshop.entity.*;
 import com.slodkacysia.bakeryshop.repository.*;
-import com.slodkacysia.bakeryshop.service.CartDao;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,16 +23,13 @@ public class CartItemController {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
     private final CartItemRepository cartItemRepository;
-    private final CartDao cartDao;
     private final PurchaseRepository purchaseRepository;
 
-    public CartItemController(CartRepository cartRepository, UserRepository userRepository, ProductRepository productRepository, CartItemRepository cartItemRepository, CartDao cartDao, PurchaseRepository purchaseRepository) {
+    public CartItemController(CartRepository cartRepository, UserRepository userRepository, ProductRepository productRepository, CartItemRepository cartItemRepository, PurchaseRepository purchaseRepository) {
         this.cartRepository = cartRepository;
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.cartItemRepository = cartItemRepository;
-        this.cartDao = cartDao;
-
         this.purchaseRepository = purchaseRepository;
     }
 
@@ -71,7 +67,6 @@ public class CartItemController {
         com.slodkacysia.bakeryshop.entity.User user = userRepository.findUserByEmail(activeCustomer.getEmail());
         Cart cart = user.getCart();
         Product product = productRepository.findProductById(productId);
-//        cartDao.addProduct(product);
 
         CartItem cartItem = new CartItem();
 
@@ -90,9 +85,9 @@ public class CartItemController {
         return "cartAdded";
     }
 
-    @RequestMapping(value = "/remove/{productId}")
-    public String removeItem(@PathVariable Long productId) {
-        CartItem cartItem = cartItemRepository.findCartItemById(productId);
+    @RequestMapping(value = "/remove/{cartItemId}")
+    public String removeItem(@PathVariable Long cartItemId) {
+        CartItem cartItem = cartItemRepository.findCartItemById(cartItemId);
         System.out.println("testowanie");
         cartItemRepository.deleteCartItemById(cartItem.getId());
 

@@ -36,9 +36,6 @@ public class AdminUser {
 
     }
 
-
-
-
     @RequestMapping("/panel")
     public String addProductForm(Model model) {
 

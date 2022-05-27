@@ -55,7 +55,7 @@
             <td>${cartItem.product.price}</td>
             <td>${cartItem.product.description}</td>
             <td>${cartItem.quantity}</td>
-            <td><a href="/rest/cart/remove/${cartItem.product.id}">usuń</a></td>
+
             <br>
 
         </tr>
