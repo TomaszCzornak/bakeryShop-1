@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface PurchaseRepository extends JpaRepository<Purchase, Integer> {
+public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
 
     Purchase save(Purchase purchase);
 
@@ -29,3 +29,4 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Integer> {
 
     Purchase findPurchaseByUserId(Long id);
 }
+//@Query("SELECT p FROM Product p join fetch p.category c where c.name = :category")

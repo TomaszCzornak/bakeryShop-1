@@ -21,22 +21,16 @@ import java.util.List;
 public class HomeController {
 
 
-    private final UserRepository userRepository;
-    private final CartRepository cartRepository;
+
     private final ProductRepository productRepository;
 
-    private final PurchaseRepository purchaseRepository;
-
-    private final CategoryRepository categoryRepository;
 
 
     @Autowired
-    public HomeController(UserRepository userRepository, CartRepository cartRepository, ProductRepository productRepository, PurchaseRepository purchaseRepository, CategoryRepository categoryRepository) {
-        this.userRepository = userRepository;
-        this.cartRepository = cartRepository;
+    public HomeController(ProductRepository productRepository) {
+
         this.productRepository = productRepository;
-        this.purchaseRepository = purchaseRepository;
-        this.categoryRepository = categoryRepository;
+
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -47,7 +41,7 @@ public class HomeController {
     }
 
 
-    @RequestMapping("/productlist")
+    @RequestMapping("/product_list")
     public String list(Model model) {
         model.addAttribute("products", productRepository.findAllBy());
 
@@ -57,12 +51,6 @@ public class HomeController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public String welcome(Model model,@AuthenticationPrincipal User activeUser) {
-//        User user = userRepository.findUserByEmail(activeUser.getEmail());
-//        Cart cart = new Cart();
-//        cart.setUser(user);
-//        cart.setTotal_amount(BigDecimal.ZERO);
-//        user.setCart(cart);
-//        cartRepository.save(cart);
 
         return "welcome";
     }

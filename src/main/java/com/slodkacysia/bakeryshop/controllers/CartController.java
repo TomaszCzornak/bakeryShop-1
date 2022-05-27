@@ -22,16 +22,14 @@ import java.util.List;
 public class CartController {
 
     private final CustomAuthenticationProvider customAuthenticationProvider;
-    private final CustomerRepository customerRepository;
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
     private final PurchaseRepository purchaseRepository;
 
     @Autowired
-    public CartController(CustomAuthenticationProvider customAuthenticationProvider, CustomerRepository customerRepository, UserRepository userRepository, CartRepository cartRepository, CartItemRepository cartItemRepository, PurchaseRepository purchaseRepository) {
+    public CartController(CustomAuthenticationProvider customAuthenticationProvider, UserRepository userRepository, CartRepository cartRepository, CartItemRepository cartItemRepository, PurchaseRepository purchaseRepository) {
         this.customAuthenticationProvider = customAuthenticationProvider;
-        this.customerRepository = customerRepository;
         this.userRepository = userRepository;
         this.cartRepository = cartRepository;
         this.cartItemRepository = cartItemRepository;
@@ -49,7 +47,6 @@ public class CartController {
     @RequestMapping("/{cartId}")
     public String getCartRedirect(@PathVariable(value = "cartId") Long cartId, Model model,@AuthenticationPrincipal User activeCustomer) {
         List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
-        cartItemList.stream().forEach(System.out::println);
         BigDecimal allCartItems = BigDecimal.valueOf(0);
         BigDecimal totalCart = BigDecimal.valueOf(0);
         for (int i = 0; i < cartItemList.size(); i++) {
@@ -60,7 +57,6 @@ public class CartController {
         Cart cart = cartRepository.getCartById(cartId);
         cart.setTotal_amount(totalCart);
         cartRepository.save(cart);
-        System.out.println("sumakwadratu " + totalCart);
         model.addAttribute("fullCart", cartItemList);
         return "cartView";
     }

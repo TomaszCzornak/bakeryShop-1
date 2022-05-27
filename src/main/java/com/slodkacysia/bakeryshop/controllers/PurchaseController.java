@@ -61,10 +61,10 @@ public class PurchaseController {
         } else {
             purchaseSpecific.updatePayment(cartId,purchase.getPaymentMethod(), activeUser.getId());
         }
-        return "redirect:/finalization/" + cartId;
+        return "redirect:/checkout/finalization/" + cartId;
     }
 
-    @RequestMapping("/finalization/{cartId}")
+    @RequestMapping("/checkout/finalization/{cartId}")
     public String createOrder(@PathVariable("cartId") Long cartId, Model model) {
         List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
         Cart cart = cartRepository.getCartById(cartId);

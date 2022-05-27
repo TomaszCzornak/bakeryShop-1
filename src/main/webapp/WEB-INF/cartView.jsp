@@ -44,35 +44,33 @@
         <th>Cena</th>
         <th>Opis</th>
         <th>Ilość</th>
-        <th>Akcja</th>
-        <th>Akcja</th>
+
     </tr>
     <br>
-    <c:forEach var="cart" items="${fullCart}">
+    <c:forEach var="cartItem" items="${fullCart}">
         <tr>
                 <%--            <td>${calaLista.quantity}</td>--%>
-            <td>${cart.product.id}</td>
-            <td>${cart.product.name}</td>
-            <td>${cart.product.price}</td>
-            <td>${cart.product.description}</td>
-            <td>${cart.quantity}</td>
-            <td><a href="/remove/${cart.product.id}">usuń</a></td>
-            <td><a href="/rest/cart/add/quantity/${cart.product.id}">dodaj_sztukę</a></td>
+            <td>${cartItem.product.id}</td>
+            <td>${cartItem.product.name}</td>
+            <td>${cartItem.product.price}</td>
+            <td>${cartItem.product.description}</td>
+            <td>${cartItem.quantity}</td>
+
             <br>
 
         </tr>
     </c:forEach>
 
-    <c:forEach var="cart" items="${fullCart}">
+    <c:forEach var="cartItem" items="${fullCart}">
     <tr>
         <c:set var="cartTotal" value="${0}" />
-        <c:forEach var="cart" items="${fullCart}">
-            <c:set var="cartTotal" value="${cartTotal + (cart.product.price* cart.quantity)}" />
+        <c:forEach var="cartItem" items="${fullCart}">
+            <c:set var="cartTotal" value="${cartTotal + (cartItem.product.price* cartItem.quantity)}" />
         </c:forEach>
     </tr>
     </c:forEach>
 <td></td>
-<td></td>
+<td>Suma Zakupów</td>
 <td>${cartTotal}</td>
     <br>
     <br>

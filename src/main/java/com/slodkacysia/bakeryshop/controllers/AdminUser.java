@@ -1,17 +1,10 @@
 package com.slodkacysia.bakeryshop.controllers;
 
 
-import com.slodkacysia.bakeryshop.entity.Category;
-import com.slodkacysia.bakeryshop.entity.Product;
-import com.slodkacysia.bakeryshop.entity.User;
-import com.slodkacysia.bakeryshop.repository.CategoryRepository;
-import com.slodkacysia.bakeryshop.repository.ProductRepository;
-import com.slodkacysia.bakeryshop.repository.UserRepository;
-import com.slodkacysia.bakeryshop.service.CurrentUser;
+import com.slodkacysia.bakeryshop.entity.*;
+import com.slodkacysia.bakeryshop.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,17 +20,21 @@ public class AdminUser {
 
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+    private final PurchaseRepository purchaseRepository;
+    private final PurchaseSpecific purchaseSpecific;
+    private final CartItemRepository cartItemRepository;
 
     private final CategoryRepository categoryRepository;
     @Autowired
-    AdminUser(UserRepository userRepository, ProductRepository productRepository, CategoryRepository categoryRepository){
+    AdminUser(UserRepository userRepository, ProductRepository productRepository, PurchaseRepository purchaseRepository, PurchaseSpecific purchaseSpecific, CartItemRepository cartItemRepository, CategoryRepository categoryRepository){
         this.userRepository = userRepository;
         this.productRepository = productRepository;
+        this.purchaseRepository = purchaseRepository;
+        this.purchaseSpecific = purchaseSpecific;
+        this.cartItemRepository = cartItemRepository;
         this.categoryRepository = categoryRepository;
+
     }
-
-
-
 
     @RequestMapping("/panel")
     public String addProductForm(Model model) {
@@ -54,11 +51,11 @@ public class AdminUser {
         } else {
             System.out.println("wynik " + product.getCategory().toString());
             productRepository.save(product);
-            return "redirect:/admin/productlist";
+            return "redirect:/admin /product_list";
         }
     }
 
-    @RequestMapping("/productlist")
+    @RequestMapping("/product_list")
     public String list(Model model){
         model.addAttribute("products", productRepository.findAllBy());
 
@@ -68,26 +65,49 @@ public class AdminUser {
     public List<Category> getAllCategories(){
         return categoryRepository.findAll();
     }
-    @RequestMapping("/removeproduct/{id}")
+    @RequestMapping("/remove_product/{id}")
     public String deleteCategory(@PathVariable Long id){
         Product product = productRepository.findProductById(id);
-        productRepository.delete(product);
-        return "redirect:/admin/productlist";
+        productRepository.deleteProductById(product.getId());
+        return "redirect:/admin/product_list";
     }
-    @RequestMapping("/editproduct/{id}")
+    @RequestMapping("/edit_product/{id}")
     public String editProduct(@PathVariable Long id, Model model){
         Product product = productRepository.findProductById(id);
         model.addAttribute("product", product);
         return "edit-product";
     }
-    @RequestMapping(value = "/editproduct/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit_product/{id}", method = RequestMethod.POST)
     public String saveEditProduct(@PathVariable Long id, Product product) {
         productRepository.save(product);
 
-        return "redirect:/admin/productlist";
+        return "redirect:/admin/product_list";
     }
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public String welcome(Model model) {
         return "welcome";
+    }
+
+    @RequestMapping("/purchases")
+    public String purchases(Model model){
+        List<Purchase> purchaseList = purchaseSpecific.findAllByCartItemStatus();
+        model.addAttribute("purchases", purchaseList);
+
+        return "purchases_list";
+    }
+
+    @RequestMapping("/purchases/details/{cartId}")
+    public String purchaseDetails(@PathVariable Long cartId, Model model){
+        List<CartItem>cartItemList = cartItemRepository.findCartItemsByCartId(cartId);
+        model.addAttribute("details", cartItemList);
+        return "purchase_details";
+    }
+
+    @RequestMapping("/purchases/details/user/{userId}")
+    public String clientDetails(@PathVariable Long userId, Model model){
+        User user = userRepository.findUserById(userId);
+        System.out.println("mój adres " + user.getEmail().toString());
+        model.addAttribute("clientDetails", user);
+        return "client_address";
     }
 }

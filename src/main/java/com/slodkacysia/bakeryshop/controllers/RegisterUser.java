@@ -1,11 +1,7 @@
 package com.slodkacysia.bakeryshop.controllers;
 
-import com.slodkacysia.bakeryshop.entity.Cart;
-import com.slodkacysia.bakeryshop.entity.Customer;
-import com.slodkacysia.bakeryshop.entity.Purchase;
 import com.slodkacysia.bakeryshop.entity.User;
 import com.slodkacysia.bakeryshop.repository.CartRepository;
-import com.slodkacysia.bakeryshop.repository.CustomerRepository;
 import com.slodkacysia.bakeryshop.repository.RoleRepository;
 import com.slodkacysia.bakeryshop.repository.UserRepository;
 import com.slodkacysia.bakeryshop.service.UserServiceImpl;
@@ -29,16 +25,14 @@ public class RegisterUser {
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
     private final RoleRepository roleRepository;
-    private final CustomerRepository customerRepository;
     private final UserServiceImpl userServiceImpl;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    private RegisterUser(UserRepository userRepository, CartRepository cartRepository, RoleRepository roleRepository, CustomerRepository customerRepository, UserServiceImpl userServiceImpl, BCryptPasswordEncoder bCryptPasswordEncoder){
+    private RegisterUser(UserRepository userRepository, CartRepository cartRepository, RoleRepository roleRepository, UserServiceImpl userServiceImpl, BCryptPasswordEncoder bCryptPasswordEncoder){
         this.userRepository = userRepository;
         this.cartRepository = cartRepository;
         this.roleRepository = roleRepository;
-        this.customerRepository = customerRepository;
         this.userServiceImpl = userServiceImpl;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
@@ -75,28 +69,6 @@ public class RegisterUser {
             }
 
 
-            Customer customer = new Customer();
-            customer.setUserId(user.getId());
-            customer.setEnabled(1);
-            customer.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            customer.setUsername(user.getUserName());
-            customer.setEmail(user.getEmail());
-            customer.setCity(user.getCity());
-            customer.setPost_code(user.getPost_code());
-            customer.setStreet(user.getStreet());
-            customer.setFirst_name(user.getFirst_name());
-            customer.setLast_name(user.getLast_name());
-            customer.setPhone(user.getPhone());
-
-
-            customerRepository.save(customer);
-
-//            Cart cart = new Cart();
-//            cart.setUser(user);
-//            cart.setTotal_amount(BigDecimal.ZERO);
-//            cartRepository.save(cart);
-//
-//            user.setCart(cart);
             userRepository.save(user);
 
 

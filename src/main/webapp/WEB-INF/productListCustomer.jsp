@@ -16,11 +16,38 @@
     <title>Twoja lista produktów</title>
 </head>
 <body>
-<a>
-    <%@include file="/WEB-INF/header.jsp" %></a><br>
+    <%@include file="/WEB-INF/header.jsp" %>
+    <br>
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid grey;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 6px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
+<table>
+    <tr>
+        <th>Nr Produktu</th>
+        <th>Nazwa Produktu</th>
+        <th>Opis Produktu</th>
+        <th>Cena Produktu</th>
+        <th>Akcja</th>
+
+    </tr>
+    <br>
 
 <%--@elvariable id="product" type="java.util.List<pl.coderslab.entity.Product>"--%>
-<table>
     <c:forEach var="item" items="${offer}">
         <tr>
             <td>${item.id}</td>
