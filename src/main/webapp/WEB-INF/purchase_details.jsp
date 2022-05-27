@@ -38,7 +38,6 @@ SZCZEGÓŁY ZAMÓWIENIA nr ${cartId}
 <table>
     <tr>
         <th>Nr</th>
-        <th>Cena</th>
         <th>Ilość</th>
         <th>Cena</th>
         <th>Produkt</th>
@@ -50,7 +49,6 @@ SZCZEGÓŁY ZAMÓWIENIA nr ${cartId}
         <tr>
                 <%--            <td>${item.id}</td>--%>
             <td>${count.count}</td>
-            <td>${item.price}</td>
             <td>${item.quantity}</td>
             <td>${item.price}</td>
             <td>${item.product.name}</td>
@@ -70,7 +68,12 @@ SZCZEGÓŁY ZAMÓWIENIA nr ${cartId}
     <td>${cartTotal}</td>
     <br>
     <br>
-    <br>
+
 </table>
+<br>
+<c:forEach var="item" items="${details}" begin="1" end="1">
+
+<a href="/admin/purchases/details/user/${item.cart.user.id}"> adres wysyłki</a>
+    </c:forEach>
 </body>
 </html>

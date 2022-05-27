@@ -1,10 +1,7 @@
 package com.slodkacysia.bakeryshop.controllers;
 
 
-import com.slodkacysia.bakeryshop.entity.CartItem;
-import com.slodkacysia.bakeryshop.entity.Category;
-import com.slodkacysia.bakeryshop.entity.Product;
-import com.slodkacysia.bakeryshop.entity.Purchase;
+import com.slodkacysia.bakeryshop.entity.*;
 import com.slodkacysia.bakeryshop.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -109,4 +106,11 @@ public class AdminUser {
         return "purchase_details";
     }
 
+    @RequestMapping("/purchases/details/user/{userId}")
+    public String clientDetails(@PathVariable Long userId, Model model){
+        User user = userRepository.findUserById(userId);
+        System.out.println("mój adres " + user.getEmail().toString());
+        model.addAttribute("clientDetails", user);
+        return "client_address";
+    }
 }
