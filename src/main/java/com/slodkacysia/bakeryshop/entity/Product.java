@@ -30,7 +30,7 @@ public class Product {
     @ManyToOne
     private Category category;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<CartItem> cartItems;
 
     public Category getCategory() {

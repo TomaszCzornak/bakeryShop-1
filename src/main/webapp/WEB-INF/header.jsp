@@ -17,6 +17,10 @@
     <title>Title</title>
 </head>
 <body>
+<style>
+    div
+    {background-color:darkgrey}
+</style>
 <div id="navbar" ...>
   <ul class="nav navbar-nav pull-right">
     <li><a href="<c:url value="/logout" />">Logout</a>

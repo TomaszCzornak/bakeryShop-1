@@ -44,8 +44,6 @@
         <th>Cena</th>
         <th>Opis</th>
         <th>Ilość</th>
-        <th>Akcja</th>
-        <th>Akcja</th>
     </tr><br>
 <%--    <c:forEach var="cart" items="${addedItems}">--%>
         <tr>
@@ -55,8 +53,7 @@
             <td>${addedItems.product.price}</td>
             <td>${addedItems.product.description}</td>
             <td>${addedItems.quantity}</td>
-            <td><a href="/remove/${cart.id}">usuń</a></td>
-            <td><a href="/rest/cart/add/${cart.id}">dodaj_sztukę</a></td>
+
         </tr>
 </table>
 <br>
