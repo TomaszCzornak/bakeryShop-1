@@ -58,7 +58,6 @@ public class CartController {
         Cart cart = cartRepository.getCartById(cartId);
         cart.setTotal_amount(totalCart);
         cartRepository.save(cart);
-        System.out.println("sumakwadratu " + totalCart);
         model.addAttribute("fullCart", cartItemList);
         return "cartView";
     }

@@ -90,14 +90,13 @@ public class CartItemController {
         return "cartAdded";
     }
 
-    @RequestMapping(value = "/remove/{productId}", method = RequestMethod.POST)
-    @ResponseStatus(value = HttpStatus.OK)
-    public String removeItem(@PathVariable("productId") Long productId) {
-        CartItem cartItem = cartItemRepository.findCartItemByProduct_id(productId);
-
+    @RequestMapping(value = "/remove/{cartItemId}")
+    public String removeItem(@PathVariable Long cartItemId) {
+        CartItem cartItem = cartItemRepository.findCartItemById(cartItemId);
+        System.out.println("testowanie");
         cartItemRepository.deleteCartItemById(cartItem.getId());
 
-        return "cartAdded";
+        return "redirect:/user/customer/cart/"+ cartItem.getCart().getId();
     }
 
 
@@ -114,7 +113,7 @@ public class CartItemController {
 
     @GetMapping("/add/quantity/{productId}")
     public String addQuantity(@PathVariable Long productId) {
-        CartItem cartItem = cartItemRepository.findCartItemByProduct_id(productId);
+        CartItem cartItem = cartItemRepository.findCartItemByProductId(productId);
         cartItem.setQuantity(cartItem.getQuantity().add(BigDecimal.valueOf(1)));
         cartItemRepository.save(cartItem);
         Long cartID = cartItem.getCart().getId();

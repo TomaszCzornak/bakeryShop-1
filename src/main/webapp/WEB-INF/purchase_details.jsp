@@ -13,10 +13,7 @@
 <body>
 <%@include file="/WEB-INF/header.jsp" %>
 <br>
-SZCZEGÓŁY ZAMÓWIENIA ${cartId}
-<br>
-<br>
-<br>
+SZCZEGÓŁY ZAMÓWIENIA nr ${cartId}
 <br>
 <br>
 <br>
@@ -40,35 +37,36 @@ SZCZEGÓŁY ZAMÓWIENIA ${cartId}
 </style>
 <table>
     <tr>
-        <th>Numer zamówienia</th>
+        <th>Nr</th>
         <th>Cena</th>
         <th>Ilość</th>
-        <th>Suma</th>
+        <th>Cena</th>
         <th>Produkt</th>
 
-    </tr><br>
+    </tr>
+    <br>
     <%--@elvariable id="cartItems" type="java.util.List<pl.coderslab.entity.CartItems>"--%>
-    <c:forEach var="item" items="${details}">
+    <c:forEach var="item" items="${details}" varStatus="count">
         <tr>
-<%--            <td>${item.id}</td>--%>
-            <td>${item.id}</td>
+                <%--            <td>${item.id}</td>--%>
+            <td>${count.count}</td>
             <td>${item.price}</td>
-            <td>${item.total_price}</td>
-            <td>${item.product.name}</td>
             <td>${item.quantity}</td>
-            <td>${item.status}</td>
+            <td>${item.price}</td>
+            <td>${item.product.name}</td>
         </tr>
     </c:forEach>
     <c:forEach var="cart" items="${details}">
         <tr>
-            <c:set var="cartTotal" value="${0}" />
+            <c:set var="cartTotal" value="${0}"/>
             <c:forEach var="cart" items="${details}">
-                <c:set var="cartTotal" value="${cartTotal + (cart.price* cart.quantity)}" />
+                <c:set var="cartTotal" value="${cartTotal + (cart.price* cart.quantity)}"/>
             </c:forEach>
         </tr>
     </c:forEach>
     <td></td>
-    <td>Suma Zakupów</td>
+    <td></td>
+    <td>do zapłaty razem</td>
     <td>${cartTotal}</td>
     <br>
     <br>
