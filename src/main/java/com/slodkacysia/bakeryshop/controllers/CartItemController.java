@@ -71,7 +71,7 @@ public class CartItemController {
         com.slodkacysia.bakeryshop.entity.User user = userRepository.findUserByEmail(activeCustomer.getEmail());
         Cart cart = user.getCart();
         Product product = productRepository.findProductById(productId);
-        cartDao.addProduct(product);
+//        cartDao.addProduct(product);
 
         CartItem cartItem = new CartItem();
 
@@ -90,9 +90,9 @@ public class CartItemController {
         return "cartAdded";
     }
 
-    @RequestMapping(value = "/remove/{cartItemId}")
-    public String removeItem(@PathVariable Long cartItemId) {
-        CartItem cartItem = cartItemRepository.findCartItemById(cartItemId);
+    @RequestMapping(value = "/remove/{productId}")
+    public String removeItem(@PathVariable Long productId) {
+        CartItem cartItem = cartItemRepository.findCartItemById(productId);
         System.out.println("testowanie");
         cartItemRepository.deleteCartItemById(cartItem.getId());
 

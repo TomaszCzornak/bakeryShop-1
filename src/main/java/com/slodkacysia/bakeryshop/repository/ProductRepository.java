@@ -18,7 +18,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Product findProductById(Long id);
 
-    public Product save(Product product);
+    Product save(Product product);
     @Query("SELECT p FROM Product p join fetch p.category c where c.name = :category")
     List<Product> findAllByCategory(@Param("category") String category);
 

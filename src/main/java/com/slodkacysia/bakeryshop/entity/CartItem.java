@@ -10,11 +10,11 @@ public class CartItem {
     private Long id;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="cartId")
     private Cart cart;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Product product;
 
     private BigDecimal total_price;

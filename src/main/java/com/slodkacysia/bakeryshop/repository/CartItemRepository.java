@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Repository
+
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
 
      CartItem save(CartItem cartItem);
@@ -24,14 +24,11 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
      @Modifying
      void deleteCartItemById(Long id);
 
-     @Transactional
-     void deleteCartItemByCartId(Long id);
+
 
      @Transactional
      void deleteAllByCart(Cart cart);
 
-     @Transactional
-     void deleteCartItemByProductId(Long productId);
 
      @Query("SELECT c FROM CartItem c join fetch c.cart s where c.status=0 and s.id=:cartId")
      List<CartItem> findCartItemsByCart(@Param("cartId") Long id);
