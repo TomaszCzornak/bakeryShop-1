@@ -57,12 +57,6 @@ public class HomeController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public String welcome(Model model,@AuthenticationPrincipal User activeUser) {
-//        User user = userRepository.findUserByEmail(activeUser.getEmail());
-//        Cart cart = new Cart();
-//        cart.setUser(user);
-//        cart.setTotal_amount(BigDecimal.ZERO);
-//        user.setCart(cart);
-//        cartRepository.save(cart);
 
         return "welcome";
     }

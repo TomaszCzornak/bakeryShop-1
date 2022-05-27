@@ -10,7 +10,7 @@ public class CartItem {
     private Long id;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="cartId")
     private Cart cart;
 

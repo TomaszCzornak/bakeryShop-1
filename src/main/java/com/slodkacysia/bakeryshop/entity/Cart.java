@@ -17,7 +17,7 @@ public class Cart {
 
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 

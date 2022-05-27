@@ -47,7 +47,6 @@ public class CartController {
     @RequestMapping("/{cartId}")
     public String getCartRedirect(@PathVariable(value = "cartId") Long cartId, Model model,@AuthenticationPrincipal User activeCustomer) {
         List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
-        cartItemList.stream().forEach(System.out::println);
         BigDecimal allCartItems = BigDecimal.valueOf(0);
         BigDecimal totalCart = BigDecimal.valueOf(0);
         for (int i = 0; i < cartItemList.size(); i++) {

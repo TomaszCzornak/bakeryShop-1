@@ -44,8 +44,7 @@
         <th>Cena</th>
         <th>Opis</th>
         <th>Ilość</th>
-        <th>Akcja</th>
-        <th>Akcja</th>
+
     </tr>
     <br>
     <c:forEach var="cartItem" items="${fullCart}">
