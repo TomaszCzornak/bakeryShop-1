@@ -24,6 +24,9 @@
         <br>
         Telefon:
     <td>${clientDetails.phone}</td>
+        <br>
+        Email
+    <td>${clientDetails.email}</td>
     <br>
     <br>
 </tr>
