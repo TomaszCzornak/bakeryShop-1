@@ -16,7 +16,6 @@ public class Cart {
     private BigDecimal total_amount;
 
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
@@ -28,8 +27,9 @@ public class Cart {
     public void setUser(User user) {
         this.user = user;
     }
+
     @Column(nullable = true)
-    @OneToMany(mappedBy="cart",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<CartItem> cartItems;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -68,25 +68,5 @@ public class Cart {
         this.id = id;
     }
 
-    public void addProduct(Product product) {
-        CartItem item = this.findItemByID(product.getId());
 
-        if (item == null) {
-            item = new CartItem();
-            item.setQuantity(BigDecimal.valueOf(1));
-            item.setProduct(product);
-            this.cartItems.add(item);
-        }
-
-    }
-
-    private CartItem findItemByID(Long id) {
-        CartItem item = null;
-        for (int i = 0; i < cartItems.size(); i++) {
-            if (cartItems.get(i).getProduct().getId() == id) {
-                item = cartItems.get(i);
-            }
-        }
-        return item;
-    }
 }
