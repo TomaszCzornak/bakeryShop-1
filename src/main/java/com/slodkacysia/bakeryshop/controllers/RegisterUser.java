@@ -67,11 +67,7 @@ public class RegisterUser {
 
 
             }
-
-
             userRepository.save(user);
-
-
             userServiceImpl.saveUser(user);
             return "redirect:/login";
         }

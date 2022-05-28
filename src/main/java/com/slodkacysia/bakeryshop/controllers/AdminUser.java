@@ -20,16 +20,14 @@ public class AdminUser {
 
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
-    private final PurchaseRepository purchaseRepository;
     private final PurchaseSpecific purchaseSpecific;
     private final CartItemRepository cartItemRepository;
 
     private final CategoryRepository categoryRepository;
     @Autowired
-    AdminUser(UserRepository userRepository, ProductRepository productRepository, PurchaseRepository purchaseRepository, PurchaseSpecific purchaseSpecific, CartItemRepository cartItemRepository, CategoryRepository categoryRepository){
+    AdminUser(UserRepository userRepository, ProductRepository productRepository, PurchaseSpecific purchaseSpecific, CartItemRepository cartItemRepository, CategoryRepository categoryRepository){
         this.userRepository = userRepository;
         this.productRepository = productRepository;
-        this.purchaseRepository = purchaseRepository;
         this.purchaseSpecific = purchaseSpecific;
         this.cartItemRepository = cartItemRepository;
         this.categoryRepository = categoryRepository;

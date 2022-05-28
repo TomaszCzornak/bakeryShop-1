@@ -23,14 +23,12 @@ public class CartItemController {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
     private final CartItemRepository cartItemRepository;
-    private final PurchaseRepository purchaseRepository;
 
-    public CartItemController(CartRepository cartRepository, UserRepository userRepository, ProductRepository productRepository, CartItemRepository cartItemRepository, PurchaseRepository purchaseRepository) {
+    public CartItemController(CartRepository cartRepository, UserRepository userRepository, ProductRepository productRepository, CartItemRepository cartItemRepository) {
         this.cartRepository = cartRepository;
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.cartItemRepository = cartItemRepository;
-        this.purchaseRepository = purchaseRepository;
     }
 
     @RequestMapping("/{cartId}")
