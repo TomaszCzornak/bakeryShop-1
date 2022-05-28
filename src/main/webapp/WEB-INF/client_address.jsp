@@ -11,6 +11,7 @@
     <title>Adres do Wysyłki</title>
 </head>
 <body>
+DANE DO WYSYŁKI:
 <tr>
     <%--            <td>${item.id}</td>--%>
     Imię i Nazwisko:

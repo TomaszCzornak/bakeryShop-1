@@ -16,7 +16,6 @@
 <body>
 <h1>
 </h1>
-<modelAttribute="purchase" method="get">
 
 ${emptyCart}
 </body>
