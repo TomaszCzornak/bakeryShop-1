@@ -85,35 +85,4 @@ public class CartItemController {
         return "cartAdded";
     }
 
-    @RequestMapping(value = "/remove/{cartItemId}")
-    public String removeItem(@PathVariable Long cartItemId) {
-        CartItem cartItem = cartItemRepository.findCartItemById(cartItemId);
-        System.out.println("testowanie");
-        cartItemRepository.deleteCartItemById(cartItem.getId());
-
-        return "redirect:/user/customer/cart/"+ cartItem.getCart().getId();
-    }
-
-
-//REMOVE CART/CLEAR CART
-
-    @RequestMapping(value = "/{cartId}", method = RequestMethod.DELETE)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void clearCart(@PathVariable(value = "cartId") int cartId) {
-
-        Cart cart = cartRepository.getCartById(cartId);
-        cartItemRepository.deleteAllByCart(cart);
-
-    }
-
-    @GetMapping("/add/quantity/{productId}")
-    public String addQuantity(@PathVariable Long productId) {
-        CartItem cartItem = cartItemRepository.findCartItemByProductId(productId);
-        cartItem.setQuantity(cartItem.getQuantity().add(BigDecimal.valueOf(1)));
-        cartItemRepository.save(cartItem);
-        Long cartID = cartItem.getCart().getId();
-        return "redirect: /rest/cart/" + cartID;
-    }
-
-
 }

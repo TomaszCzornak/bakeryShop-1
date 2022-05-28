@@ -2,6 +2,7 @@ package com.slodkacysia.bakeryshop.controllers;
 
 import com.slodkacysia.bakeryshop.entity.*;
 import com.slodkacysia.bakeryshop.repository.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
 
+@PreAuthorize("hasRole('ROLE_USER')")
 @Controller
 public class PurchaseController {
 
@@ -76,7 +78,7 @@ public class PurchaseController {
 
                     cartItemRepository.save(cartItemList.get(i));
                 }
-                model.addAttribute("endOfTrx", "Twoje zamówienie zostały przyjęte do realizacji");
+                model.addAttribute("endOfTrx", "Twoje zamówienie zostało przyjęte do realizacji");
 
                 return "finalPage";
             }
