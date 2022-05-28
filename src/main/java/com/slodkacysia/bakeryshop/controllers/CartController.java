@@ -25,15 +25,13 @@ public class CartController {
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
-    private final PurchaseRepository purchaseRepository;
 
     @Autowired
-    public CartController(CustomAuthenticationProvider customAuthenticationProvider, UserRepository userRepository, CartRepository cartRepository, CartItemRepository cartItemRepository, PurchaseRepository purchaseRepository) {
+    public CartController(CustomAuthenticationProvider customAuthenticationProvider, UserRepository userRepository, CartRepository cartRepository, CartItemRepository cartItemRepository) {
         this.customAuthenticationProvider = customAuthenticationProvider;
         this.userRepository = userRepository;
         this.cartRepository = cartRepository;
         this.cartItemRepository = cartItemRepository;
-        this.purchaseRepository = purchaseRepository;
     }
 
     @RequestMapping
@@ -45,7 +43,7 @@ public class CartController {
     }
 
     @RequestMapping("/{cartId}")
-    public String getCartRedirect(@PathVariable(value = "cartId") Long cartId, Model model,@AuthenticationPrincipal User activeCustomer) {
+    public String getCartRedirect(@PathVariable(value = "cartId") Long cartId, Model model) {
         List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
         BigDecimal allCartItems = BigDecimal.valueOf(0);
         BigDecimal totalCart = BigDecimal.valueOf(0);

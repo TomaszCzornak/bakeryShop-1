@@ -21,16 +21,11 @@ import java.util.List;
 public class HomeController {
 
 
-
     private final ProductRepository productRepository;
-
-
 
     @Autowired
     public HomeController(ProductRepository productRepository) {
-
         this.productRepository = productRepository;
-
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -50,7 +45,7 @@ public class HomeController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
-    public String welcome(Model model,@AuthenticationPrincipal User activeUser) {
+    public String welcome(Model model, @AuthenticationPrincipal User activeUser) {
 
         return "welcome";
     }
@@ -60,6 +55,7 @@ public class HomeController {
         return "index";
 
     }
+
     @RequestMapping("/products_to_buy")
     public String addToCart(Model model) {
         List<Product> productList = productRepository.findAllBy();

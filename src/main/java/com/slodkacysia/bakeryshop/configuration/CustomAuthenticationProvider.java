@@ -34,7 +34,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication)
             throws AuthenticationException {
         String email = authentication.getName();
-        String name = authentication.getPrincipal().toString();
         User user = null;
         if(email != null) {
             user = userServiceimpl.findUserByEmail(email);
@@ -42,7 +41,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         if(user == null) {
             throw new UsernameNotFoundException("Incorrect User Name");
         }
-        String noHashPass = (user.getPassword());
         String password = user.getPassword();
 
 
