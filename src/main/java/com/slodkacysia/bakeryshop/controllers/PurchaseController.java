@@ -33,7 +33,7 @@ public class PurchaseController {
 
 
 
-    @RequestMapping("/checkout/{cartId}")
+    @GetMapping("/checkout/{cartId}")
     public String finalize(@PathVariable("cartId") Long cartId, Model model) {
 
         List<CartItem> cartItemList = cartItemRepository.findCartItemsByCart(cartId);
