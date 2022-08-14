@@ -1,6 +1,8 @@
 
 # create database bakery CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+
+
 insert into category(name)values ('urodzinowy');
 insert into category(name)values ('weselny');
 insert into category(name)values ('przyjęcie');

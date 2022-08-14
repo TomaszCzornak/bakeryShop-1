@@ -25,7 +25,32 @@ public class User {
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
+    @Email(message = "proszę podać poprawny adres email")
+    private String email;
 
+    private String phone;
+
+    @Size(min = 1, message = "Podaj imię")
+    private String first_name;
+
+    @Size(min = 1, message = "podaj nazwisko")
+    private String last_name;
+    @Size(min = 1, message = "podaj nazwę ulicy")
+    private String street;
+    @Pattern(regexp = "[0-9]{2}-[0-9]{3}", message = "kod powinien być w formacie 00-000")
+    private String post_code;
+    private int enabled;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+    private String city;
+    private String password;
+
+    public Cart getCart() {
+        return cart;
+    }
 
     public String getUserName() {
         return userName;
@@ -33,38 +58,6 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-
-
-
-    @Email(message = "proszę podać poprawny adres email")
-    private String email;
-
-    private String phone;
-
-
-
-    @Size(min = 1, message = "Podaj imię")
-    private String first_name;
-    @Size(min = 1, message = "podaj nazwisko")
-    private String last_name;
-    @Size(min = 1, message = "podaj nazwę ulicy")
-    private String street;
-    @Pattern(regexp = "[0-9]{2}-[0-9]{3}", message = "kod powinien być w formacie 00-000")
-    private String post_code;
-
-    private int enabled;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
-    private String city;
-
-    private String password;
-
-    public Cart getCart() {
-        return cart;
     }
 
     public void setCart(Cart cart) {
