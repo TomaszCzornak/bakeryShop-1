@@ -1,12 +1,8 @@
 package com.slodkacysia.bakeryshop.entity;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 public class Purchase {
@@ -22,7 +18,7 @@ public class Purchase {
     @ManyToOne
     private PaymentMethod paymentMethod;
     @OneToOne(cascade = CascadeType.ALL)
-    private User user;
+    private Buyer buyer;
 
     public Integer getStatus() {
         return status;
@@ -47,12 +43,12 @@ public class Purchase {
         this.paymentMethod = paymentMethod;
     }
 
-    public User getUser() {
-        return user;
+    public Buyer getBuyer() {
+        return buyer;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setBuyer(Buyer buyer) {
+        this.buyer = buyer;
     }
 
     public Cart getCart() {

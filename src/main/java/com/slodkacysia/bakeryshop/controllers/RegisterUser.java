@@ -1,11 +1,12 @@
 package com.slodkacysia.bakeryshop.controllers;
 
-import com.slodkacysia.bakeryshop.entity.User;
+import com.slodkacysia.bakeryshop.entity.Buyer;
 import com.slodkacysia.bakeryshop.repository.CartRepository;
 import com.slodkacysia.bakeryshop.repository.RoleRepository;
 import com.slodkacysia.bakeryshop.repository.UserRepository;
 import com.slodkacysia.bakeryshop.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.BeanDefinitionDsl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -41,34 +42,34 @@ public class RegisterUser {
     public String registerUser(Model model) {
 
 
-        User user = new User();
-        model.addAttribute("user", user);
+        Buyer buyer = new Buyer();
+        model.addAttribute("buyer", buyer);
 
         return "registerUser";
     }
     @PostMapping("/register")
-    public String addUser(@Valid@ ModelAttribute User user, BindingResult bindingResult, Model model){
+    public String addUser(@Valid@ ModelAttribute Buyer buyer, BindingResult bindingResult, Model model){
 
         if(bindingResult.hasErrors()){
             return "registerUser";
         }else{
-            List<User> userList = userRepository.getAllBy();
+            List<Buyer> buyerList = userRepository.getAllBy();
 
-            for (User userInList : userList) {
+            for (Buyer buyerInList : buyerList) {
 
-                if (userInList.getEmail().equals(user.getEmail())) {
+                if (buyerInList.getEmail().equals(buyer.getEmail())) {
                     model.addAttribute("emailMsg","Taki email już istnieje");
                     return "registerUser";
                 }
-                if (userInList.getUserName().equals(user.getUserName())) {
+                if (buyerInList.getUserName().equals(buyer.getUserName())) {
                     model.addAttribute("usernameMsg","Taki użytkownik już jest zarejestrowany");
                     return "registerUser";
                 }
 
 
             }
-            userRepository.save(user);
-            userServiceImpl.saveUser(user);
+            userRepository.save(buyer);
+            userServiceImpl.saveBuyer(buyer);
             return "redirect:/login";
         }
     }

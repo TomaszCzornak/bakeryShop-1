@@ -15,9 +15,9 @@
     </style>
 </head>
 <body>
-<%--@elvariable id="user" type="pl.coderslab.entity.User"--%>
+<%--@elvariable id="buyer" type="pl.coderslab.entity.User"--%>
 
-<form:form modelAttribute="user" method="post">
+<form:form modelAttribute="buyer" method="post">
     USER NAME <form:input path="userName"/>
     <c:if test="${not empty usernameMsg }">
         <label class="label-danger" style="color: red">${usernameMsg}</label>

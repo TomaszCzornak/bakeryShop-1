@@ -1,7 +1,7 @@
 package com.slodkacysia.bakeryshop.service;
 
 import com.slodkacysia.bakeryshop.entity.Role;
-import com.slodkacysia.bakeryshop.entity.User;
+import com.slodkacysia.bakeryshop.entity.Buyer;
 import com.slodkacysia.bakeryshop.repository.RoleRepository;
 import com.slodkacysia.bakeryshop.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,16 +25,16 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User findUserByEmail(String email) {
-        return userRepository.findUserByEmail(email);
+    public Buyer findBuyerByEmail(String email) {
+        return userRepository.findBuyerByEmail(email);
     }
 
     @Override
-    public void saveUser(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setEnabled(1);
+    public void saveBuyer(Buyer buyer) {
+        buyer.setPassword(bCryptPasswordEncoder.encode(buyer.getPassword()));
+        buyer.setEnabled(1);
         Role userRole = roleRepository.findByName("ROLE_ADMIN");
-        user.setRoles(new HashSet<>(Arrays.asList(userRole)));
-        userRepository.save(user);
+        buyer.setRoles(new HashSet<>(Arrays.asList(userRole)));
+        userRepository.save(buyer);
     }
 }

@@ -27,6 +27,6 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
 
     Purchase findPurchaseByCartId(Long id);
 
-    Purchase findPurchaseByUserId(Long id);
+    Purchase findPurchaseByBuyerId(Long id);
 }
 //@Query("SELECT p FROM Product p join fetch p.category c where c.name = :category")

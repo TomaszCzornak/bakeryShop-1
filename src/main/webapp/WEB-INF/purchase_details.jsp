@@ -73,7 +73,7 @@ SZCZEGÓŁY ZAMÓWIENIA nr ${cartId}
 <br>
 <c:forEach var="item" items="${details}" begin="1" end="1">
 
-<a href="/admin/purchases/details/user/${item.cart.user.id}"> adres wysyłki</a>
+<a href="/admin/purchases/details/buyer/${item.cart.buyer.id}"> adres wysyłki</a>
     </c:forEach>
 </body>
 </html>

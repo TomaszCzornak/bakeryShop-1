@@ -1,13 +1,37 @@
-/home/tomek/Pobrane/bakeryShop/src/main/java/com/slodkacysia/bakeryshop/controllers/RegisterUser.java
-/home/tomek/Pobrane/bakeryShop/src/main/java/com/slodkacysia/bakeryshop/repository/UserRepository.java
-/home/tomek/Pobrane/bakeryShop/src/main/java/com/slodkacysia/bakeryshop/entity/Category.java
-/home/tomek/Pobrane/bakeryShop/src/main/java/com/slodkacysia/bakeryshop/entity/ShippingMethod.java
-/home/tomek/Pobrane/bakeryShop/src/main/java/com/slodkacysia/bakeryshop/entity/Purchase.java
-/home/tomek/Pobrane/bakeryShop/src/main/java/com/slodkacysia/bakeryshop/BakeryShopApplication.java
-/home/tomek/Pobrane/bakeryShop/src/main/java/com/slodkacysia/bakeryshop/entity/CartItem.java
-/home/tomek/Pobrane/bakeryShop/src/main/java/com/slodkacysia/bakeryshop/entity/User.java
-/home/tomek/Pobrane/bakeryShop/src/main/java/com/slodkacysia/bakeryshop/configuration/SecurityConfig.java
-/home/tomek/Pobrane/bakeryShop/src/main/java/com/slodkacysia/bakeryshop/entity/Cart.java
-/home/tomek/Pobrane/bakeryShop/src/main/java/com/slodkacysia/bakeryshop/entity/PaymentMethod.java
-/home/tomek/Pobrane/bakeryShop/src/main/java/com/slodkacysia/bakeryshop/entity/Product.java
-/home/tomek/Pobrane/bakeryShop/src/main/java/com/slodkacysia/bakeryshop/controllers/Health.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\service\UserService.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\service\SpringDataUserDetailsService.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\configuration\CustomAuthenticationProvider.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\service\UserServiceImpl.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\configuration\WebAppConfig.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\controllers\RegisterUser.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\repository\PurchaseRepository.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\repository\CartRepository.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\controllers\CartController.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\BakeryShopApplication.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\repository\CategoryRepository.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\configuration\AppInitializer.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\controllers\PurchaseController.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\repository\ProductRepository.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\configuration\UserAuthorities.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\entity\CartItem.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\entity\Product.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\controllers\HomeController.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\controllers\ProductController.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\entity\Category.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\repository\PurchaseSpecific.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\entity\Purchase.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\service\CurrentUser.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\repository\RoleRepository.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\configuration\SecurityConfig.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\controllers\AdminUser.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\repository\PaymentMethodRepository.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\controllers\Health.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\controllers\CartItemController.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\entity\User.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\controllers\UserController.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\repository\CartItemRepository.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\configuration\MySimpleUrlAuthenticationSuccessHandler.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\repository\UserRepository.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\entity\Role.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\entity\Cart.java
+C:\Pobrane z Linux\Pobrane\bakeryShop-1\src\main\java\com\slodkacysia\bakeryshop\entity\PaymentMethod.java

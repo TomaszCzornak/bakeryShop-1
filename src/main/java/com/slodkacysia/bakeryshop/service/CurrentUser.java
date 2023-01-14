@@ -1,18 +1,19 @@
 package com.slodkacysia.bakeryshop.service;
+import com.slodkacysia.bakeryshop.entity.Buyer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
 public class CurrentUser extends User {
-    private final com.slodkacysia.bakeryshop.entity.User user;
+    private final Buyer buyer;
     public CurrentUser(String username, String password,
                        Collection<? extends GrantedAuthority> authorities,
-                       com.slodkacysia.bakeryshop.entity.User user) {
+                       Buyer buyer) {
         super(username, password, authorities);
-        this.user = user;
+        this.buyer = buyer;
     }
-    public com.slodkacysia.bakeryshop.entity.User getUser() {
-        return user;
+    public Buyer getBuyer() {
+        return buyer;
     }
 }

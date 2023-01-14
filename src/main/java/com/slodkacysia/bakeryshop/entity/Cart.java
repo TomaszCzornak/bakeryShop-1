@@ -1,8 +1,5 @@
 package com.slodkacysia.bakeryshop.entity;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,15 +14,15 @@ public class Cart {
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "buyer_id")
+    private Buyer buyer;
 
-    public User getUser() {
-        return user;
+    public Buyer getBuyer() {
+        return buyer;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setBuyer(Buyer buyer) {
+        this.buyer = buyer;
     }
 
     @Column(nullable = true)

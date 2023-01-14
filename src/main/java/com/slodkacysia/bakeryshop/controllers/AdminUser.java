@@ -49,7 +49,7 @@ public class AdminUser {
         } else {
             System.out.println("wynik " + product.getCategory().toString());
             productRepository.save(product);
-            return "redirect:/admin /product_list";
+            return "redirect:/product_list";
         }
     }
 
@@ -101,11 +101,11 @@ public class AdminUser {
         return "purchase_details";
     }
 
-    @RequestMapping("/purchases/details/user/{userId}")
+    @RequestMapping("/purchases/details/buyer/{userId}")
     public String clientDetails(@PathVariable Long userId, Model model){
-        User user = userRepository.findUserById(userId);
-        System.out.println("mój adres " + user.getEmail().toString());
-        model.addAttribute("clientDetails", user);
+        Buyer buyer = userRepository.findBuyerById(userId);
+        System.out.println("mój adres " + buyer.getEmail().toString());
+        model.addAttribute("clientDetails", buyer);
         return "client_address";
     }
 }

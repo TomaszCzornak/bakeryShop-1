@@ -1,17 +1,17 @@
 package com.slodkacysia.bakeryshop.repository;
 
-import com.slodkacysia.bakeryshop.entity.User;
+import com.slodkacysia.bakeryshop.entity.Buyer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<Buyer, Long> {
 
-    User save(User user);
-    User findByUserName(String userName);
-    List<User> getAllBy();
-    User findUserByEmail(String email);
-    User findUserById(Long id);
+    Buyer save(Buyer buyer);
+    Buyer findByUserName(String userName);
+    List<Buyer> getAllBy();
+    Buyer findBuyerByEmail(String email);
+    Buyer findBuyerById(Long id);
 
 
 }

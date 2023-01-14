@@ -1,8 +1,7 @@
 package com.slodkacysia.bakeryshop.controllers;
 
-import com.slodkacysia.bakeryshop.entity.Cart;
 import com.slodkacysia.bakeryshop.entity.Product;
-import com.slodkacysia.bakeryshop.entity.User;
+import com.slodkacysia.bakeryshop.entity.Buyer;
 import com.slodkacysia.bakeryshop.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,9 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.math.BigDecimal;
-import java.security.Principal;
 import java.util.List;
 
 
@@ -31,7 +27,7 @@ public class HomeController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/username", method = RequestMethod.GET)
     @ResponseBody
-    public String currentUserNameSimple(@AuthenticationPrincipal User activeUser) {
+    public String currentUserNameSimple(@AuthenticationPrincipal Buyer activeUser) {
         return "Jesteś zalogowany jako: " + activeUser.getUserName();
     }
 
@@ -45,7 +41,7 @@ public class HomeController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
-    public String welcome(Model model, @AuthenticationPrincipal User activeUser) {
+    public String welcome(Model model, @AuthenticationPrincipal Buyer activeUser) {
 
         return "welcome";
     }

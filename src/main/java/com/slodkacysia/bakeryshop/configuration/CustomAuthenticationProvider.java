@@ -1,9 +1,8 @@
 package com.slodkacysia.bakeryshop.configuration;
 
-import com.slodkacysia.bakeryshop.entity.User;
+import com.slodkacysia.bakeryshop.entity.Buyer;
 import com.slodkacysia.bakeryshop.service.UserService;
 import com.slodkacysia.bakeryshop.service.UserServiceImpl;
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -34,14 +33,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication)
             throws AuthenticationException {
         String email = authentication.getName();
-        User user = null;
+        Buyer buyer = null;
         if(email != null) {
-            user = userServiceimpl.findUserByEmail(email);
+            buyer = userServiceimpl.findBuyerByEmail(email);
         }
-        if(user == null) {
+        if(buyer == null) {
             throw new UsernameNotFoundException("Incorrect User Name");
         }
-        String password = user.getPassword();
+        String password = buyer.getPassword();
 
 
 
@@ -50,8 +49,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             throw new BadCredentialsException("Incorrect credentials");
         }
         Collection<? extends GrantedAuthority> authorities =
-                UserAuthorities.createAuthorities(user);
-        return new UsernamePasswordAuthenticationToken(user, password,
+                UserAuthorities.createAuthorities(buyer);
+        return new UsernamePasswordAuthenticationToken(buyer, password,
                 authorities);
     }
     public boolean supports(Class<?> authentication) {

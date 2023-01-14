@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/rest/cart/**").hasRole("USER")
                     .antMatchers("/checkout/**").hasRole("USER")
                     .antMatchers("/admin/**").hasRole("ADMIN")
-                    .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
+                    .antMatchers("/buyer/**").hasAnyRole("USER", "ADMIN")
                     .antMatchers("/**").permitAll()
                     .and().formLogin().successHandler(myAuthenticationSuccessHandler())
                     .and().logout().logoutUrl("/logout").logoutSuccessUrl("/");

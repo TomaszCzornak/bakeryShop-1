@@ -1,8 +1,8 @@
 package com.slodkacysia.bakeryshop.service;
 
-import com.slodkacysia.bakeryshop.entity.User;
+import com.slodkacysia.bakeryshop.entity.Buyer;
 
 public interface UserService {
-    User findUserByEmail(String email);
-    void saveUser(User user);
+    Buyer findBuyerByEmail(String email);
+    void saveBuyer(Buyer buyer);
 }

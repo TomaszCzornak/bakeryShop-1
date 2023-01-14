@@ -68,6 +68,6 @@ OFERTA SKLEPU
 <br>
 <br>
 <br>
-<a href="/user/customer/cart/${cart.id}"> koszyk</a>
+<a href="/buyer/customer/cart/${cart.id}"> koszyk</a>
 </body>
 </html>

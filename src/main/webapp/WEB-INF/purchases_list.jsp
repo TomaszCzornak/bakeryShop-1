@@ -51,11 +51,11 @@ LISTA AKTUALNYCH ZAMÓWIEŃ
 <%--@elvariable id="purchase" type="java.util.List<pl.coderslab.entity.Purchase>"--%>
     <c:forEach var="item" items="${purchases}">
         <tr>
-            <td>${item.user.id}</td>
+            <td>${item.buyer.id}</td>
             <td>${item.cart.total_amount}</td>
             <td>${item.paymentMethod.name}</td>
             <td>${item.created}</td>
-            <td>${item.cart.user.first_name}</td>
+            <td>${item.cart.buyer.first_name}</td>
             <td>${item.status}</td>
             <td><a href="/admin/purchases/details/${item.cart.id}">szczegóły</a></td>
         </tr>

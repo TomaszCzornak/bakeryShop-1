@@ -1,6 +1,6 @@
 package com.slodkacysia.bakeryshop.configuration;
 
-import com.slodkacysia.bakeryshop.entity.User;
+import com.slodkacysia.bakeryshop.entity.Buyer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 
@@ -12,9 +12,9 @@ public class UserAuthorities {
                 "ROLE_USER");
         private static final List<GrantedAuthority> USER_ROLES = AuthorityUtils.createAuthorityList("ROLE_USER");
 
-        public static Collection<? extends GrantedAuthority> createAuthorities(User user) {
-            String username = user.getEmail();
-            if (username.startsWith("admin")) {
+        public static Collection<? extends GrantedAuthority> createAuthorities(Buyer buyer) {
+            String username = buyer.getEmail();
+            if (username.startsWith("tomasz")) {
                 return ADMIN_ROLES;
             }
             return USER_ROLES;

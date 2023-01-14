@@ -10,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.util.List;
 
 @PreAuthorize("hasRole('ROLE_USER')")
@@ -56,7 +55,7 @@ public class PurchaseController {
     }
 
     @RequestMapping(value = "/checkout/payment/{cartId}", method = RequestMethod.POST)
-    private String PaymentMethod(@PathVariable Long cartId, @Valid Purchase purchase, BindingResult bindingResult, @AuthenticationPrincipal User activeUser) {
+    private String PaymentMethod(@PathVariable Long cartId, @Valid Purchase purchase, BindingResult bindingResult, @AuthenticationPrincipal Buyer activeUser) {
 
         if (bindingResult.hasErrors()) {
             return "paymentMethod";

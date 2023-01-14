@@ -1,10 +1,9 @@
 package com.slodkacysia.bakeryshop.controllers;
 
 import com.slodkacysia.bakeryshop.configuration.CustomAuthenticationProvider;
+import com.slodkacysia.bakeryshop.entity.Buyer;
 import com.slodkacysia.bakeryshop.entity.Cart;
 import com.slodkacysia.bakeryshop.entity.CartItem;
-import com.slodkacysia.bakeryshop.entity.Purchase;
-import com.slodkacysia.bakeryshop.entity.User;
 import com.slodkacysia.bakeryshop.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,7 +16,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user/customer/cart")
+@RequestMapping("/buyer/customer/cart")
 
 public class CartController {
 
@@ -35,11 +34,11 @@ public class CartController {
     }
 
     @RequestMapping
-    public String getCart(@AuthenticationPrincipal User activeCustomer) {
-        User user = userRepository.findUserByEmail(activeCustomer.getEmail());
-        long cartId = user.getCart().getId();
+    public String getCart(@AuthenticationPrincipal Buyer activeCustomer) {
+        Buyer buyer = userRepository.findBuyerByEmail(activeCustomer.getEmail());
+        long cartId = buyer.getCart().getId();
 
-        return "redirect:/user/customer/cart/" + cartId;
+        return "redirect:/buyer/customer/cart/" + cartId;
     }
 
     @RequestMapping("/{cartId}")

@@ -15,9 +15,9 @@ import java.util.List;
 public interface PurchaseSpecific extends CrudRepository<Purchase, Long> {
 
     @Modifying
-    @Query(value = "insert into purchase (cart_date,cart_id, payment_method_id, user_id) VALUES (now(),:cartId,:paymentId,:userId)", nativeQuery = true)
+    @Query(value = "insert into purchase (cart_date,cart_id, payment_method_id, buyer_id) VALUES (now(),:cartId,:paymentId,:BuyerId)", nativeQuery = true)
     @Transactional
-    void updatePayment(@Param("cartId") Long cartId, @Param("paymentId") PaymentMethod paymentMethod, @Param("userId") Long id);
+    void updatePayment(@Param("cartId") Long cartId, @Param("paymentId") PaymentMethod paymentMethod, @Param("BuyerId") Long id);
 
 
     @Query(value = "Select * from purchase p join cart  c on p.cart_id = c.id  join cart_item  ci on c.id = ci.cart_id where ci.status = 1", nativeQuery =true)

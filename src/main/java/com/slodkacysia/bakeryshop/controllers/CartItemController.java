@@ -2,7 +2,6 @@ package com.slodkacysia.bakeryshop.controllers;
 
 import com.slodkacysia.bakeryshop.entity.*;
 import com.slodkacysia.bakeryshop.repository.*;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -47,23 +46,23 @@ public class CartItemController {
     }
 
     @RequestMapping("/products_view")
-    public String shopView(Model model, @AuthenticationPrincipal User activeUser) {
+    public String shopView(Model model, @AuthenticationPrincipal Buyer activeUser) {
         List<Product> productList = productRepository.findAllBy();
         model.addAttribute("offer", productList);
-        User user = userRepository.findUserByEmail(activeUser.getEmail());
+        Buyer buyer = userRepository.findBuyerByEmail(activeUser.getEmail());
         Cart cart = new Cart();
-        cart.setUser(user);
+        cart.setBuyer(buyer);
         cart.setTotal_amount(BigDecimal.ZERO);
-        user.setCart(cart);
+        buyer.setCart(cart);
         cartRepository.save(cart);
         return "productsView";
     }
 
     @GetMapping("/add/{productId}")
-    public String addItem(Model model, @PathVariable("productId") Long productId, @AuthenticationPrincipal User activeCustomer) {
+    public String addItem(Model model, @PathVariable("productId") Long productId, @AuthenticationPrincipal Buyer activeCustomer) {
 
-        com.slodkacysia.bakeryshop.entity.User user = userRepository.findUserByEmail(activeCustomer.getEmail());
-        Cart cart = user.getCart();
+        Buyer buyer = userRepository.findBuyerByEmail(activeCustomer.getEmail());
+        Cart cart = buyer.getCart();
         Product product = productRepository.findProductById(productId);
 
         CartItem cartItem = new CartItem();
